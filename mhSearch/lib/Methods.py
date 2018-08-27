@@ -42,7 +42,6 @@ class GeneralMethods:
         return err_distance
 
     def getModelAccuracy(self, parametros, individual, score_cache, resultados):
-        # X, y = _createDataset("data/Tx_0x06")
         params = _individual_to_params(individual, parametros)
         score = 0
         scoring = "accuracy"
