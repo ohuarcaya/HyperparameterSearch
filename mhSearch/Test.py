@@ -17,8 +17,7 @@ if __name__ == "__main__":
     estimador = estimadorDictionary[specificModelName]
     hypSwitcher = HyperparameterSwitcher()
     parametros = hypSwitcher.getHyperparameters(specificModelName)()
-    gm = GeneralMethods(
-        estimador, urlDataset='./data/Tx_0x06')
+    gm = GeneralMethods(estimador, urlDataset='./data/Tx_0x06')
     test = EdasHyperparameterSearch(
         gm, parametros, estimador, iterations=2, sample_size=15, select_ratio=0.3, debug=False)
     test.run()
