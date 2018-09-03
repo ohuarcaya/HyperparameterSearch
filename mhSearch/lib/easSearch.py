@@ -26,7 +26,7 @@ from sklearn.utils.validation import _num_samples
 # [https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/utils/validation.py][105]
 from sklearn.utils.validation import indexable
 # [https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/utils/validation.py][208]
-from multiprocessing import Pool
+from multiprocessing import Pool, Manager, cpu_count
 # Selección para estimadores
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
@@ -112,7 +112,7 @@ def _individual_to_params(individual, name_values):
 
 
 def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params,
-				verbose=0, error_score='raise', score_cache={}):
+                  verbose=0, error_score='raise', score_cache={}, result_cache=[]):
 	"""[Evaluación del modelo]
 	Arguments:
 		individual {[creator.Individual]} -- [Individuo]
@@ -184,7 +184,9 @@ class GeneticSearchCV:
         self.best_score_ = None
         self.best_params_ = None
         self.scorer_ = None
-        self.score_cache = {}
+        self.__manager = Manager()
+        self.score_cache = self.__manager.dict()
+        self.result_cache = self.__manager.list()
         # Fitness [base.Fitness], objetivo 1
         creator.create("FitnessMax", base.Fitness, weights=(1.0,))
         # Individuo [list], parámetros:est, FinessMax
@@ -259,7 +261,7 @@ class GeneticSearchCV:
 						name_values=name_values, X=X, y=y,
 						scorer=self.scorer_, cv=self.cv, uniform=self.uniform, verbose=self.verbose,
 						error_score=self.error_score, fit_params=self.fit_params,
-						score_cache=self.score_cache)
+						score_cache=self.score_cache, result_cache=self.result_cache)
         # registro de función Cruce
         toolbox.register("mate", _cxIndividual, prob_cruce=self.gene_crossover_prob, gene_type=self.gene_type)
         # registro de función Mutación
