@@ -1,4 +1,4 @@
-# HyperparameterSearch
+# Hyperparameter Search Optimization
 
 Hyperparameter search optimization by genetic algorithms and distribution estimation algorithms
 
@@ -26,7 +26,7 @@ Hyperparameter search optimization by genetic algorithms and distribution estima
 - __Details__
 
         - Evaluation of changes by univariate and bivariate EAS, EDAS.
-        - Dataset [Wlan dataset for indoor localisation][1]
+        - Dataset [Wlan dataset for indoor localisation](https://archive.ics.uci.edu/ml/datasets/Geo-Magnetic+field+and+WLAN+dataset+for+indoor+localisation+from+wristband+and+smartphone#)
 
 - __Benchmark study__
 
@@ -36,5 +36,3 @@ Hyperparameter search optimization by genetic algorithms and distribution estima
         - https://pypi.org/project/pytest-benchmark/
         - https://stackoverflow.com/questions/1593019/is-there-any-simple-way-to-benchmark-python-script
         - https://dzone.com/articles/unit-testing-the-good-bad-amp-ugly
-
-[1]: https://archive.ics.uci.edu/ml/datasets/Geo-Magnetic+field+and+WLAN+dataset+for+indoor+localisation+from+wristband+and+smartphone#

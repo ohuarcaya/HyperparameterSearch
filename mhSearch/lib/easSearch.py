@@ -135,20 +135,28 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
 	if paramkey in score_cache:
 		score = score_cache[paramkey]
 	else:
+        resultIndividuo = []
+        cv = KFold(n_splits=10, shuffle=False)
+        scorer = check_scoring(individual.est, scoring="accuracy")
 		for train, test in cv.split(X, y):
-			_score = _fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
+			resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
 						train=train, test=test, verbose=verbose,
-						parameters=parameters, fit_params=fit_params,
-						error_score=error_score)[0]
-			if uniform:
-				score += _score * len(test)
-				n_test += len(test)
-			else:
-				score += _score
-				n_test += 1
-		assert n_test > 0, "No se completo el fitting, Verificar data."
-		score /= float(n_test)
-		score_cache[paramkey] = score
+                                         parameters=parameters, fit_params=None, return_times=True))
+			
+		accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
+        runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
+        # error = distance_error(estimator, X, y)
+        score = accuracy.mean()
+        score_cache[paramkey] = score
+        dict_result = {}
+        dict_result['Modelo'] = nombreModelo
+        dict_result['Parametros'] = params
+        dict_result['Accuracy'] = score
+        dict_result['stdAccuracy'] = accuracy.std()
+        dict_result['Runtime'] = runtime.mean()
+        dict_result['accuracy_values'] = accuracy
+        dict_result['runtime_values'] = runtime
+        resultados.append(dict_result)
 	return (score,)
 
 
@@ -311,7 +319,7 @@ class GeneticSearchCV:
         self.best_score_ = current_best_score_
         self.best_params_ = current_best_params_
 
-
+"""
 # Lectura de los datos y separación
 dataset = pd.read_csv("../data/Tx_0x06")
 validation_size = 0.20
@@ -353,3 +361,4 @@ model = models[key]
 params = params[key]
 gs = GeneticSearchCV(model, params, cv=cv, n_jobs=n_jobs, verbose=verbose, scoring=scoring, refit=refit)
 result = gs.fit(X, Y)
+"""
