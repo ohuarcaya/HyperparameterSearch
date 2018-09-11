@@ -1,11 +1,40 @@
 # HyperparameterSearch
-Hyperparameter optimization search by genetic algorithms and distribution estimation algorithms
 
-# Pendientes
+Hyperparameter search optimization by genetic algorithms and distribution estimation algorithms
 
-1. Integrar Eas y Edas como clases con los principios SOLID.
-2. Para EAS, EDAS, GridSearch y Randomized. En la optimización de búsqueda de hiperparámetros, evaluar precisión, rapidez (tiempo), iteraciones y consumo computacional (memoria, CPU, Inst/ciclo y Energía).
-3. Tomar 2 casos de estudio (1 regresión y 1 clasificación).
-    - Uno puede ser el de localización y habría que buscar uno de regresión.
-    - Buscar una data típica y bien contrastada en UCI Machine Learning para clasificación y regresión.
-4. Buscar qué hiperparámetros jugamos con GA como por ejemplo lo que puse de univariable e multivariable (puede ser respecto a la data que ingresa).
+## About this work
+
+- __Types of Hyperparameter Search to Compare__
+
+        - EAS
+        - EDAS
+        - GridSearch
+        - Randomized
+
+- __Metrics to Compare__
+
+        - Accuracy, Precision
+        - Runtime Execution
+        - Number of Iterations
+        - Computational consumption (CPU, Memory, Energy)
+
+- __Cases of Study__
+
+        - Classification problem With Indoor Location
+        - Regression problem With Indoor Location
+
+- __Details__
+
+        - Evaluation of changes by univariate and bivariate EAS, EDAS.
+        - Dataset [Wlan dataset for indoor localisation][1]
+
+- __Benchmark study__
+
+        - https://www.blog.pythonlibrary.org/2016/05/24/python-101-an-intro-to-benchmarking-your-code/
+        - https://github.com/ionelmc/pytest-benchmark
+        - https://mg.pov.lt/profilehooks/
+        - https://pypi.org/project/pytest-benchmark/
+        - https://stackoverflow.com/questions/1593019/is-there-any-simple-way-to-benchmark-python-script
+        - https://dzone.com/articles/unit-testing-the-good-bad-amp-ugly
+
+[1]: https://archive.ics.uci.edu/ml/datasets/Geo-Magnetic+field+and+WLAN+dataset+for+indoor+localisation+from+wristband+and+smartphone#
