@@ -129,34 +129,34 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
 		score_cache {dict} -- [description] (default: {{}})
 	"""
 	parameters = _individual_to_params(individual, name_values)
+	nombreModelo = str(individual.est).split('(')[0]
 	score = 0
-	n_test = 0
 	paramkey = str(individual)
 	if paramkey in score_cache:
 		score = score_cache[paramkey]
 	else:
-        resultIndividuo = []
-        cv = KFold(n_splits=10, shuffle=False)
-        scorer = check_scoring(individual.est, scoring="accuracy")
+		resultIndividuo = []
+		cv = KFold(n_splits=10, shuffle=False)
+		scorer = check_scoring(individual.est, scoring="accuracy")
 		for train, test in cv.split(X, y):
 			resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
 						train=train, test=test, verbose=verbose,
                                          parameters=parameters, fit_params=None, return_times=True))
 			
 		accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
-        runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
-        # error = distance_error(estimator, X, y)
-        score = accuracy.mean()
-        score_cache[paramkey] = score
-        dict_result = {}
-        dict_result['Modelo'] = nombreModelo
-        dict_result['Parametros'] = params
-        dict_result['Accuracy'] = score
-        dict_result['stdAccuracy'] = accuracy.std()
-        dict_result['Runtime'] = runtime.mean()
-        dict_result['accuracy_values'] = accuracy
-        dict_result['runtime_values'] = runtime
-        resultados.append(dict_result)
+		runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
+		# error = distance_error(estimator, X, y)
+		score = accuracy.mean()
+		score_cache[paramkey] = score
+		dict_result = {}
+		dict_result['Modelo'] = nombreModelo
+		dict_result['Parametros'] = parameters
+		dict_result['Accuracy'] = score
+		dict_result['stdAccuracy'] = accuracy.std()
+		dict_result['Runtime'] = runtime.mean()
+		dict_result['accuracy_values'] = accuracy
+		dict_result['runtime_values'] = runtime
+		result_cache.append(dict_result)
 	return (score,)
 
 
@@ -210,7 +210,7 @@ class GeneticSearchCV:
             idxs, individuals, each_scores = zip(*[(idx, indiv, np.mean(indiv.fitness.values))
 											for idx, indiv in list(gen.genealogy_history.items())
 											if indiv.fitness.valid and not np.all(np.isnan(indiv.fitness.values))])
-            name_values, _, _ = _get_param_types_maxint(params)
+            name_values, _, _ = _get_param_types_maxint(self.params)
             # Add to output
             #out['param_index'] += [p] * len(idxs)
             out['index'] += idxs
