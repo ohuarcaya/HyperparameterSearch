@@ -7,21 +7,21 @@ Each ID represents an unique place on the map. The X-Y coordinates represents th
 
 ## For each measure
 
-**measure1(2)_timestamp_id.csv**
+### **measure1(2)_timestamp_id.csv**
 
 Timestamp (Unixtime) of arrival on placeID, timestamp (Unixtime) of departure by placeID, Place ID identifier (0-324)
 
-**measure1(2)_smartphone_sens.csv**
+### **measure1(2)_smartphone_sens.csv**
 
 According to measure1(2)_timestamp_id.csv, this csv contains the data sensors retrieved by the smartphone.
 Timestamp, AccelerationX, AccelerationY, AccelerationZ, MagneticFieldX, MagneticFieldY, MagneticFieldZ, Z-AxisAgle(Azimuth), X-AxisAngle(Pitch), Y-AxisAngle(Roll), GyroX, GyroY, GyroZ
 
-**measure1(2)_smartwatch_sens.csv**
+### **measure1(2)_smartwatch_sens.csv**
 
-According to measure1(2)_timestamp_id.csv, this csv contains the data sensors retrieved by the smartwatch. 
+According to measure1(2)_timestamp_id.csv, this csv contains the data sensors retrieved by the smartwatch.
 Timestamp, AccelerationX, AccelerationY, AccelerationZ, MagneticFieldX, MagneticFieldY, MagneticFieldZ, Z-AxisAgle(Azimuth), X-AxisAngle(Pitch), Y-AxisAngle(Roll), GyroX, GyroY, GyroZ
 
-**measure1(2)_smartphone_wifi.csv**
+### **measure1(2)_smartphone_wifi.csv**
 
 Each rows contains PlaceId (ascending order) and 127 column, with RSSI level for each different
 WAPs retrieved during the campaign. Not all the WAPs are detected in each scan.
@@ -32,7 +32,7 @@ For these WAPs, the articial RSSI value is -100 (dbm).
 Barsocchi, P., Crivello, A., La Rosa, D., & Palumbo, F. (2016, October). A multisource and multivariate dataset for indoor localization methods based on WLAN and geo-magnetic field fingerprinting. In Indoor Positioning and Indoor Navigation (IPIN), 2016 International Conference on (pp. 1-8). IEEE.
 
 __Relevant Paper:__
-https://ieeexplore.ieee.org/document/7743678/
+<https://ieeexplore.ieee.org/document/7743678/>
 
 __Url Data:__
-https://archive.ics.uci.edu/ml/datasets/Geo-Magnetic+field+and+WLAN+dataset+for+indoor+localisation+from+wristband+and+smartphone#
+<https://archive.ics.uci.edu/ml/datasets/Geo-Magnetic+field+and+WLAN+dataset+for+indoor+localisation+from+wristband+and+smartphone#>

@@ -1,3 +1,18 @@
+import time
+ 
+#@profile
+def fast_function():
+    print("I'm a fast function!")
+ 
+#@profile
+def slow_function():
+    time.sleep(2)
+    print("I'm a slow function")
+ 
+if __name__ == '__main__':
+    fast_function()
+    slow_function()
+
 """
 import os
 import time
@@ -63,6 +78,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import VotingClassifier
 warnings.filterwarnings("ignore")
+"""
+
+
+
 """
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -192,6 +211,8 @@ accuracy_score(y_test, estimador.predict(X_test))
 y_pred = estimador.predict(X_test)
 y_pred = estimador.predict(X_test)
 np.sum(y_pred == y_test)/len(y_test)
+"""
+
 
 """
 LogisticRegression(penalty=’l2’, dual=False, tol=0.0001, C=1.0, fit_intercept=True, intercept_scaling=1, 
