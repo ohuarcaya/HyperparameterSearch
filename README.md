@@ -40,6 +40,7 @@ Hyperparameter search optimization by genetic algorithms and distribution estima
                 - memory_profiler
                 - timeit
                 - profilehooks
+		- guppy
 
         Enlaces de Referencia
 
@@ -49,3 +50,4 @@ Hyperparameter search optimization by genetic algorithms and distribution estima
                 - https://pypi.org/project/pytest-benchmark/
                 - https://stackoverflow.com/questions/1593019/is-there-any-simple-way-to-benchmark-python-script
                 - https://dzone.com/articles/unit-testing-the-good-bad-amp-ugly
+		- http://www.marinamele.com/7-tips-to-time-python-scripts-and-control-memory-and-cpu-usage
