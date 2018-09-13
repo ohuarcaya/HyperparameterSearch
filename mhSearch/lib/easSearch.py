@@ -1,3 +1,7 @@
+#how to
+#python -m pip uninstall deap
+#python -m pip install --upgrade --upgrade-strategy "eager" --force-reinstall --ignore-installed --compile --process-dependency-links --no-binary :all: deap
+#pip install --upgrade --upgrade-strategy "eager" --force-reinstall --ignore-installed --compile --process-dependency-links --no-binary :all: deap
 import os
 import time
 import warnings
@@ -6,13 +10,16 @@ import random as rnd
 import pandas as pd
 from collections import defaultdict
 # Librería Genética
-from deap import base, creator, tools, algorithms
+from deap import base
+from deap import creator
+from deap import tools # Import warning
+from deap import algorithms
 # Subfunciones de estimadores
-from sklearn.base import clone
+from sklearn.base import clone # Import warning
 # [https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/base.py][30]
 from sklearn.base import is_classifier
 # [https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/base.py][535]
-from sklearn.model_selection._validation import _fit_and_score
+from sklearn.model_selection._validation import _fit_and_score # Import warning
 # [https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/model_selection/_validation.py][346]
 from sklearn.model_selection._search import BaseSearchCV
 # [https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/model_selection/_search.py][386]
@@ -51,113 +58,112 @@ def _get_param_types_maxint(params):
 
 
 def _initIndividual(pcls, maxints):
-	"""[Iniciar Individuo]
-	Arguments:
-		pcls {[creator.Individual]} -- [Iniciar individuo con indices aleatorios]
-		maxints {[params_size]} -- [lista de máximos índices]
-	Returns:
-		[creator.Individual] -- [Creación de individuo]
-	"""
-	part = pcls(rnd.randint(0, maxint) for maxint in maxints)
-	return part
+    """[Iniciar Individuo]
+    Arguments:
+        pcls {[creator.Individual]} -- [Iniciar individuo con indices aleatorios]
+        maxints {[params_size]} -- [lista de máximos índices]
+    Returns:
+        [creator.Individual] -- [Creación de individuo]
+    """
+    part = pcls(rnd.randint(0, maxint) for maxint in maxints)
+    return part
 
 
 def _mutIndividual(individual, maxints, prob_mutacion):
-	"""[Mutación Individuo]
-	Arguments:
-		individual {[creator.Individual]} -- [Individuo de población]
-		maxints {[lista]} -- [lista de máximos índices]
-		prob_mutacion {[float]} -- [probabilidad de mutación del gen]
-	Returns:
-		[creator.Individual] -- [Individuo mutado]
-	"""
-	for i in range(len(maxints)):
-		if rnd.random() < prob_mutacion:
-			individual[i] = rnd.randint(0, maxints[i])
-	return individual,
+    """[Mutación Individuo]
+    Arguments:
+        individual {[creator.Individual]} -- [Individuo de población]
+        maxints {[lista]} -- [lista de máximos índices]
+        prob_mutacion {[float]} -- [probabilidad de mutación del gen]
+    Returns:
+        [creator.Individual] -- [Individuo mutado]
+    """
+    for i in range(len(maxints)):
+        if rnd.random() < prob_mutacion:
+            individual[i] = rnd.randint(0, maxints[i])
+    return individual
 
 
 def _cxIndividual(ind1, ind2, prob_cruce, gene_type):
-	"""[Cruce de Individuos]
-	Arguments:
-		ind1 {[creator.Individual]} -- [Individuo 1]
-		ind2 {[creator.Individual]} -- [Individuo 2]
-		indpb {[float]} -- [probabilidad de emparejar]
-		gene_type {[list]} -- [tipos de dato de los parámetros, CATEGORICO o NUMERICO]
-	Returns:
-		[creator.Individual,creator.Individual] -- [nuevos Individuos]
-	"""
-	CATEGORICO = 1  # int o str
-	NUMERICO = 2  # float
-	for i in range(len(ind1)):
-		if rnd.random() < prob_cruce:
-			if gene_type[i] == CATEGORICO:
-				ind1[i], ind2[i] = ind2[i], ind1[i]
-			else:
-				sorted_ind = sorted([ind1[i], ind2[i]])
-				ind1[i] = rnd.randint(sorted_ind[0], sorted_ind[1])
-				ind2[i] = rnd.randint(sorted_ind[0], sorted_ind[1])
-	return ind1, ind2
+    """[Cruce de Individuos]
+    Arguments:
+        ind1 {[creator.Individual]} -- [Individuo 1]
+        ind2 {[creator.Individual]} -- [Individuo 2]
+        indpb {[float]} -- [probabilidad de emparejar]
+        gene_type {[list]} -- [tipos de dato de los parámetros, CATEGORICO o NUMERICO]
+    Returns:
+        [creator.Individual,creator.Individual] -- [nuevos Individuos]
+    """
+    CATEGORICO = 1  # int o str
+    NUMERICO = 2  # float
+    for i in range(len(ind1)):
+        if rnd.random() < prob_cruce:
+            if gene_type[i] == CATEGORICO:
+                ind1[i], ind2[i] = ind2[i], ind1[i]
+            else:
+                sorted_ind = sorted([ind1[i], ind2[i]])
+                ind1[i] = rnd.randint(sorted_ind[0], sorted_ind[1])
+                ind2[i] = rnd.randint(sorted_ind[0], sorted_ind[1])
+    return ind1, ind2
 
 
 def _individual_to_params(individual, name_values):
-	"""[Set de parámetro según individuo]
-	Arguments:
-		individual {[creator.Individual]} -- [individuo]
-		name_values {[list]} -- [lista de parámetros, params_data]
-	Returns:
-		[diccionario] -- [parámetros del individuo]
-	"""
-	return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
+    """[Set de parámetro según individuo]
+    Arguments:
+        individual {[creator.Individual]} -- [individuo]
+        name_values {[list]} -- [lista de parámetros, params_data]
+    Returns:
+        [diccionario] -- [parámetros del individuo]
+    """
+    return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
 
 
 def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params,
                   verbose=0, error_score='raise', score_cache={}, result_cache=[]):
-	"""[Evaluación del modelo]
-	Arguments:
-		individual {[creator.Individual]} -- [Individuo]
-		name_values {[list]} -- [parámetros en general]
-		X {[array]} -- [Input]
-		y {[array]} -- [Output]
-		scorer {[string]} -- [Parámetro de evaluación, precisión]
-		cv {[int | cross-validation]} -- [Especificación de los folds]
-		uniform {[boolean]} -- [True hace que la data se distribuya uniformemente en los folds]
-		fit_params {[dict | None]} -- [parámetros para estimator.fit]
-	Keyword Arguments:
-		verbose {integer} -- [Mensajes de descripción] (default: {0})
-		error_score {numerico} -- [valor asignado si ocurre un error en fitting] (default: {'raise'})
-		score_cache {dict} -- [description] (default: {{}})
-	"""
-	parameters = _individual_to_params(individual, name_values)
-	nombreModelo = str(individual.est).split('(')[0]
-	score = 0
-	paramkey = str(individual)
-	if paramkey in score_cache:
-		score = score_cache[paramkey]
-	else:
-		resultIndividuo = []
-		cv = KFold(n_splits=10, shuffle=False)
-		scorer = check_scoring(individual.est, scoring="accuracy")
-		for train, test in cv.split(X, y):
-			resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
-						train=train, test=test, verbose=verbose,
-                                         parameters=parameters, fit_params=None, return_times=True))
-			
-		accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
-		runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
-		# error = distance_error(estimator, X, y)
-		score = accuracy.mean()
-		score_cache[paramkey] = score
-		dict_result = {}
-		dict_result['Modelo'] = nombreModelo
-		dict_result['Parametros'] = parameters
-		dict_result['Accuracy'] = score
-		dict_result['stdAccuracy'] = accuracy.std()
-		dict_result['Runtime'] = runtime.mean()
-		dict_result['accuracy_values'] = accuracy
-		dict_result['runtime_values'] = runtime
-		result_cache.append(dict_result)
-	return (score,)
+    """[Evaluación del modelo]
+    Arguments:
+        individual {[creator.Individual]} -- [Individuo]
+        name_values {[list]} -- [parámetros en general]
+        X {[array]} -- [Input]
+        y {[array]} -- [Output]
+        scorer {[string]} -- [Parámetro de evaluación, precisión]
+        cv {[int | cross-validation]} -- [Especificación de los folds]
+        uniform {[boolean]} -- [True hace que la data se distribuya uniformemente en los folds]
+        fit_params {[dict | None]} -- [parámetros para estimator.fit]
+    Keyword Arguments:
+        verbose {integer} -- [Mensajes de descripción] (default: {0})
+        error_score {numerico} -- [valor asignado si ocurre un error en fitting] (default: {'raise'})
+        score_cache {dict} -- [description] (default: {{}})
+    """
+    parameters = _individual_to_params(individual, name_values)
+    nombreModelo = str(individual.est).split('(')[0]
+    score = 0
+    paramkey = str(individual)
+    if paramkey in score_cache:
+        score = score_cache[paramkey]
+    else:
+        resultIndividuo = []
+        cv = KFold(n_splits=10, shuffle=False)
+        scorer = check_scoring(individual.est, scoring="accuracy")
+        for train, test in cv.split(X, y):
+            resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
+                        train=train, test=test, verbose=verbose,
+                        parameters=parameters, fit_params=None, return_times=True))
+        accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
+        runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
+        # error = distance_error(estimator, X, y)
+        score = accuracy.mean()
+        score_cache[paramkey] = score
+        dict_result = {}
+        dict_result['Modelo'] = nombreModelo
+        dict_result['Parametros'] = parameters
+        dict_result['Accuracy'] = score
+        dict_result['stdAccuracy'] = accuracy.std()
+        dict_result['Runtime'] = runtime.mean()
+        dict_result['accuracy_values'] = accuracy
+        dict_result['runtime_values'] = runtime
+        result_cache.append(dict_result)
+    return (score,)
 
 
 class GeneticSearchCV:
@@ -199,7 +205,6 @@ class GeneticSearchCV:
         creator.create("FitnessMax", base.Fitness, weights=(1.0,))
         # Individuo [list], parámetros:est, FinessMax
         creator.create("Individual", list, est=clone(self.estimator), fitness=creator.FitnessMax)
-
     @property
     def cv_results_(self):
         if self._cv_results is None:
@@ -222,11 +227,9 @@ class GeneticSearchCV:
             out['nan_test_score?'] += [np.any(np.isnan(scores)) for scores in each_scores]
             self._cv_results = out
         return self._cv_results
-
     @property
     def best_index_(self):
         return np.argmax(self.cv_results_['max_test_score'])
-	
     # fit y refit general
     def fit(self, X, y):
         self.best_estimator_ = None
@@ -323,7 +326,7 @@ class GeneticSearchCV:
 # Lectura de los datos y separación
 dataset = pd.read_csv("../data/Tx_0x06")
 validation_size = 0.20
-X = dataset.values[:, 0:dataset.shape[1] - 1].astype(float)
+X = dataset.values[:, 0:dataset.shape[1] - 1].astype(int)
 Y = dataset.values[:, dataset.shape[1] - 1]
 # Split randomizando los datos
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=validation_size)
@@ -358,7 +361,7 @@ scoring = "accuracy"
 refit = False
 key = 'ExtraTreesClassifier'
 model = models[key]
-params = params[key]
-gs = GeneticSearchCV(model, params, cv=cv, n_jobs=n_jobs, verbose=verbose, scoring=scoring, refit=refit)
+parameters = params[key]
+gs = GeneticSearchCV(model, parameters, cv=cv, n_jobs=n_jobs, verbose=verbose, scoring=scoring, refit=refit)
 result = gs.fit(X, Y)
 """
