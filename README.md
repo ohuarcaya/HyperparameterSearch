@@ -28,7 +28,7 @@ Hyperparameter search optimization by genetic algorithms and distribution estima
         - Evaluation of changes by univariate and bivariate EAS, EDAS.
         - Dataset Wlan dataset for indoor localisation: 
 
-[aquí el enlace uci](https://archive.ics.uci.edu/ml/datasets/Geo-Magnetic+field+and+WLAN+dataset+for+indoor+localisation+from+wristband+and+smartphone#)
+[aquí el enlace uci](https://archive.ics.uci.edu/ml/datasets/UJIIndoorLoc#)
 
 - __Benchmark study__
 
