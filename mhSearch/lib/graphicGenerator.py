@@ -1,6 +1,7 @@
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.ticker as mticker
 import matplotlib.pyplot as plt
+from scipy.misc import imread
 import matplotlib as mpl
 import seaborn as sns
 import numpy as np
@@ -21,7 +22,13 @@ mpl.rcParams['ytick.labelsize'] = 6
 class GraphicBuilder:
     def __init__(self, inputDataFrame):
         self.prefijo = "PRED_"
+        self.minLongitude = -7705
+        self.maxLongitude = -7290
+        self.minLatitude = 4864735
+        self.maxLatitude = 4865023
         self.inputDataFrame = inputDataFrame
+        self.inputDataFrame.FLOOR = self.inputDataFrame.FLOOR.apply(int)
+        self.inputDataFrame.BUILDINGID = self.inputDataFrame.BUILDINGID.apply(int)
 
     def error_distance (self, columns = ["LATITUDE", "LONGITUDE", "FLOOR"]):
         altura = 2.5
@@ -34,8 +41,15 @@ class GraphicBuilder:
         self.inputDataFrame['ERR_REG'] = var_xy
         self.inputDataFrame['ERR'] = np.sqrt(var_xy*var_xy + var_z*var_z)
 
-    def graphicMap2D(self, filename="test", x = "LATITUDE", y="LONGITUDE", hue="BUILDINGID"):
-        sns.lmplot(x=x, y=y, hue=hue, data=self.inputDataFrame, fit_reg=False, x_jitter=.1, markers='.')
+    def graphicMap2D(self, filename="test", x="LONGITUDE", y="LATITUDE", hue="BUILDINGID"):
+        # sns.lmplot(x=x, y=y, hue=hue, data=self.inputDataFrame, fit_reg=False, x_jitter=.1, markers='.')
+        plt.plot(x, y, data=self.inputDataFrame[self.inputDataFrame.BUILDINGID==0], linestyle='', marker='.', markersize=3.5, alpha=0.3, label=hue+' 0', zorder=1, color='g')
+        plt.plot(x, y, data=self.inputDataFrame[self.inputDataFrame.BUILDINGID==1], linestyle='', marker='.', markersize=3.5, alpha=0.3, label=hue+' 1', zorder=1, color='b')
+        plt.plot(x, y, data=self.inputDataFrame[self.inputDataFrame.BUILDINGID==2], linestyle='', marker='.', markersize=3.5, alpha=0.3, label=hue+' 2', zorder=1, color='r')
+        plt.legend(markerscale=4)
+        plt.xlabel(x)
+        plt.ylabel(y)
+        plt.imshow(imread("images/geomap2d.jpg"), zorder=0, extent=[self.minLongitude, self.maxLongitude, self.minLatitude, self.maxLatitude])
         plt.show()
         plt.savefig("images/"+str(filename)+".svg")
 
@@ -45,6 +59,8 @@ class GraphicBuilder:
         for index in range(3):
             ax = fig.add_subplot(1, 3, index+1, projection='3d')
             fig.tight_layout()
+            # self.inputDataFrame.FLOOR = self.inputDataFrame.FLOOR.apply(int)
+            # self.inputDataFrame.BUILDINGID = self.inputDataFrame.BUILDINGID.apply(int)
             dfGraphics = self.inputDataFrame[self.inputDataFrame.BUILDINGID==index]
             x = dfGraphics[columns[0]]
             y = dfGraphics[columns[1]]
@@ -77,6 +93,8 @@ class GraphicBuilder:
         ax = fig.add_subplot(1, 1, 1, projection='3d')
         fig.tight_layout()
         dfGraphics = self.inputDataFrame
+        # dfGraphics.FLOOR = dfGraphics.FLOOR.apply(int)
+        # dfGraphics.BUILDINGID = dfGraphics.BUILDINGID.apply(int)
         x = dfGraphics[columns[0]]
         y = dfGraphics[columns[1]]
         z = dfGraphics[columns[2]]
