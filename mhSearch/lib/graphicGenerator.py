@@ -26,9 +26,22 @@ class GraphicBuilder:
         self.maxLongitude = -7290
         self.minLatitude = 4864735
         self.maxLatitude = 4865023
-        self.inputDataFrame = inputDataFrame
+        self.maxLatitudeGPS = 39.993720
+        self.maxLongitudeGPS = -0.069254
+        self.minLatitudeGPS = 39.991626
+        self.minLongitudeGPS = -0.065425
+        self.inputDataFrame = inputDataFrame.copy()
         self.inputDataFrame.FLOOR = self.inputDataFrame.FLOOR.apply(int)
         self.inputDataFrame.BUILDINGID = self.inputDataFrame.BUILDINGID.apply(int)
+
+    def updateDataFrame(self, inputDataFrame):
+        self.inputDataFrame = inputDataFrame.copy()
+
+    def convertInt(self):
+        self.inputDataFrame.FLOOR = self.inputDataFrame.FLOOR.apply(int)
+        self.inputDataFrame.BUILDINGID = self.inputDataFrame.BUILDINGID.apply(int)
+        self.inputDataFrame.PRED_FLOOR = self.inputDataFrame.PRED_FLOOR.apply(int)
+        self.inputDataFrame.PRED_BUILDINGID = self.inputDataFrame.PRED_BUILDINGID.apply(int)
 
     def error_distance (self, columns = ["LATITUDE", "LONGITUDE", "FLOOR"]):
         altura = 2.5
@@ -91,10 +104,7 @@ class GraphicBuilder:
         fig = plt.figure(figsize=(10,10))
         fig.tight_layout()
         ax = fig.add_subplot(1, 1, 1, projection='3d')
-        fig.tight_layout()
         dfGraphics = self.inputDataFrame
-        # dfGraphics.FLOOR = dfGraphics.FLOOR.apply(int)
-        # dfGraphics.BUILDINGID = dfGraphics.BUILDINGID.apply(int)
         x = dfGraphics[columns[0]]
         y = dfGraphics[columns[1]]
         z = dfGraphics[columns[2]]
