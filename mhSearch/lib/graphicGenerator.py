@@ -45,14 +45,22 @@ class GraphicBuilder:
 
     def error_distance (self, columns = ["LATITUDE", "LONGITUDE", "FLOOR"]):
         altura = 2.5
-        real_point = (self.inputDataFrame[columns[0]], self.inputDataFrame[columns[1]])
-        pred_point= (self.inputDataFrame[self.prefijo + columns[0]], self.inputDataFrame[self.prefijo + columns[1]])
+        real_point = (self.longitudeToGPS(self.inputDataFrame[columns[0]]), self.latitudeToGPS(self.inputDataFrame[columns[1]]))
+        pred_point=  (self.longitudeToGPS(self.inputDataFrame[self.prefijo + columns[0]]), self.latitudeToGPS(self.inputDataFrame[self.prefijo + columns[1]]))
+        #real_point = (self.inputDataFrame[columns[0]], self.inputDataFrame[columns[1]])
+        #pred_point= (self.inputDataFrame[self.prefijo + columns[0]], self.inputDataFrame[self.prefijo + columns[1]])
         #https://stackoverflow.com/questions/19412462/getting-distance-between-two-points-based-on-latitude-longitude
         #https://en.wikipedia.org/wiki/Vincenty%27s_formulae
         var_xy = geopy.distance.vincenty(real_point, pred_point).m
         var_z = np.abs(self.inputDataFrame[columns[2]] - self.inputDataFrame[self.prefijo + columns[2]]) * altura
         self.inputDataFrame['ERR_REG'] = var_xy
         self.inputDataFrame['ERR'] = np.sqrt(var_xy*var_xy + var_z*var_z)
+
+    def longitudeToGPS(self, x):
+        return (self.maxLongitudeGPS-self.minLongitudeGPS)*(x-self.minLongitude)/(self.maxLongitude-self.minLongitude) + self.minLongitudeGPS
+    
+    def latitudeToGPS(self, x):
+        return (self.maxLatitudeGPS-self.minLatitudeGPS)*(x-self.minLatitude)/(self.maxLatitude-self.minLatitude) + self.minLatitudeGPS
 
     def graphicMap2D(self, filename="test", x="LONGITUDE", y="LATITUDE", hue="BUILDINGID"):
         # sns.lmplot(x=x, y=y, hue=hue, data=self.inputDataFrame, fit_reg=False, x_jitter=.1, markers='.')
