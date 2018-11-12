@@ -8,10 +8,12 @@ from sklearn.model_selection import train_test_split
 
 
 class GeneralMethods:
-    def __init__(self, estimador, urlDataset, test_size=0.2, seed=7):
+    def __init__(self, estimador, X, y, test_size=0.2, seed=7):
         self.seed = seed
         self.setEstimador(estimador)
-        self._createDataset(urlDataset=urlDataset, test_size=test_size)
+        #self._createDataset(urlDataset=urlDataset, test_size=test_size)
+        self.X  = X
+        self.y = y
 
     def setEstimador(self, estimador):
         self.estimator = estimador
@@ -53,23 +55,29 @@ class GeneralMethods:
             resultIndividuo = []
             cv = KFold(n_splits=10, shuffle=False)
             scorer = check_scoring(self.estimator, scoring=scoring)
-            for train, test in cv.split(self.X_train, self.y_train):
-                resultIndividuo.append(_fit_and_score(estimator=self.estimator, X=self.X_train, y=self.y_train, scorer=scorer, parameters=params,
-                                                      train=train, test=test, verbose=0, fit_params=None, return_times=True))
+            for train, test in cv.split(self.X, self.y):
+                resultIndividuo.append(_fit_and_score(estimator=self.estimator, 
+                                X=self.X, y=self.y, scorer=scorer, parameters=params,
+                                train=train, test=test, verbose=0, fit_params=None, return_times=True))
             accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
             runtime = np.array(resultIndividuo)[
                 :, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
             # error = distance_error(estimator, X, y)
             score = accuracy.mean()
             score_cache[paramkey] = score
-            dict_result = {}
-            dict_result['Modelo'] = nombreModelo
-            dict_result['Parametros'] = params
+            #dict_result = {}
+            #dict_result['Modelo'] = nombreModelo
+            #dict_result['Parametros'] = params
+            #dict_result['Accuracy'] = score
+            #dict_result['stdAccuracy'] = accuracy.std()
+            #dict_result['Runtime'] = runtime.mean()
+            #dict_result['accuracy_values'] = accuracy
+            #dict_result['runtime_values'] = runtime
+            dict_result = params
             dict_result['Accuracy'] = score
             dict_result['stdAccuracy'] = accuracy.std()
             dict_result['Runtime'] = runtime.mean()
-            dict_result['accuracy_values'] = accuracy
-            dict_result['runtime_values'] = runtime
+            dict_result['stdRuntime'] = runtime.std()
             resultados.append(dict_result)
         return score
 

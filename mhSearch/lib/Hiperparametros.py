@@ -65,13 +65,14 @@ class HyperparameterSwitcher(object):
         parameters['leaf_size'] = [10, 30, 50, 70]
         return parameters
 
-    def Parametros_DecisionTreeClassifier(self):
+    def Parametros_DecisionTreeClassifier(self, isDummy = True):
         parameters = {}
-        parameters['max_features'] = ['sqrt', 'log2', None]
-        parameters['splitter'] = ['best', 'random']
+        if isDummy:
+            parameters['max_features'] = ['sqrt', 'log2', None]
+            parameters['splitter'] = ['best', 'random']
+            parameters['max_depth'] = [2, 3, 10, 50, 100]
         parameters['criterion'] = ['gini', 'entropy']
         parameters['class_weight'] = [None, 'balanced']
-        parameters['max_depth'] = [2, 3, 10, 50, 100]
         return parameters
 
     def Parametros_GaussianNB(self):

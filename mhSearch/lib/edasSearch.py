@@ -16,7 +16,8 @@ Class EdasHyperparameterSearch
 
 
 class EdasHyperparameterSearch:
-    def __init__(self, of, parametros, estimator, iterations=10, sample_size=50, select_ratio=0.3, debug=False):
+    def __init__(self, of, parametros, estimator, iterations=10, sample_size=50,
+                 select_ratio=0.3, debug=False, n_jobs=1):
         # Algorithm parameters
         self.iterations = iterations
         self.sample_size = sample_size
@@ -35,7 +36,7 @@ class EdasHyperparameterSearch:
         self.__manager = Manager()
         self.score_cache = self.__manager.dict()
         self.resultados = self.__manager.list()
-        self.n_jobs = cpu_count()
+        self.n_jobs = cpu_count() if n_jobs == -1 else n_jobs
         self.dimensions = len(parametros)
 
     def sample_sort(self):
