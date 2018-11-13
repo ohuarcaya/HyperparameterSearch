@@ -17,15 +17,15 @@ Class EdasHyperparameterSearch
 
 class EdasHyperparameterSearch:
     def __init__(self, of, parametros, estimator, iterations=10, sample_size=50,
-                 select_ratio=0.3, debug=False, n_jobs=1):
+                 select_ratio=0.3, debug=False, n_jobs=1, type="accuracy"):
         # Algorithm parameters
-        self.iterations = iterations
+        self.iterations = 1 if iterations <= 1 else iterations - 1
         self.sample_size = sample_size
         self.select_ratio = select_ratio
         self.epsilon = 10e-6
         # class members
         self.class_method = of
-        self.objective_function = of.getModelAccuracy
+        self.objective_function = of.getModelAccuracy if type=="accuracy" else of.getModelMSE
         self.sample = []
         self.means = []
         self.stdevs = []
@@ -70,6 +70,7 @@ class EdasHyperparameterSearch:
         var = var + (var == 0) * self.epsilon
         self.sample = np.floor(
             ((self.sample - np.min(self.sample, 0)) / var) * (self.tope_params - 1))
+        self.sample = np.unique(self.sample, axis=0)
         if self.debug:
             print("draw sample")
             print(self.sample)
@@ -95,6 +96,7 @@ class EdasHyperparameterSearch:
                             1 for key in self.parametros.keys()]  # maxints
         self.tope_params = np.array(self.params_size + [-1]) + 1
         self.sample = np.floor(self.sample * self.tope_params)
+        self.sample = np.unique(self.sample, axis=0)
         if self.debug:
             print("initialization")
             print(self.sample)

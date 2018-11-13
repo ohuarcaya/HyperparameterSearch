@@ -154,14 +154,19 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
         # error = distance_error(estimator, X, y)
         score = accuracy.mean()
         score_cache[paramkey] = score
-        dict_result = {}
-        dict_result['Modelo'] = nombreModelo
-        dict_result['Parametros'] = parameters
+        #dict_result = {}
+        #dict_result['Modelo'] = nombreModelo
+        #dict_result['Parametros'] = parameters
+        #dict_result['Accuracy'] = score
+        #dict_result['stdAccuracy'] = accuracy.std()
+        #dict_result['Runtime'] = runtime.mean()
+        #dict_result['accuracy_values'] = accuracy
+        #dict_result['runtime_values'] = runtime
+        dict_result = parameters
         dict_result['Accuracy'] = score
         dict_result['stdAccuracy'] = accuracy.std()
         dict_result['Runtime'] = runtime.mean()
-        dict_result['accuracy_values'] = accuracy
-        dict_result['runtime_values'] = runtime
+        dict_result['stdRuntime'] = runtime.std()
         result_cache.append(dict_result)
     return (score,)
 
