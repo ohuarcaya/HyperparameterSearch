@@ -43,7 +43,7 @@ class GeneralMethods:
         err_distance = np.mean(np.sqrt(vx*vx + vy*vy))
         return err_distance
 
-    def getModelAccuracy(self, parametros, individual, score_cache, resultados):
+    def getModelAccuracy(self, parametros, individual, score_cache, resultados, generacion):
         params = _individual_to_params(individual, parametros)
         score = 0
         scoring = "accuracy"
@@ -78,6 +78,7 @@ class GeneralMethods:
             dict_result['stdAccuracy'] = accuracy.std()
             dict_result['Runtime'] = runtime.mean()
             dict_result['stdRuntime'] = runtime.std()
+            dict_result['generacion'] = generacion
             resultados.append(dict_result)
         return score
 

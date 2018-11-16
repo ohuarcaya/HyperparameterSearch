@@ -138,12 +138,16 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
     parameters = _individual_to_params(individual, name_values)
     nombreModelo = str(individual.est).split('(')[0]
     score = 0
-    paramkey = str(individual)
+    paramkey = nombreModelo+str(individual)
+    if 'genCount' in score_cache:
+        score_cache['genCount'] = score_cache['genCount'] + 1
+    else:
+        score_cache['genCount'] = 1
     if paramkey in score_cache:
         score = score_cache[paramkey]
     else:
         resultIndividuo = []
-        cv = KFold(n_splits=10, shuffle=False)
+        #cv = KFold(n_splits=10, shuffle=False)
         scorer = check_scoring(individual.est, scoring="accuracy")
         for train, test in cv.split(X, y):
             resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
@@ -167,6 +171,7 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
         dict_result['stdAccuracy'] = accuracy.std()
         dict_result['Runtime'] = runtime.mean()
         dict_result['stdRuntime'] = runtime.std()
+        dict_result['gene'] = score_cache['genCount']
         result_cache.append(dict_result)
     return (score,)
 
