@@ -15,8 +15,8 @@ WORKDIR /app
 ADD . /app
 
 # Using pip:
-RUN python3 -m pip install -r requirements.txt
-CMD ["python3", "-m", "hyperparametersearchcode"]
+#RUN python3 -m pip install -r requirements.txt
+#CMD ["python3", "-m", "hyperparametersearchcode"]
 
 # Using pipenv:
 #RUN python3 -m pip install pipenv
