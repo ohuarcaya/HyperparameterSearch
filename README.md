@@ -2,6 +2,12 @@
 
 Hyperparameter search optimization by genetic algorithms and distribution estimation algorithms
 
+## Virtual Environment
+```sh
+python3 -m venv env
+source env/bin/activate
+```
+
 ## About this work
 
 - __Types of Hyperparameter Search to Compare__
