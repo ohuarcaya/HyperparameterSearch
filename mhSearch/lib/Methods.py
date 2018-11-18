@@ -62,17 +62,8 @@ class GeneralMethods:
             accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
             runtime = np.array(resultIndividuo)[
                 :, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
-            # error = distance_error(estimator, X, y)
             score = accuracy.mean()
             score_cache[paramkey] = score
-            #dict_result = {}
-            #dict_result['Modelo'] = nombreModelo
-            #dict_result['Parametros'] = params
-            #dict_result['Accuracy'] = score
-            #dict_result['stdAccuracy'] = accuracy.std()
-            #dict_result['Runtime'] = runtime.mean()
-            #dict_result['accuracy_values'] = accuracy
-            #dict_result['runtime_values'] = runtime
             dict_result = params
             dict_result['Accuracy'] = score
             dict_result['stdAccuracy'] = accuracy.std()

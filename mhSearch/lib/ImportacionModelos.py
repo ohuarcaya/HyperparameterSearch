@@ -14,8 +14,10 @@ from sklearn.naive_bayes import BernoulliNB
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import SVC
 # Ensemble Classifiers
-from sklearn.ensemble import AdaBoostClassifier # Future deprecated dependency (numpy.core.umath_tests)
-from sklearn.ensemble import GradientBoostingClassifier # Future deprecated dependency(numpy.core.umath_tests)
+from sklearn.ensemble import AdaBoostClassifier 
+# Future deprecated dependency (numpy.core.umath_tests)
+from sklearn.ensemble import GradientBoostingClassifier 
+# Future deprecated dependency(numpy.core.umath_tests)
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.ensemble import VotingClassifier
@@ -31,14 +33,19 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.gaussian_process import GaussianProcessRegressor
 # Ensemble Regresors
-from sklearn.ensemble import AdaBoostRegressor # Future deprecated dependency(numpy.core.umath_tests)
-from sklearn.ensemble import GradientBoostingRegressor # Future deprecated dependency(numpy.core.umath_tests)
+from sklearn.ensemble import AdaBoostRegressor 
+# Future deprecated dependency(numpy.core.umath_tests)
+from sklearn.ensemble import GradientBoostingRegressor 
+# Future deprecated dependency(numpy.core.umath_tests)
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import ExtraTreesRegressor
 from sklearn.ensemble import BaggingRegressor
 # from sklearn.linear_model import Perceptron
-# Perceptron and SGDClassifier share the same underlying implementation. In fact, Perceptron() is equivalent to SGDClassifier(loss="perceptron", eta0=1, learning_rate="constant", penalty=None)
-# from sklearn.neighbors import RadiusNeighborsClassifier # TO MUCH DANGEROUS BECAUSE OF RADIOUS PRODUCE EXCEPTION
+# Perceptron and SGDClassifier share the same underlying implementation. 
+# In fact, Perceptron() is equivalent to SGDClassifier(loss="perceptron", eta0=1, 
+#   learning_rate="constant", penalty=None)
+# from sklearn.neighbors import RadiusNeighborsClassifier 
+# # TO MUCH DANGEROUS BECAUSE OF RADIOUS PRODUCE EXCEPTION
 
 def getClassifierNames(includeEnsambled=False):
     names = ['LogisticRegression', 'SGDClassifier', 'PassiveAggressiveClassifier', 'MLPClassifier', 
@@ -109,15 +116,18 @@ def getClassifierModels(includeEnsambled=False, seed=7):
     models['MultinomialNB'] = MultinomialNB()
     models['SVC'] = SVC(random_state=seed)
     if(includeEnsambled):
-        models['AdaBoostClassifier'] = AdaBoostClassifier(DecisionTreeClassifier(random_state=seed), random_state=seed)
+        models['AdaBoostClassifier'] = AdaBoostClassifier(
+            DecisionTreeClassifier(random_state=seed), random_state=seed)
         models['GradientBoostingClassifier'] = GradientBoostingClassifier(random_state=seed)
         models['RandomForestClassifier'] = RandomForestClassifier(random_state=seed)
         models['ExtraTreesClassifier'] = ExtraTreesClassifier(random_state=seed)
         estimators = []
-        estimators.append(("Voting_GradientBoostingClassifier", GradientBoostingClassifier(random_state=seed)))
+        estimators.append(("Voting_GradientBoostingClassifier", 
+            GradientBoostingClassifier(random_state=seed)))
         estimators.append(("Voting_ExtraTreesClassifier", ExtraTreesClassifier(random_state=seed)))
         models['VotingClassifier'] = VotingClassifier(estimators)
-        models['BaggingClassifier'] = BaggingClassifier(DecisionTreeClassifier(random_state=seed), random_state=seed)
+        models['BaggingClassifier'] = BaggingClassifier(
+            DecisionTreeClassifier(random_state=seed), random_state=seed)
     return models
 
 
@@ -133,10 +143,12 @@ def getRegressorModels(includeEnsambled=False, seed=7):
     models['KNeighborsRegressor'] = KNeighborsRegressor()
     models['GaussianProcessRegressor'] = GaussianProcessRegressor(random_state=seed)
     if(includeEnsambled):		# Regression
-        models['AdaBoostRegressor'] = AdaBoostRegressor(DecisionTreeRegressor(random_state=seed), random_state=seed)
+        models['AdaBoostRegressor'] = AdaBoostRegressor(
+            DecisionTreeRegressor(random_state=seed), random_state=seed)
         models['GradientBoostingRegressor'] = GradientBoostingRegressor(random_state=seed)
         models['RandomForestRegressor'] = RandomForestRegressor(random_state=seed)
         models['ExtraTreesRegressor'] = ExtraTreesRegressor(random_state=seed)
-        models['BaggingRegressor'] = BaggingRegressor(DecisionTreeRegressor(random_state=seed), random_state=seed)
+        models['BaggingRegressor'] = BaggingRegressor(
+            DecisionTreeRegressor(random_state=seed), random_state=seed)
     return models
 

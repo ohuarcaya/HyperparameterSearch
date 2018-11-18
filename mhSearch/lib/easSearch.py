@@ -1,7 +1,10 @@
-#how to
-#python -m pip uninstall deap
-#python -m pip install --upgrade --upgrade-strategy "eager" --force-reinstall --ignore-installed --compile --process-dependency-links --no-binary :all: deap
-#pip install --upgrade --upgrade-strategy "eager" --force-reinstall --ignore-installed --compile --process-dependency-links --no-binary :all: deap
+"""
+python -m pip uninstall deap
+python -m pip install --upgrade --upgrade-strategy "eager" --force-reinstall
+     --ignore-installed --compile --process-dependency-links --no-binary :all: deap
+pip install --upgrade --upgrade-strategy "eager" --force-reinstall
+     --ignore-installed --compile --process-dependency-links --no-binary :all: deap
+"""
 import os
 import time
 import warnings
@@ -49,7 +52,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import GradientBoostingClassifier
 
-
 def _get_param_types_maxint(params):
     params_data = list(params.items())  # name_values
     params_type = [isinstance(params[key][0], float) + 1 for key in params.keys()]  # gene_type
@@ -58,26 +60,11 @@ def _get_param_types_maxint(params):
 
 
 def _initIndividual(pcls, maxints):
-    """[Iniciar Individuo]
-    Arguments:
-        pcls {[creator.Individual]} -- [Iniciar individuo con indices aleatorios]
-        maxints {[params_size]} -- [lista de máximos índices]
-    Returns:
-        [creator.Individual] -- [Creación de individuo]
-    """
     part = pcls(rnd.randint(0, maxint) for maxint in maxints)
     return part
 
 
 def _mutIndividual(individual, maxints, prob_mutacion):
-    """[Mutación Individuo]
-    Arguments:
-        individual {[creator.Individual]} -- [Individuo de población]
-        maxints {[lista]} -- [lista de máximos índices]
-        prob_mutacion {[float]} -- [probabilidad de mutación del gen]
-    Returns:
-        [creator.Individual] -- [Individuo mutado]
-    """
     for i in range(len(maxints)):
         if rnd.random() < prob_mutacion:
             individual[i] = rnd.randint(0, maxints[i])
@@ -85,15 +72,6 @@ def _mutIndividual(individual, maxints, prob_mutacion):
 
 
 def _cxIndividual(ind1, ind2, prob_cruce, gene_type):
-    """[Cruce de Individuos]
-    Arguments:
-        ind1 {[creator.Individual]} -- [Individuo 1]
-        ind2 {[creator.Individual]} -- [Individuo 2]
-        indpb {[float]} -- [probabilidad de emparejar]
-        gene_type {[list]} -- [tipos de dato de los parámetros, CATEGORICO o NUMERICO]
-    Returns:
-        [creator.Individual,creator.Individual] -- [nuevos Individuos]
-    """
     CATEGORICO = 1  # int o str
     NUMERICO = 2  # float
     for i in range(len(ind1)):
@@ -108,33 +86,11 @@ def _cxIndividual(ind1, ind2, prob_cruce, gene_type):
 
 
 def _individual_to_params(individual, name_values):
-    """[Set de parámetro según individuo]
-    Arguments:
-        individual {[creator.Individual]} -- [individuo]
-        name_values {[list]} -- [lista de parámetros, params_data]
-    Returns:
-        [diccionario] -- [parámetros del individuo]
-    """
     return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
 
 
 def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params,
                   verbose=0, error_score='raise', score_cache={}, result_cache=[]):
-    """[Evaluación del modelo]
-    Arguments:
-        individual {[creator.Individual]} -- [Individuo]
-        name_values {[list]} -- [parámetros en general]
-        X {[array]} -- [Input]
-        y {[array]} -- [Output]
-        scorer {[string]} -- [Parámetro de evaluación, precisión]
-        cv {[int | cross-validation]} -- [Especificación de los folds]
-        uniform {[boolean]} -- [True hace que la data se distribuya uniformemente en los folds]
-        fit_params {[dict | None]} -- [parámetros para estimator.fit]
-    Keyword Arguments:
-        verbose {integer} -- [Mensajes de descripción] (default: {0})
-        error_score {numerico} -- [valor asignado si ocurre un error en fitting] (default: {'raise'})
-        score_cache {dict} -- [description] (default: {{}})
-    """
     parameters = _individual_to_params(individual, name_values)
     nombreModelo = str(individual.est).split('(')[0]
     score = 0
@@ -147,7 +103,6 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
         score = score_cache[paramkey]
     else:
         resultIndividuo = []
-        #cv = KFold(n_splits=10, shuffle=False)
         scorer = check_scoring(individual.est, scoring="accuracy")
         for train, test in cv.split(X, y):
             resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
@@ -155,23 +110,14 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
                         parameters=parameters, fit_params=None, return_times=True))
         accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
         runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
-        # error = distance_error(estimator, X, y)
         score = accuracy.mean()
         score_cache[paramkey] = score
-        #dict_result = {}
-        #dict_result['Modelo'] = nombreModelo
-        #dict_result['Parametros'] = parameters
-        #dict_result['Accuracy'] = score
-        #dict_result['stdAccuracy'] = accuracy.std()
-        #dict_result['Runtime'] = runtime.mean()
-        #dict_result['accuracy_values'] = accuracy
-        #dict_result['runtime_values'] = runtime
         dict_result = parameters
         dict_result['Accuracy'] = score
         dict_result['stdAccuracy'] = accuracy.std()
         dict_result['Runtime'] = runtime.mean()
         dict_result['stdRuntime'] = runtime.std()
-        dict_result['gene'] = score_cache['genCount']
+        dict_result['genCount'] = score_cache['genCount']
         result_cache.append(dict_result)
     return (score,)
 
@@ -211,23 +157,18 @@ class GeneticSearchCV:
         self.__manager = Manager()
         self.score_cache = self.__manager.dict()
         self.result_cache = self.__manager.list()
-        # Fitness [base.Fitness], objetivo 1
         creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-        # Individuo [list], parámetros:est, FinessMax
         creator.create("Individual", list, est=clone(self.estimator), fitness=creator.FitnessMax)
     @property
     def cv_results_(self):
         if self._cv_results is None:
             out = defaultdict(list)
             gen = self.all_history_
-            # Get individuals and indexes, their list of scores,
-            # and additionally the name_values for this set of parameters
             idxs, individuals, each_scores = zip(*[(idx, indiv, np.mean(indiv.fitness.values))
 											for idx, indiv in list(gen.genealogy_history.items())
-											if indiv.fitness.valid and not np.all(np.isnan(indiv.fitness.values))])
+											if indiv.fitness.valid and not 
+                                            np.all(np.isnan(indiv.fitness.values))])
             name_values, _, _ = _get_param_types_maxint(self.params)
-            # Add to output
-            #out['param_index'] += [p] * len(idxs)
             out['index'] += idxs
             out['params'] += [_individual_to_params(indiv, name_values) for indiv in individuals]
             out['mean_test_score'] += [np.nanmean(scores) for scores in each_scores]
@@ -240,7 +181,6 @@ class GeneticSearchCV:
     @property
     def best_index_(self):
         return np.argmax(self.cv_results_['max_test_score'])
-    # fit y refit general
     def fit(self, X, y):
         self.best_estimator_ = None
         self.best_mem_score_ = float("-inf")
@@ -254,17 +194,14 @@ class GeneticSearchCV:
                 self.best_estimator_.fit(X, y, **self.fit_params)
             else:
                 self.best_estimator_.fit(X, y)
-    # fit individual
     def _fit(self, X, y, parameter_dict):
-        self._cv_results = None  # Indicador de necesidad de actualización
+        self._cv_results = None
         self.scorer_ = check_scoring(self.estimator, scoring=self.scoring)
         n_samples = _num_samples(X)
-        # verificar longitudes x,y 
         if _num_samples(y) != n_samples:
             raise ValueError('Target [y], data [X] no coinciden')
         self.cv = check_cv(self.cv, y=y, classifier=is_classifier(self.estimator))
         toolbox = base.Toolbox()
-        # name_values = lista de parametros, gene_type = [1:categorico; 2:numérico], maxints = size(parametros)
         name_values, self.gene_type, maxints = _get_param_types_maxint(parameter_dict)
         if self.verbose:
             print("Tipos: %s, rangos: %s" % (self.gene_type, maxints))
@@ -284,7 +221,8 @@ class GeneticSearchCV:
 						error_score=self.error_score, fit_params=self.fit_params,
 						score_cache=self.score_cache, result_cache=self.result_cache)
         # registro de función Cruce
-        toolbox.register("mate", _cxIndividual, prob_cruce=self.gene_crossover_prob, gene_type=self.gene_type)
+        toolbox.register("mate", _cxIndividual, prob_cruce=self.gene_crossover_prob, 
+                        gene_type=self.gene_type)
         # registro de función Mutación
         toolbox.register("mutate", _mutIndividual, prob_mutacion=self.gene_mutation_prob, maxints=maxints)
         # registro de función Selección
@@ -308,12 +246,10 @@ class GeneticSearchCV:
         # Posibles combinaciones
         if self.verbose:
             print('--- Evolve in {0} possible combinations ---'.format(np.prod(np.array(maxints) + 1)))
-        pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.5, mutpb=0.2,
+        pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=self.gene_crossover_prob, 
+                                        mutpb=self.gene_mutation_prob,
 										ngen=self.generations_number, stats=stats,
 										halloffame=hof, verbose=self.verbose)
-        #pop, logbook = algorithms.eaGenerateUpdate(toolbox,
-        #								ngen=self.generations_number, stats=stats,
-        #								halloffame=hof, verbose=self.verbose)
         # Save History
         self.all_history_ = hist
         self.all_logbooks_ = logbook
@@ -331,47 +267,3 @@ class GeneticSearchCV:
         pool.join()
         self.best_score_ = current_best_score_
         self.best_params_ = current_best_params_
-
-"""
-# Lectura de los datos y separación
-dataset = pd.read_csv("../data/Tx_0x06")
-validation_size = 0.20
-X = dataset.values[:, 0:dataset.shape[1] - 1].astype(int)
-Y = dataset.values[:, dataset.shape[1] - 1]
-# Split randomizando los datos
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=validation_size)
-
-# Modelos para el Test
-models = { 
-    'ExtraTreesClassifier': ExtraTreesClassifier(),
-    'GradientBoostingClassifier': GradientBoostingClassifier(),
-    'SVC': SVC()
-}
-
-# Parametros de los modelos para el Test
-params = { 
-    'ExtraTreesClassifier': { 
-        'n_estimators': [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
-    },
-    'GradientBoostingClassifier': { 
-        'n_estimators': [17, 22, 27, 32], 
-        'learning_rate': [0.3, 0.5, 0.8, 1.0],
-    },
-    'SVC': {
-        'kernel': ['rbf'], 
-        'C': [1, 3, 5, 7, 9], 
-        'gamma': [0.1, 0.01, 0.001, 0.0001],
-    }
-}
-
-cv = KFold(n_splits=5)
-n_jobs = 4
-verbose = 1
-scoring = "accuracy"
-refit = False
-key = 'ExtraTreesClassifier'
-model = models[key]
-parameters = params[key]
-gs = GeneticSearchCV(model, parameters, cv=cv, n_jobs=n_jobs, verbose=verbose, scoring=scoring, refit=refit)
-result = gs.fit(X, Y)
-"""

@@ -80,7 +80,7 @@ class EdasHyperparameterSearch:
         _pool = Pool(self.n_jobs)
         # iterador de parametros de función objetivo multiproceso
         _iterable = it.product([self.parametros], np.int32(self.sample[:, :self.dimensions]),
-                               [self.score_cache], [self.resultados], [self.generacion])  # [self.estimator],
+                               [self.score_cache], [self.resultados], [self.generacion]) 
         self.sample[:, -1] = _pool.starmap(self.objective_function, _iterable)
         _pool.close()
         _pool.join()
@@ -90,8 +90,7 @@ class EdasHyperparameterSearch:
             print
 
     def run(self):
-        self.sample = np.random.rand(self.sample_size, self.dimensions + 1)  # uniform initialization
-        # cosmetic
+        self.sample = np.random.rand(self.sample_size, self.dimensions + 1)
         self.params_size = [len(self.parametros[key]) -
                             1 for key in self.parametros.keys()]  # maxints
         self.tope_params = np.array(self.params_size + [-1]) + 1
