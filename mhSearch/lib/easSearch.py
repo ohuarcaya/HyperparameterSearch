@@ -68,7 +68,7 @@ def _mutIndividual(individual, maxints, prob_mutacion):
     for i in range(len(maxints)):
         if rnd.random() < prob_mutacion:
             individual[i] = rnd.randint(0, maxints[i])
-    return individual
+    return individual,
 
 
 def _cxIndividual(ind1, ind2, prob_cruce, gene_type):
@@ -102,23 +102,34 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
     if paramkey in score_cache:
         score = score_cache[paramkey]
     else:
-        resultIndividuo = []
-        scorer = check_scoring(individual.est, scoring="accuracy")
-        for train, test in cv.split(X, y):
-            resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
-                        train=train, test=test, verbose=verbose,
-                        parameters=parameters, fit_params=None, return_times=True))
-        accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
-        runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
-        score = accuracy.mean()
-        score_cache[paramkey] = score
-        dict_result = parameters
-        dict_result['Accuracy'] = score
-        dict_result['stdAccuracy'] = accuracy.std()
-        dict_result['Runtime'] = runtime.mean()
-        dict_result['stdRuntime'] = runtime.std()
-        dict_result['genCount'] = score_cache['genCount']
-        result_cache.append(dict_result)
+        try:
+            resultIndividuo = []
+            scorer = check_scoring(individual.est, scoring="accuracy")
+            for train, test in cv.split(X, y):
+                resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
+                            train=train, test=test, verbose=verbose,
+                            parameters=parameters, fit_params=None, return_times=True))
+            accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
+            runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
+            score = accuracy.mean()
+            score_cache[paramkey] = score
+            dict_result = parameters
+            dict_result['Accuracy'] = score
+            dict_result['stdAccuracy'] = accuracy.std()
+            dict_result['Runtime'] = runtime.mean()
+            dict_result['stdRuntime'] = runtime.std()
+            dict_result['genCount'] = score_cache['genCount']
+            result_cache.append(dict_result)
+        except Exception as ex:
+            print(ex)
+            score_cache[paramkey] = 0
+            dict_result = parameters
+            dict_result['Accuracy'] = 0
+            dict_result['stdAccuracy'] = 0
+            dict_result['Runtime'] = 0
+            dict_result['stdRuntime'] = 0
+            dict_result['genCount'] = score_cache['genCount']
+            result_cache.append(dict_result)
     return (score,)
 
 

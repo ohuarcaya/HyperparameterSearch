@@ -1,11 +1,16 @@
 import numpy as np
-
-
-class HyperparameterSwitcher(object):
-    def getHyperparameters(self, modelName):
-        methodName = 'Parametros_' + str(modelName)
-        method = getattr(self, methodName, lambda: "Invalid Model Name")
-        return method
+from functools import reduce
+class HyperparameterSwitcher:
+    def __init__(self, modelName):
+        self.modelName = modelName
+    
+    def getHyperparameters(self):
+        methodName = 'Parametros_' + str(self.modelName)
+        return getattr(self, methodName, lambda: "Invalid Model Name")
+    
+    def getHeurisctics(self):
+        methodName = 'Heuristics_' + str(self.modelName)
+        return getattr(self, methodName, lambda: "Invalid Model Name")
 
     # classifiers
     def Parametros_LogisticRegression(self):
@@ -18,8 +23,7 @@ class HyperparameterSwitcher(object):
 
     def Parametros_SGDClassifier(self):
         parameters = {}
-        parameters['loss'] = ['hinge', 'log',
-                              'modified_huber', 'squared_hinge', 'perceptron']
+        parameters['loss'] = ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron']
         parameters['penalty'] = ['none', 'l1', 'l2', 'elasticnet']
         parameters['alpha'] = np.logspace(-5, 0, 6)
         parameters['learning_rate'] = ['constant', 'invscaling', 'optimal']
@@ -65,12 +69,11 @@ class HyperparameterSwitcher(object):
         parameters['leaf_size'] = [10, 30, 50, 70]
         return parameters
 
-    def Parametros_DecisionTreeClassifier(self, isDummy = True):
+    def Parametros_DecisionTreeClassifier(self):
         parameters = {}
-        if isDummy:
-            parameters['max_features'] = ['sqrt', 'log2', None]
-            parameters['splitter'] = ['best', 'random']
-            parameters['max_depth'] = [2, 3, 10, 50, 100]
+        parameters['max_features'] = ['sqrt', 'log2', None]
+        parameters['splitter'] = ['best', 'random']
+        parameters['max_depth'] = [2, 3, 10, 50, 100]
         parameters['criterion'] = ['gini', 'entropy']
         parameters['class_weight'] = [None, 'balanced']
         return parameters
@@ -92,17 +95,14 @@ class HyperparameterSwitcher(object):
         parameters['fit_prior'] = [True, False]
         return parameters
 
-    def Parametros_SVC(self, isPolinomic = True):
+    def Parametros_SVC(self):
         parameters = {}
         parameters['C'] = [1, 2, 5, 10]
         parameters['decision_function_shape'] = ['ovr']
         parameters['max_iter'] = [10000]
         parameters['shrinking'] = [True, False]
-        if isPolinomic:
-            parameters['kernel'] = ['poly']
-            parameters['degree'] = [1, 2, 3, 4, 5] # conditional for kernel poly
-        else:
-            parameters['kernel'] = ['linear', 'rbf', 'sigmoid']
+        parameters['kernel'] = ['poly', 'linear', 'rbf', 'sigmoid']
+        parameters['degree'] = [1, 2, 3, 4, 5] # conditional for kernel poly
         return parameters
 
     # ensambled classifiers
@@ -181,8 +181,7 @@ class HyperparameterSwitcher(object):
         parameters['alpha'] = np.arange(0.1, 1.1, 0.3)
         parameters['fit_intercept'] = [True, False]
         parameters['normalize'] = [True, False]
-        parameters['solver'] = ['svd', 'cholesky',
-                                'lsqr', 'sparse_cg', 'sag', 'saga']
+        parameters['solver'] = ['svd', 'cholesky', 'lsqr', 'sparse_cg', 'sag', 'saga']
         return parameters
 
     def Parametros_ElasticNet(self):
@@ -290,3 +289,111 @@ class HyperparameterSwitcher(object):
         parameters['oob_score'] = [True, False]
         parameters['warm_start'] = [True, False]
         return parameters
+
+    def Heuristics_LogisticRegression(self): # 60
+        return getHeuristicParamSearch(3, 15, 3, 0.5)
+    
+    def Heuristics_SGDClassifier(self): # 1440
+        return getHeuristicParamSearch(10, 80, 5, 0.3)
+    
+    def Heuristics_PassiveAggressiveClassifier(self): # 80
+        return getHeuristicParamSearch(4, 15, 3, 0.5)
+    
+    def Heuristics_MLPClassifier(self): # 720
+        return getHeuristicParamSearch(6, 80, 3, 0.4)
+    
+    def Heuristics_LinearDiscriminantAnalysis(self): # 6
+        return getHeuristicParamSearch(2, 3, 2, 0.5)
+    
+    def Heuristics_QuadraticDiscriminantAnalysis(self): # 4
+        return getHeuristicParamSearch(2, 2, 2, 0.5)
+    
+    def Heuristics_KNeighborsClassifier(self): # 1440
+        return getHeuristicParamSearch(10, 80, 5, 0.3)
+    
+    def Heuristics_DecisionTreeClassifier(self): # 120
+        return getHeuristicParamSearch(4, 20, 3, 0.5)
+    
+    def Heuristics_GaussianNB(self): # 1
+        return getHeuristicParamSearch(1, 1, 1, 0.5)
+    
+    def Heuristics_BernoulliNB(self): # 8
+        return getHeuristicParamSearch(2, 3, 2, 0.5)
+    
+    def Heuristics_MultinomialNB(self): # 8
+        return getHeuristicParamSearch(2, 3, 2, 0.5)
+    
+    def Heuristics_SVC(self, isPolinomic = True): # 160
+        return getHeuristicParamSearch(6, 15, 3, 0.5)
+    
+    def Heuristics_AdaBoostClassifier(self): # 24
+        return getHeuristicParamSearch(2, 10, 2, 0.5)
+    
+    def Heuristics_GradientBoostingClassifier(self): # 648
+        return getHeuristicParamSearch(7, 30, 3, 0.4)
+    
+    def Heuristics_RandomForestClassifier(self): # 576
+        return getHeuristicParamSearch(7, 50, 3, 0.4)
+    
+    def Heuristics_ExtraTreesClassifier(self): # 11250
+        return getHeuristicParamSearch(12, 150, 10, 0.3)
+    
+    def Heuristics_VotingClassifier(self): # 6
+        return getHeuristicParamSearch(2, 3, 2, 0.5)
+    
+    def Heuristics_BaggingClassifier(self): # 48
+        return getHeuristicParamSearch(4, 10, 3, 0.5)
+    
+    def Heuristics_LinearRegression(self): # 4
+        return getHeuristicParamSearch(2, 2, 2, 0.5)
+    
+    def Heuristics_Lasso(self): # 96
+        return getHeuristicParamSearch(7, 12, 3, 0.5)
+    
+    def Heuristics_Ridge(self): # 96
+        return getHeuristicParamSearch(7, 12, 3, 0.5)
+    
+    def Heuristics_ElasticNet(self): # 384
+        return getHeuristicParamSearch(8, 30, 2, 0.5)
+    
+    def Heuristics_PassiveAggressiveRegressor(self): # 2
+        return getHeuristicParamSearch(1, 2, 2, 0.5)
+    
+    def Heuristics_SVR(self): # 80
+        return getHeuristicParamSearch(6, 10, 3, 0.5)
+    
+    def Heuristics_DecisionTreeRegressor(self): # 60
+        return getHeuristicParamSearch(5, 10, 3, 0.5)
+    
+    def Heuristics_KNeighborsRegressor(self): # 1440
+        return getHeuristicParamSearch(8, 50, 4, 0.4)
+    
+    def Heuristics_GaussianProcessRegressor(self): # 12
+        return getHeuristicParamSearch(2, 5, 2, 0.5)
+    
+    def Heuristics_AdaBoostRegressor(self): # 36
+        return getHeuristicParamSearch(3, 10, 2, 0.5)
+    
+    def Heuristics_GradientBoostingRegressor(self): # 9216
+        return getHeuristicParamSearch(12, 120, 8, 0.3)
+    
+    def Heuristics_RandomForestRegressor(self): # 192
+        return getHeuristicParamSearch(5, 25, 3, 0.5)
+    
+    def Heuristics_ExtraTreesRegressor(self): # 240
+        return getHeuristicParamSearch(7, 30, 3, 0.5)
+    
+    def Heuristics_BaggingRegressor(self): # 64
+        return getHeuristicParamSearch(5, 12, 3, 0.5)
+
+
+def getHeuristicParamSearch(ngen, psize, elit, pelit):
+    searchParams = {}
+    searchParams['ngen'] = ngen # 3 # rand, eas, edas
+    searchParams['psize'] = psize # 15 # eas, edas
+    searchParams['elit'] = elit # 2 # eas
+    searchParams['pelit'] = pelit # 0.5 # edas
+    return searchParams
+
+def parameterSpaceCounter(parameters):
+    return reduce(lambda x,y: x*y, map(lambda x: len(parameters[x]), parameters.keys()))
