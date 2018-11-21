@@ -1,53 +1,36 @@
-# Hyperparameter Search Optimization
+# Hyperparameter Search Optimization for Machine Learning Models, focused in indoor location
 
-Hyperparameter search optimization by genetic algorithms and distribution estimation algorithms
-
-## About this work
-
-- __Types of Hyperparameter Search to Compare__
-
-        - EAS
-        - EDAS
-        - GridSearch
-        - Randomized
-
-- __Metrics to Compare__
-
-        - Accuracy, Precision
-        - Runtime Execution
-        - Number of Iterations
-        - Computational consumption (CPU, Memory, Energy)
-
-- __Cases of Study__
-
-        - Classification problem With Indoor Location
-        - Regression problem With Indoor Location
-
-- __Details__
-
-        - Evaluation of changes by univariate and bivariate EAS, EDAS.
-        - Dataset Wlan dataset for indoor localisation: 
+Hyperparameter search comparison of different heuristics in order to optimize the time spend in find
+the best configuration for Machine Learning Models, the study case takes a multi building, multi floor 
+indoor localization database to test Indoor Positioning System that rely on WLAN/WiFi fingerprint.
 
 [aquí el enlace uci](https://archive.ics.uci.edu/ml/datasets/UJIIndoorLoc#)
 
-- __Benchmark study__
 
-        Librerías para realizar benchmark en python
+## About this work
 
-                - pycallgraph
-                - cProfile
-                - line_profiler
-                - memory_profiler
-                - timeit
-                - profilehooks
-		- guppy
+- __Details__
 
-        Enlaces de Referencia
+        - Dataset with plenty of wifi signal for indoor localisation in 3 buildings
+        - Indoor localization 3D: latitude, longitude, floor
 
-                - https://www.blog.pythonlibrary.org/2016/05/24/python-101-an-intro-to-benchmarking-your-code/
-                - https://github.com/ionelmc/pytest-benchmark
-                - https://mg.pov.lt/profilehooks/
-                - https://pypi.org/project/pytest-benchmark/
-                - https://stackoverflow.com/questions/1593019/is-there-any-simple-way-to-benchmark-python-script
-                - https://dzone.com/articles/unit-testing-the-good-bad-amp-ugly
-		- http://www.marinamele.com/7-tips-to-time-python-scripts-and-control-memory-and-cpu-usage
+- __Cases of Study__
+
+        - Classification to predict building and floor
+        - Regression to predict latitude and longitude
+
+- __Types of Hyperparameter Search to Compare__
+
+        - EAS (Evolutive Algorithm Search)
+        - EDAS (Estimation of Distributions Algorithm Search)
+        - GridSearch (Exhaustive Search)
+        - RandomizedSearch (Randomized Search)
+
+- __Metrics to Compare__
+
+        - Accuracy with Classifiers
+        - Mse for distance error with Regressors
+        - Runtime Execution
+        - Number of Iterations
+        - Computational consumption (CPU, RAM, Energy, Cycles)
+
