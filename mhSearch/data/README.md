@@ -59,31 +59,31 @@ Information about who (user), how (android device & version) and when (timestamp
 
 ### PhoneID Android Device Android Ver. UserID
 
-- 0 Celkon A27 4.0.4(6577) 0
-- 1 GT-I8160 2.3.6 8
-- 2 GT-I8160 4.1.2 0
-- 3 GT-I9100 4.0.4 5
-- 4 GT-I9300 4.1.2 0
-- 5 GT-I9505 4.2.2 0
-- 6 GT-S5360 2.3.6 7
-- 7 GT-S6500 2.3.6 14
-- 8 Galaxy Nexus 4.2.2 10
-- 9 Galaxy Nexus 4.3 0
-- 10 HTC Desire HD 2.3.5 18
-- 11 HTC One 4.1.2 15
-- 12 HTC One 4.2.2 0
-- 13 HTC Wildfire S 2.3.5 0,11
-- 14 LT22i 4.0.4 0,1,9,16
-- 15 LT22i 4.1.2 0
-- 16 LT26i 4.0.4 3
-- 17 M1005D 4.0.4 13
-- 18 MT11i 2.3.4 4
-- 19 Nexus 4 4.2.2 6
-- 20 Nexus 4 4.3 0
-- 21 Nexus S 4.1.2 0
-- 22 Orange Monte Carlo 2.3.5 17
-- 23 Transformer TF101 4.0.3 2
-- 24 bq Curie 4.1.1 12
+- 0 Celkon A27 4.0.4(6577) 0            [120]
+- 1 GT-I8160 2.3.6 8                    [507]
+- 2 GT-I8160 4.1.2 0                    [52]
+- 3 GT-I9100 4.0.4 5                    [610]
+- 4 GT-I9300 4.1.2 0                    [69]
+- 5 GT-I9505 4.2.2 0                    [17]
+- 6 GT-S5360 2.3.6 7                    [1383]
+- 7 GT-S6500 2.3.6 14                   [1596]
+- 8 Galaxy Nexus 4.2.2 10               [913]
+- 9 Galaxy Nexus 4.3 0                  [77]
+- 10 HTC Desire HD 2.3.5 18             [440]
+- 11 HTC One 4.1.2 15                   [498]
+- 12 HTC One 4.2.2 0                    [70]
+- 13 HTC Wildfire S 2.3.5 0,11          [4885]
+- 14 LT22i 4.0.4 0,1,9,16               [4863]
+- 15 LT22i 4.1.2 0                      [36]
+- 16 LT26i 4.0.4 3                      [192]
+- 17 M1005D 4.0.4 13                    [841]
+- 18 MT11i 2.3.4 4                      [374]
+- 19 Nexus 4 4.2.2 6                    [980]
+- 20 Nexus 4 4.3 0                      [213]
+- 21 Nexus S 4.1.2 0                    [60]
+- 22 Orange Monte Carlo 2.3.5 17        [724]
+- 23 Transformer TF101 4.0.3 2          [1091]
+- 24 bq Curie 4.1.1 12                  [437]
 
 ## Literatura
 
