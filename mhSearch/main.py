@@ -28,7 +28,7 @@ Argumentos de Ejecucion
 arg1 = int(sys.argv[1]) # 0 al 3 - proceso
 arg2 = int(sys.argv[2]) # 0 al 3 - y_predict
 arg3 = int(sys.argv[3]) # 0 al 17 (classifier) 0 al 13 (regressor)
-arg4 = 1 # 1:classifier, 0: regression
+arg4 = 0 # 1:classifier, 0: regression
 listProcess = ["randomized", "exhaustive", "edas", "eas"]
 listPredict = ["FLOOR", "BUILDINGID", "LATITUDE", "LONGITUDE"]
 process = listProcess[arg1]
@@ -55,6 +55,6 @@ ev = Evaluator(X_train, y_train[y_column], seed)
 ev.setEstimador(estimador)
 ev.setParams(parametros)
 ev.setTypeSearch(process)
-ev.fit(scoring='accuracy', n_jobs=cpu_count(), kargs=searchParams)
+ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
 # Guardar Modelo en formato csv
 ev.saveDataFrame(modelName + y_column)

@@ -274,7 +274,7 @@ class GeneticSearchCV:
                 self.best_estimator_.fit(X, y)
     def _fit(self, X, y, parameter_dict):
         self._cv_results = None
-        self.scorer_ = check_scoring(self.estimator, scoring=self.scoring)
+        # self.scorer_ = check_scoring(self.estimator, scoring=self.scoring)
         n_samples = _num_samples(X)
         if _num_samples(y) != n_samples:
             raise ValueError('Target [y], data [X] no coinciden')

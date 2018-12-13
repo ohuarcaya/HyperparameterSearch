@@ -34,7 +34,7 @@ class Evaluator:
                     n_jobs=n_jobs, verbose=1, scoring=scoring, refit=False, tournament_size=elitismo,
                     generations_number=generaciones, population_size=pop_size)
             agcv.fit(self.X, self.y)
-            self.dff = pd.DataFrame(list(agcv.result_cache)).sort_values(['Accuracy'], 
+            self.dff = pd.DataFrame(list(agcv.result_cache)).sort_values(['Approach'], 
                     ascending=False).reset_index(drop=True)
         if (self.type == 'edas'):
             gm = GeneralMethods(self.estimador, self.X, self.y)
@@ -42,7 +42,7 @@ class Evaluator:
                     iterations=generaciones, sample_size=pop_size, select_ratio=prob_elitismo, 
                     debug=False, n_jobs=n_jobs, type=scoring)
             edcv.run()
-            self.dff = pd.DataFrame(list(edcv.resultados)).sort_values(['Accuracy'], 
+            self.dff = pd.DataFrame(list(edcv.resultados)).sort_values(['Approach'], 
                     ascending=False).reset_index(drop=True)
         if (self.type == 'exhaustive'):
             escv = GridSearchCV(self.estimador, param_grid=self.params, cv=self.kf, scoring=scoring, 
