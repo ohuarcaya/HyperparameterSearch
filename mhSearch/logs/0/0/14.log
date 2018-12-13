@@ -1,0 +1,10 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='accuracy', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 69, in fit
+    df2 = pd.DataFrame(rscv.cv_results_['params'])
+  File "/usr/lib64/python3.4/site-packages/pandas/core/frame.py", line 354, in __init__
+    raise ValueError('DataFrame constructor not properly called!')
+ValueError: DataFrame constructor not properly called!

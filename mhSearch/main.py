@@ -17,7 +17,7 @@ from lib.ProcessManager import Evaluator
 Ingesta de Datos
 """
 seed = 9
-xSize = 1041
+xSize = 1055
 df = pd.read_csv("data/filtred.csv")
 X = df[df.columns[:xSize]]
 Y = df[df.columns[xSize:]]

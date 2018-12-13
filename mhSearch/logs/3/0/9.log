@@ -1,0 +1,21 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Tipos: [1, 1], rangos: [3, 1]
+Process ForkPoolWorker-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 254, in _bootstrap
+    self.run()
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/usr/lib64/python3.4/multiprocessing/queues.py", line 360, in get
+    res = self._reader.recv_bytes()
+  File "/usr/lib64/python3.4/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "/usr/lib64/python3.4/multiprocessing/connection.py", line 420, in _recv_bytes
+    return self._recv(size)
+  File "/usr/lib64/python3.4/multiprocessing/connection.py", line 392, in _recv
+    buf.write(chunk)
+MemoryError
+--- Evolve in 8 possible combinations ---

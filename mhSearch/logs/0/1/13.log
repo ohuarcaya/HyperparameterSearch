@@ -1,0 +1,34 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='accuracy', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 62, in fit
+    rscv.fit(self.X, self.y)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 1190, in fit
+    return self._fit(X, y, groups, sampled_params)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 564, in _fit
+    for parameters in parameter_iterable
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 728, in __call__
+    n_jobs = self._initialize_backend()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 540, in _initialize_backend
+    **self._backend_args)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 311, in configure
+    self._pool = MemmapingPool(n_jobs, **backend_args)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/pool.py", line 600, in __init__
+    super(MemmapingPool, self).__init__(**poolargs)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/pool.py", line 420, in __init__
+    super(PicklingPool, self).__init__(**poolargs)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 168, in __init__
+    self._repopulate_pool()
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 233, in _repopulate_pool
+    w.start()
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 105, in start
+    self._popen = self._Popen(self)
+  File "/usr/lib64/python3.4/multiprocessing/context.py", line 267, in _Popen
+    return Popen(process_obj)
+  File "/usr/lib64/python3.4/multiprocessing/popen_fork.py", line 21, in __init__
+    self._launch(process_obj)
+  File "/usr/lib64/python3.4/multiprocessing/popen_fork.py", line 70, in _launch
+    self.pid = os.fork()
+OSError: [Errno 12] Cannot allocate memory

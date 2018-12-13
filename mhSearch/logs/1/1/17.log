@@ -1,0 +1,26 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Traceback (most recent call last):
+  File "main.py", line 21, in <module>
+    df = pd.read_csv("data/filtred.csv")
+  File "/usr/lib64/python3.4/site-packages/pandas/io/parsers.py", line 655, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/usr/lib64/python3.4/site-packages/pandas/io/parsers.py", line 411, in _read
+    data = parser.read(nrows)
+  File "/usr/lib64/python3.4/site-packages/pandas/io/parsers.py", line 1000, in read
+    df = DataFrame(col_dict, columns=columns, index=index)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/frame.py", line 275, in __init__
+    mgr = self._init_dict(data, index, columns, dtype=dtype)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/frame.py", line 411, in _init_dict
+    return _arrays_to_mgr(arrays, data_names, index, columns, dtype=dtype)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/frame.py", line 5604, in _arrays_to_mgr
+    return create_block_manager_from_arrays(arrays, arr_names, axes)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 4309, in create_block_manager_from_arrays
+    blocks = form_blocks(arrays, names, axes)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 4381, in form_blocks
+    int_blocks = _multi_blockify(int_items)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 4450, in _multi_blockify
+    values, placement = _stack_arrays(list(tup_block), dtype)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 4493, in _stack_arrays
+    stacked = np.empty(shape, dtype=dtype)
+MemoryError

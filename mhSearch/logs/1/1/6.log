@@ -1,0 +1,624 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/threading.py", line 911, in _bootstrap_inner
+    self.run()
+  File "/usr/lib64/python3.4/threading.py", line 859, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 366, in _handle_workers
+    pool._maintain_pool()
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 240, in _maintain_pool
+    self._repopulate_pool()
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 233, in _repopulate_pool
+    w.start()
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 105, in start
+    self._popen = self._Popen(self)
+  File "/usr/lib64/python3.4/multiprocessing/context.py", line 267, in _Popen
+    return Popen(process_obj)
+  File "/usr/lib64/python3.4/multiprocessing/popen_fork.py", line 21, in __init__
+    self._launch(process_obj)
+  File "/usr/lib64/python3.4/multiprocessing/popen_fork.py", line 70, in _launch
+    self.pid = os.fork()
+OSError: [Errno 12] Cannot allocate memory
+
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 344, in __call__
+    return self.func(*args, **kwargs)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py", line 238, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/usr/lib64/python3.4/site-packages/sklearn/neighbors/base.py", line 761, in fit
+    X, y = check_X_y(X, y, "csr", multi_output=True)
+  File "/usr/lib64/python3.4/site-packages/sklearn/utils/validation.py", line 521, in check_X_y
+    ensure_min_features, warn_on_dtype, estimator)
+  File "/usr/lib64/python3.4/site-packages/sklearn/utils/validation.py", line 382, in check_array
+    array = np.array(array, dtype=dtype, order=order, copy=copy)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/generic.py", line 983, in __array__
+    return _values_from_object(self)
+  File "pandas/_libs/lib.pyx", line 93, in pandas._libs.lib.values_from_object (pandas/_libs/lib.c:4618)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/generic.py", line 3175, in get_values
+    return self.as_matrix()
+  File "/usr/lib64/python3.4/site-packages/pandas/core/generic.py", line 3142, in as_matrix
+    return self._data.as_matrix(columns).T
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 3450, in as_matrix
+    return mgr._interleave()
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 3459, in _interleave
+    result = np.empty(self.shape, dtype=dtype)
+MemoryError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 353, in __call__
+    raise TransportableException(text, e_type)
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+MemoryError                                        Mon Nov 19 08:06:49 2018
+PID: 19872                                   Python 3.4.5: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     2
+7566     0
+17990    2
+1180     2
+1050...  2
+Name: BUILDINGID, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'algorithm': 'ball_tree', 'leaf_size': 10, 'n_neighbors': 3, 'p': 1, 'weights': 'uniform'}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     2
+7566     0
+17990    2
+1180     2
+1050...  2
+Name: BUILDINGID, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'algorithm': 'ball_tree', 'leaf_size': 10, 'n_neighbors': 3, 'p': 1, 'weights': 'uniform'})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], y=6775     2
+7566     0
+17990    2
+1180     2
+1050...  2
+Name: BUILDINGID, Length: 16270, dtype: int64, scorer=make_scorer(accuracy_score), train=array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), test=array([   0,    1,    2, ..., 1624, 1625, 1626]), verbose=0, parameters={'algorithm': 'ball_tree', 'leaf_size': 10, 'n_neighbors': 3, 'p': 1, 'weights': 'uniform'}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    233 
+    234     try:
+    235         if y_train is None:
+    236             estimator.fit(X_train, **fit_params)
+    237         else:
+--> 238             estimator.fit(X_train, y_train, **fit_params)
+        estimator.fit = <bound method KNeighborsClassifier.fit of KNeigh..._neighbors=3, p=1,
+           weights='uniform')>
+        X_train =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+        y_train = 11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64
+        fit_params = {}
+    239 
+    240     except Exception as e:
+    241         # Note fit time as time until error
+    242         fit_time = time.time() - start_time
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/neighbors/base.py in fit(self=KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], y=11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64)
+    756         y : {array-like, sparse matrix}
+    757             Target values of shape = [n_samples] or [n_samples, n_outputs]
+    758 
+    759         """
+    760         if not isinstance(X, (KDTree, BallTree)):
+--> 761             X, y = check_X_y(X, y, "csr", multi_output=True)
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+        y = 11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64
+    762 
+    763         if y.ndim == 1 or y.ndim == 2 and y.shape[1] == 1:
+    764             if y.ndim != 1:
+    765                 warnings.warn("A column-vector y was passed when a 1d array "
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/utils/validation.py in check_X_y(X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], y=11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64, accept_sparse='csr', dtype='numeric', order=None, copy=False, force_all_finite=True, ensure_2d=True, allow_nd=False, multi_output=True, ensure_min_samples=1, ensure_min_features=1, y_numeric=False, warn_on_dtype=False, estimator=None)
+    516     y_converted : object
+    517         The converted and validated y.
+    518     """
+    519     X = check_array(X, accept_sparse, dtype, order, copy, force_all_finite,
+    520                     ensure_2d, allow_nd, ensure_min_samples,
+--> 521                     ensure_min_features, warn_on_dtype, estimator)
+        ensure_min_features = 1
+        warn_on_dtype = False
+        estimator = None
+    522     if multi_output:
+    523         y = check_array(y, 'csr', force_all_finite=True, ensure_2d=False,
+    524                         dtype=None)
+    525     else:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/utils/validation.py in check_array(array=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], accept_sparse=['csr'], dtype=None, order=None, copy=False, force_all_finite=True, ensure_2d=True, allow_nd=False, ensure_min_samples=1, ensure_min_features=1, warn_on_dtype=False, estimator=None)
+    377 
+    378     if sp.issparse(array):
+    379         array = _ensure_sparse_format(array, accept_sparse, dtype, copy,
+    380                                       force_all_finite)
+    381     else:
+--> 382         array = np.array(array, dtype=dtype, order=order, copy=copy)
+        array =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+        dtype = None
+        order = None
+        copy = False
+    383 
+    384         if ensure_2d:
+    385             if array.ndim == 1:
+    386                 if ensure_min_samples >= 2:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/generic.py in __array__(self=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], dtype=None)
+    978 
+    979     # ----------------------------------------------------------------------
+    980     # Array Interface
+    981 
+    982     def __array__(self, dtype=None):
+--> 983         return _values_from_object(self)
+        self =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+    984 
+    985     def __array_wrap__(self, result, context=None):
+    986         d = self._construct_axes_dict(self._AXIS_ORDERS, copy=False)
+    987         return self._constructor(result, **d).__finalize__(self)
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/_libs/lib.cpython-34m.so in pandas._libs.lib.values_from_object (pandas/_libs/lib.c:4618)()
+     88 
+     89 
+     90 
+     91 
+     92 
+---> 93 
+     94 
+     95 
+     96 
+     97 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/generic.py in get_values(self=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns])
+   3170         # compat
+   3171         return self.as_matrix()
+   3172 
+   3173     def get_values(self):
+   3174         """same as values (but handles sparseness conversions)"""
+-> 3175         return self.as_matrix()
+        self.as_matrix = <bound method DataFrame.as_matrix of        WAP0...1             503  
+
+[14643 rows x 1041 columns]>
+   3176 
+   3177     def get_dtype_counts(self):
+   3178         """Return the counts of dtypes in this object."""
+   3179         from pandas import Series
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/generic.py in as_matrix(self=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], columns=None)
+   3137         --------
+   3138         pandas.DataFrame.values
+   3139         """
+   3140         self._consolidate_inplace()
+   3141         if self._AXIS_REVERSED:
+-> 3142             return self._data.as_matrix(columns).T
+        self._data.as_matrix = <bound method BlockManager.as_matrix of BlockMan...: slice(520, 1041, 1), 521 x 14643, dtype: int64>
+        columns.T = undefined
+   3143         return self._data.as_matrix(columns)
+   3144 
+   3145     @property
+   3146     def values(self):
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/internals.py in as_matrix(self=BlockManager
+Items: Index(['WAP001', 'WAP002', '...k: slice(520, 1041, 1), 521 x 14643, dtype: int64, items=None)
+   3445             mgr = self
+   3446 
+   3447         if self._is_single_block or not self.is_mixed_type:
+   3448             return mgr.blocks[0].get_values()
+   3449         else:
+-> 3450             return mgr._interleave()
+        mgr._interleave = <bound method BlockManager._interleave of BlockM...: slice(520, 1041, 1), 521 x 14643, dtype: int64>
+   3451 
+   3452     def _interleave(self):
+   3453         """
+   3454         Return ndarray from blocks with specified item order
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/internals.py in _interleave(self=BlockManager
+Items: Index(['WAP001', 'WAP002', '...k: slice(520, 1041, 1), 521 x 14643, dtype: int64)
+   3454         Return ndarray from blocks with specified item order
+   3455         Items must be contained in the blocks
+   3456         """
+   3457         dtype = _interleaved_dtype(self.blocks)
+   3458 
+-> 3459         result = np.empty(self.shape, dtype=dtype)
+        result = undefined
+        self.shape = (1041, 14643)
+        dtype = dtype('float64')
+   3460 
+   3461         if result.shape[0] == 0:
+   3462             # Workaround for numpy 1.7 bug:
+   3463             #
+
+MemoryError: 
+___________________________________________________________________________
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 682, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 608, in get
+    raise self._value
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+MemoryError                                        Mon Nov 19 08:06:49 2018
+PID: 19872                                   Python 3.4.5: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     2
+7566     0
+17990    2
+1180     2
+1050...  2
+Name: BUILDINGID, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'algorithm': 'ball_tree', 'leaf_size': 10, 'n_neighbors': 3, 'p': 1, 'weights': 'uniform'}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     2
+7566     0
+17990    2
+1180     2
+1050...  2
+Name: BUILDINGID, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'algorithm': 'ball_tree', 'leaf_size': 10, 'n_neighbors': 3, 'p': 1, 'weights': 'uniform'})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], y=6775     2
+7566     0
+17990    2
+1180     2
+1050...  2
+Name: BUILDINGID, Length: 16270, dtype: int64, scorer=make_scorer(accuracy_score), train=array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), test=array([   0,    1,    2, ..., 1624, 1625, 1626]), verbose=0, parameters={'algorithm': 'ball_tree', 'leaf_size': 10, 'n_neighbors': 3, 'p': 1, 'weights': 'uniform'}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    233 
+    234     try:
+    235         if y_train is None:
+    236             estimator.fit(X_train, **fit_params)
+    237         else:
+--> 238             estimator.fit(X_train, y_train, **fit_params)
+        estimator.fit = <bound method KNeighborsClassifier.fit of KNeigh..._neighbors=3, p=1,
+           weights='uniform')>
+        X_train =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+        y_train = 11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64
+        fit_params = {}
+    239 
+    240     except Exception as e:
+    241         # Note fit time as time until error
+    242         fit_time = time.time() - start_time
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/neighbors/base.py in fit(self=KNeighborsClassifier(algorithm='ball_tree', leaf...n_neighbors=3, p=1,
+           weights='uniform'), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], y=11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64)
+    756         y : {array-like, sparse matrix}
+    757             Target values of shape = [n_samples] or [n_samples, n_outputs]
+    758 
+    759         """
+    760         if not isinstance(X, (KDTree, BallTree)):
+--> 761             X, y = check_X_y(X, y, "csr", multi_output=True)
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+        y = 11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64
+    762 
+    763         if y.ndim == 1 or y.ndim == 2 and y.shape[1] == 1:
+    764             if y.ndim != 1:
+    765                 warnings.warn("A column-vector y was passed when a 1d array "
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/utils/validation.py in check_X_y(X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], y=11757    2
+289      2
+1946     2
+15119    0
+1136...  2
+Name: BUILDINGID, Length: 14643, dtype: int64, accept_sparse='csr', dtype='numeric', order=None, copy=False, force_all_finite=True, ensure_2d=True, allow_nd=False, multi_output=True, ensure_min_samples=1, ensure_min_features=1, y_numeric=False, warn_on_dtype=False, estimator=None)
+    516     y_converted : object
+    517         The converted and validated y.
+    518     """
+    519     X = check_array(X, accept_sparse, dtype, order, copy, force_all_finite,
+    520                     ensure_2d, allow_nd, ensure_min_samples,
+--> 521                     ensure_min_features, warn_on_dtype, estimator)
+        ensure_min_features = 1
+        warn_on_dtype = False
+        estimator = None
+    522     if multi_output:
+    523         y = check_array(y, 'csr', force_all_finite=True, ensure_2d=False,
+    524                         dtype=None)
+    525     else:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/utils/validation.py in check_array(array=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], accept_sparse=['csr'], dtype=None, order=None, copy=False, force_all_finite=True, ensure_2d=True, allow_nd=False, ensure_min_samples=1, ensure_min_features=1, warn_on_dtype=False, estimator=None)
+    377 
+    378     if sp.issparse(array):
+    379         array = _ensure_sparse_format(array, accept_sparse, dtype, copy,
+    380                                       force_all_finite)
+    381     else:
+--> 382         array = np.array(array, dtype=dtype, order=order, copy=copy)
+        array =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+        dtype = None
+        order = None
+        copy = False
+    383 
+    384         if ensure_2d:
+    385             if array.ndim == 1:
+    386                 if ensure_min_samples >= 2:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/generic.py in __array__(self=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], dtype=None)
+    978 
+    979     # ----------------------------------------------------------------------
+    980     # Array Interface
+    981 
+    982     def __array__(self, dtype=None):
+--> 983         return _values_from_object(self)
+        self =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns]
+    984 
+    985     def __array_wrap__(self, result, context=None):
+    986         d = self._construct_axes_dict(self._AXIS_ORDERS, copy=False)
+    987         return self._constructor(result, **d).__finalize__(self)
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/_libs/lib.cpython-34m.so in pandas._libs.lib.values_from_object (pandas/_libs/lib.c:4618)()
+     88 
+     89 
+     90 
+     91 
+     92 
+---> 93 
+     94 
+     95 
+     96 
+     97 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/generic.py in get_values(self=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns])
+   3170         # compat
+   3171         return self.as_matrix()
+   3172 
+   3173     def get_values(self):
+   3174         """same as values (but handles sparseness conversions)"""
+-> 3175         return self.as_matrix()
+        self.as_matrix = <bound method DataFrame.as_matrix of        WAP0...1             503  
+
+[14643 rows x 1041 columns]>
+   3176 
+   3177     def get_dtype_counts(self):
+   3178         """Return the counts of dtypes in this object."""
+   3179         from pandas import Series
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/generic.py in as_matrix(self=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[14643 rows x 1041 columns], columns=None)
+   3137         --------
+   3138         pandas.DataFrame.values
+   3139         """
+   3140         self._consolidate_inplace()
+   3141         if self._AXIS_REVERSED:
+-> 3142             return self._data.as_matrix(columns).T
+        self._data.as_matrix = <bound method BlockManager.as_matrix of BlockMan...: slice(520, 1041, 1), 521 x 14643, dtype: int64>
+        columns.T = undefined
+   3143         return self._data.as_matrix(columns)
+   3144 
+   3145     @property
+   3146     def values(self):
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/internals.py in as_matrix(self=BlockManager
+Items: Index(['WAP001', 'WAP002', '...k: slice(520, 1041, 1), 521 x 14643, dtype: int64, items=None)
+   3445             mgr = self
+   3446 
+   3447         if self._is_single_block or not self.is_mixed_type:
+   3448             return mgr.blocks[0].get_values()
+   3449         else:
+-> 3450             return mgr._interleave()
+        mgr._interleave = <bound method BlockManager._interleave of BlockM...: slice(520, 1041, 1), 521 x 14643, dtype: int64>
+   3451 
+   3452     def _interleave(self):
+   3453         """
+   3454         Return ndarray from blocks with specified item order
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/pandas/core/internals.py in _interleave(self=BlockManager
+Items: Index(['WAP001', 'WAP002', '...k: slice(520, 1041, 1), 521 x 14643, dtype: int64)
+   3454         Return ndarray from blocks with specified item order
+   3455         Items must be contained in the blocks
+   3456         """
+   3457         dtype = _interleaved_dtype(self.blocks)
+   3458 
+-> 3459         result = np.empty(self.shape, dtype=dtype)
+        result = undefined
+        self.shape = (1041, 14643)
+        dtype = dtype('float64')
+   3460 
+   3461         if result.shape[0] == 0:
+   3462             # Workaround for numpy 1.7 bug:
+   3463             #
+
+MemoryError: 
+___________________________________________________________________________
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/pool.py", line 606, in terminate
+    super(MemmapingPool, self).terminate()
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 505, in terminate
+    self._terminate()
+  File "/usr/lib64/python3.4/multiprocessing/util.py", line 185, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 553, in _terminate_pool
+    p.terminate()
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 113, in terminate
+    self._popen.terminate()
+AttributeError: 'NoneType' object has no attribute 'terminate'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='accuracy', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 50, in fit
+    escv.fit(self.X, self.y)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 945, in fit
+    return self._fit(X, y, groups, ParameterGrid(self.param_grid))
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 564, in _fit
+    for parameters in parameter_iterable
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 768, in __call__
+    self.retrieve()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 718, in retrieve
+    backend.abort_everything(ensure_ready=ensure_ready)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 143, in abort_everything
+    self.terminate()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 317, in terminate
+    super(MultiprocessingBackend, self).terminate()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 134, in terminate
+    self._pool.terminate()  # terminate does a join()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/pool.py", line 608, in terminate
+    except WindowsError as e:
+TypeError: catching classes that do not inherit from BaseException is not allowed

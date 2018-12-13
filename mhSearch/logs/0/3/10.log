@@ -1,0 +1,635 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 344, in __call__
+    return self.func(*args, **kwargs)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py", line 260, in _fit_and_score
+    test_score = _score(estimator, X_test, y_test, scorer)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py", line 288, in _score
+    score = scorer(estimator, X_test, y_test)
+  File "/usr/lib64/python3.4/site-packages/sklearn/metrics/scorer.py", line 98, in __call__
+    **self._kwargs)
+  File "/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py", line 172, in accuracy_score
+    y_type, y_true, y_pred = _check_targets(y_true, y_pred)
+  File "/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py", line 89, in _check_targets
+    raise ValueError("{0} is not supported".format(y_type))
+ValueError: continuous is not supported
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 353, in __call__
+    raise TransportableException(text, e_type)
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+ValueError                                         Thu Dec 13 05:18:14 2018
+PID: 18967                                   Python 3.4.9: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, scorer=make_scorer(accuracy_score), train=array([    0,     1,     2, ..., 16323, 16324, 16325]), test=array([    4,    22,    36, ..., 16294, 16308, 16318]), verbose=0, parameters={'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    255                              " numeric value. (Hint: if using 'raise', please"
+    256                              " make sure that it has been spelled correctly.)")
+    257 
+    258     else:
+    259         fit_time = time.time() - start_time
+--> 260         test_score = _score(estimator, X_test, y_test, scorer)
+        test_score = undefined
+        estimator = GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False)
+        X_test =          WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns]
+        y_test = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+        scorer = make_scorer(accuracy_score)
+    261         score_time = time.time() - start_time - fit_time
+    262         if return_train_score:
+    263             train_score = _score(estimator, X_train, y_train, scorer)
+    264 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _score(estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X_test=         WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns], y_test=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, scorer=make_scorer(accuracy_score))
+    283 def _score(estimator, X_test, y_test, scorer):
+    284     """Compute the score of an estimator on a given test set."""
+    285     if y_test is None:
+    286         score = scorer(estimator, X_test)
+    287     else:
+--> 288         score = scorer(estimator, X_test, y_test)
+        score = undefined
+        scorer = make_scorer(accuracy_score)
+        estimator = GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False)
+        X_test =          WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns]
+        y_test = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+    289     if hasattr(score, 'item'):
+    290         try:
+    291             # e.g. unwrap memmapped scalars
+    292             score = score.item()
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/scorer.py in __call__(self=make_scorer(accuracy_score), estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X=         WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns], y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, sample_weight=None)
+     93             return self._sign * self._score_func(y_true, y_pred,
+     94                                                  sample_weight=sample_weight,
+     95                                                  **self._kwargs)
+     96         else:
+     97             return self._sign * self._score_func(y_true, y_pred,
+---> 98                                                  **self._kwargs)
+        self._kwargs = {}
+     99 
+    100 
+    101 class _ProbaScorer(_BaseScorer):
+    102     def __call__(self, clf, X, y, sample_weight=None):
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py in accuracy_score(y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, y_pred=array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057]), normalize=True, sample_weight=None)
+    167     >>> accuracy_score(np.array([[0, 1], [1, 1]]), np.ones((2, 2)))
+    168     0.5
+    169     """
+    170 
+    171     # Compute accuracy for each possible representation
+--> 172     y_type, y_true, y_pred = _check_targets(y_true, y_pred)
+        y_type = undefined
+        y_true = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+        y_pred = array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057])
+    173     if y_type.startswith('multilabel'):
+    174         differing_labels = count_nonzero(y_true - y_pred, axis=1)
+    175         score = differing_labels == 0
+    176     else:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py in _check_targets(y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, y_pred=array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057]))
+     84     # We can't have more than one value on y_type => The set is no more needed
+     85     y_type = y_type.pop()
+     86 
+     87     # No metrics support "multiclass-multioutput" format
+     88     if (y_type not in ["binary", "multiclass", "multilabel-indicator"]):
+---> 89         raise ValueError("{0} is not supported".format(y_type))
+        y_type = 'continuous'
+     90 
+     91     if y_type in ["binary", "multiclass"]:
+     92         y_true = column_or_1d(y_true)
+     93         y_pred = column_or_1d(y_pred)
+
+ValueError: continuous is not supported
+___________________________________________________________________________
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 682, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 608, in get
+    raise self._value
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+ValueError                                         Thu Dec 13 05:18:14 2018
+PID: 18967                                   Python 3.4.9: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, scorer=make_scorer(accuracy_score), train=array([    0,     1,     2, ..., 16323, 16324, 16325]), test=array([    4,    22,    36, ..., 16294, 16308, 16318]), verbose=0, parameters={'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    255                              " numeric value. (Hint: if using 'raise', please"
+    256                              " make sure that it has been spelled correctly.)")
+    257 
+    258     else:
+    259         fit_time = time.time() - start_time
+--> 260         test_score = _score(estimator, X_test, y_test, scorer)
+        test_score = undefined
+        estimator = GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False)
+        X_test =          WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns]
+        y_test = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+        scorer = make_scorer(accuracy_score)
+    261         score_time = time.time() - start_time - fit_time
+    262         if return_train_score:
+    263             train_score = _score(estimator, X_train, y_train, scorer)
+    264 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _score(estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X_test=         WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns], y_test=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, scorer=make_scorer(accuracy_score))
+    283 def _score(estimator, X_test, y_test, scorer):
+    284     """Compute the score of an estimator on a given test set."""
+    285     if y_test is None:
+    286         score = scorer(estimator, X_test)
+    287     else:
+--> 288         score = scorer(estimator, X_test, y_test)
+        score = undefined
+        scorer = make_scorer(accuracy_score)
+        estimator = GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False)
+        X_test =          WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns]
+        y_test = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+    289     if hasattr(score, 'item'):
+    290         try:
+    291             # e.g. unwrap memmapped scalars
+    292             score = score.item()
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/scorer.py in __call__(self=make_scorer(accuracy_score), estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X=         WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns], y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, sample_weight=None)
+     93             return self._sign * self._score_func(y_true, y_pred,
+     94                                                  sample_weight=sample_weight,
+     95                                                  **self._kwargs)
+     96         else:
+     97             return self._sign * self._score_func(y_true, y_pred,
+---> 98                                                  **self._kwargs)
+        self._kwargs = {}
+     99 
+    100 
+    101 class _ProbaScorer(_BaseScorer):
+    102     def __call__(self, clf, X, y, sample_weight=None):
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py in accuracy_score(y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, y_pred=array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057]), normalize=True, sample_weight=None)
+    167     >>> accuracy_score(np.array([[0, 1], [1, 1]]), np.ones((2, 2)))
+    168     0.5
+    169     """
+    170 
+    171     # Compute accuracy for each possible representation
+--> 172     y_type, y_true, y_pred = _check_targets(y_true, y_pred)
+        y_type = undefined
+        y_true = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+        y_pred = array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057])
+    173     if y_type.startswith('multilabel'):
+    174         differing_labels = count_nonzero(y_true - y_pred, axis=1)
+    175         score = differing_labels == 0
+    176     else:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py in _check_targets(y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, y_pred=array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057]))
+     84     # We can't have more than one value on y_type => The set is no more needed
+     85     y_type = y_type.pop()
+     86 
+     87     # No metrics support "multiclass-multioutput" format
+     88     if (y_type not in ["binary", "multiclass", "multilabel-indicator"]):
+---> 89         raise ValueError("{0} is not supported".format(y_type))
+        y_type = 'continuous'
+     90 
+     91     if y_type in ["binary", "multiclass"]:
+     92         y_true = column_or_1d(y_true)
+     93         y_pred = column_or_1d(y_pred)
+
+ValueError: continuous is not supported
+___________________________________________________________________________
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 62, in fit
+    rscv.fit(self.X, self.y)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 1190, in fit
+    return self._fit(X, y, groups, sampled_params)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 564, in _fit
+    for parameters in parameter_iterable
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 768, in __call__
+    self.retrieve()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 719, in retrieve
+    raise exception
+sklearn.externals.joblib.my_exceptions.JoblibValueError: JoblibValueError
+___________________________________________________________________________
+Multiprocessing exception:
+...........................................................................
+/home/Manuel.Castillo/pruebasOHC/main.py in <module>()
+     53 """
+     54 ev = Evaluator(X_train, y_train[y_column], seed)
+     55 ev.setEstimador(estimador)
+     56 ev.setParams(parametros)
+     57 ev.setTypeSearch(process)
+---> 58 ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
+     59 # Guardar Modelo en formato csv
+     60 ev.saveDataFrame(modelName + y_column)
+     61 
+     62 
+
+...........................................................................
+/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py in fit(self=<lib.ProcessManager.Evaluator object>, scoring='mse', n_jobs=16, kargs={'elit': 8, 'ngen': 12, 'pelit': 0.3, 'psize': 120})
+     57             self.dff = pd.concat([df1,df2], axis=1).sort_values(['Accuracy', 'FitTime'], ascending=[False, True])
+     58         if (self.type == 'randomized'):
+     59             rscv = RandomizedSearchCV(self.estimador, param_distributions=self.params, 
+     60                                 n_iter=generaciones, cv=self.kf, scoring="accuracy", 
+     61                                 return_train_score=False, n_jobs=n_jobs)
+---> 62             rscv.fit(self.X, self.y)
+        rscv.fit = <bound method RandomizedSearchCV.fit of Randomiz...rain_score=False, scoring='accuracy', verbose=0)>
+        self.X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns]
+        self.y = 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64
+     63             rscv.cv_results_ = rscv.cv_results_
+     64             df1 = pd.DataFrame(np.array([rscv.cv_results_['mean_test_score'], rscv.cv_results_['std_test_score'],
+     65                                         rscv.cv_results_['mean_fit_time'], rscv.cv_results_['std_fit_time'],
+     66                                         rscv.cv_results_['mean_score_time'], rscv.cv_results_['std_score_time']
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py in fit(self=RandomizedSearchCV(cv=KFold(n_splits=10, random_...train_score=False, scoring='accuracy', verbose=0), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, groups=None)
+   1185             train/test set.
+   1186         """
+   1187         sampled_params = ParameterSampler(self.param_distributions,
+   1188                                           self.n_iter,
+   1189                                           random_state=self.random_state)
+-> 1190         return self._fit(X, y, groups, sampled_params)
+        self._fit = <bound method RandomizedSearchCV._fit of Randomi...rain_score=False, scoring='accuracy', verbose=0)>
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns]
+        y = 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64
+        groups = None
+        sampled_params = <sklearn.model_selection._search.ParameterSampler object>
+   1191 
+   1192 
+   1193 
+   1194 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py in _fit(self=RandomizedSearchCV(cv=KFold(n_splits=10, random_...train_score=False, scoring='accuracy', verbose=0), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, groups=None, parameter_iterable=<sklearn.model_selection._search.ParameterSampler object>)
+    559                                   fit_params=self.fit_params,
+    560                                   return_train_score=self.return_train_score,
+    561                                   return_n_test_samples=True,
+    562                                   return_times=True, return_parameters=True,
+    563                                   error_score=self.error_score)
+--> 564           for parameters in parameter_iterable
+        parameters = undefined
+        parameter_iterable = <sklearn.model_selection._search.ParameterSampler object>
+    565           for train, test in cv_iter)
+    566 
+    567         # if one choose to see train score, "out" will contain train score info
+    568         if self.return_train_score:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=Parallel(n_jobs=16), iterable=<generator object <genexpr>>)
+    763             if pre_dispatch == "all" or n_jobs == 1:
+    764                 # The iterable was consumed all at once by the above for loop.
+    765                 # No need to wait for async callbacks to trigger to
+    766                 # consumption.
+    767                 self._iterating = False
+--> 768             self.retrieve()
+        self.retrieve = <bound method Parallel.retrieve of Parallel(n_jobs=16)>
+    769             # Make sure that we get a last message telling us we are done
+    770             elapsed_time = time.time() - self._start_time
+    771             self._print('Done %3i out of %3i | elapsed: %s finished',
+    772                         (len(self._output), len(self._output),
+
+---------------------------------------------------------------------------
+Sub-process traceback:
+---------------------------------------------------------------------------
+ValueError                                         Thu Dec 13 05:18:14 2018
+PID: 18967                                   Python 3.4.9: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007    -7512.604164
+14408   -7474.670000
+15019 ...00
+Name: LONGITUDE, Length: 16326, dtype: float64, scorer=make_scorer(accuracy_score), train=array([    0,     1,     2, ..., 16323, 16324, 16325]), test=array([    4,    22,    36, ..., 16294, 16308, 16318]), verbose=0, parameters={'alpha': 0.7000000000000001, 'criterion': 'friedman_mse', 'learning_rate': 1.0, 'loss': 'ls', 'max_depth': 10, 'max_features': None, 'n_estimators': 400, 'warm_start': False}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    255                              " numeric value. (Hint: if using 'raise', please"
+    256                              " make sure that it has been spelled correctly.)")
+    257 
+    258     else:
+    259         fit_time = time.time() - start_time
+--> 260         test_score = _score(estimator, X_test, y_test, scorer)
+        test_score = undefined
+        estimator = GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False)
+        X_test =          WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns]
+        y_test = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+        scorer = make_scorer(accuracy_score)
+    261         score_time = time.time() - start_time - fit_time
+    262         if return_train_score:
+    263             train_score = _score(estimator, X_train, y_train, scorer)
+    264 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _score(estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X_test=         WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns], y_test=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, scorer=make_scorer(accuracy_score))
+    283 def _score(estimator, X_test, y_test, scorer):
+    284     """Compute the score of an estimator on a given test set."""
+    285     if y_test is None:
+    286         score = scorer(estimator, X_test)
+    287     else:
+--> 288         score = scorer(estimator, X_test, y_test)
+        score = undefined
+        scorer = make_scorer(accuracy_score)
+        estimator = GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False)
+        X_test =          WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns]
+        y_test = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+    289     if hasattr(score, 'item'):
+    290         try:
+    291             # e.g. unwrap memmapped scalars
+    292             score = score.item()
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/scorer.py in __call__(self=make_scorer(accuracy_score), estimator=GradientBoostingRegressor(alpha=0.70000000000000...      subsample=1.0, verbose=0, warm_start=False), X=         WAP001  WAP002  WAP003  WAP004  WAP005 ...8037        0     0  
+
+[1633 rows x 1055 columns], y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, sample_weight=None)
+     93             return self._sign * self._score_func(y_true, y_pred,
+     94                                                  sample_weight=sample_weight,
+     95                                                  **self._kwargs)
+     96         else:
+     97             return self._sign * self._score_func(y_true, y_pred,
+---> 98                                                  **self._kwargs)
+        self._kwargs = {}
+     99 
+    100 
+    101 class _ProbaScorer(_BaseScorer):
+    102     def __call__(self, clf, X, y, sample_weight=None):
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py in accuracy_score(y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, y_pred=array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057]), normalize=True, sample_weight=None)
+    167     >>> accuracy_score(np.array([[0, 1], [1, 1]]), np.ones((2, 2)))
+    168     0.5
+    169     """
+    170 
+    171     # Compute accuracy for each possible representation
+--> 172     y_type, y_true, y_pred = _check_targets(y_true, y_pred)
+        y_type = undefined
+        y_true = 17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64
+        y_pred = array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057])
+    173     if y_type.startswith('multilabel'):
+    174         differing_labels = count_nonzero(y_true - y_pred, axis=1)
+    175         score = differing_labels == 0
+    176     else:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/metrics/classification.py in _check_targets(y_true=17038   -7676.627100
+15176   -7611.056500
+761   ...300
+Name: LONGITUDE, Length: 1633, dtype: float64, y_pred=array([-7676.51680087, -7611.05018047, -7440.358... -7675.06630065, -7388.61026115, -7312.85141057]))
+     84     # We can't have more than one value on y_type => The set is no more needed
+     85     y_type = y_type.pop()
+     86 
+     87     # No metrics support "multiclass-multioutput" format
+     88     if (y_type not in ["binary", "multiclass", "multilabel-indicator"]):
+---> 89         raise ValueError("{0} is not supported".format(y_type))
+        y_type = 'continuous'
+     90 
+     91     if y_type in ["binary", "multiclass"]:
+     92         y_true = column_or_1d(y_true)
+     93         y_pred = column_or_1d(y_pred)
+
+ValueError: continuous is not supported
+___________________________________________________________________________

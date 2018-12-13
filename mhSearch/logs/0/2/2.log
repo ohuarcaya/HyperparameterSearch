@@ -1,0 +1,549 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 344, in __call__
+    return self.func(*args, **kwargs)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py", line 238, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py", line 642, in fit
+    return super(Ridge, self).fit(X, y, sample_weight=sample_weight)
+  File "/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py", line 488, in fit
+    return_intercept=False)
+  File "/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py", line 377, in ridge_regression
+    raise ValueError('Solver %s not understood' % solver)
+ValueError: Solver saga not understood
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 353, in __call__
+    raise TransportableException(text, e_type)
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+ValueError                                         Thu Dec 13 04:43:34 2018
+PID: 16916                                   Python 3.4.9: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, scorer=make_scorer(accuracy_score), train=array([    0,     1,     2, ..., 16323, 16324, 16325]), test=array([    4,    22,    36, ..., 16294, 16308, 16318]), verbose=0, parameters={'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    233 
+    234     try:
+    235         if y_train is None:
+    236             estimator.fit(X_train, **fit_params)
+    237         else:
+--> 238             estimator.fit(X_train, y_train, **fit_params)
+        estimator.fit = <bound method Ridge.fit of Ridge(alpha=0.4, copy...False, random_state=7, solver='saga', tol=0.001)>
+        X_train =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns]
+        y_train = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64
+        fit_params = {}
+    239 
+    240     except Exception as e:
+    241         # Note fit time as time until error
+    242         fit_time = time.time() - start_time
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in fit(self=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64, sample_weight=None)
+    637 
+    638         Returns
+    639         -------
+    640         self : returns an instance of self.
+    641         """
+--> 642         return super(Ridge, self).fit(X, y, sample_weight=sample_weight)
+        self.fit = <bound method Ridge.fit of Ridge(alpha=0.4, copy...False, random_state=7, solver='saga', tol=0.001)>
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns]
+        y = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64
+        sample_weight = None
+    643 
+    644 
+    645 class RidgeClassifier(LinearClassifierMixin, _BaseRidge):
+    646     """Classifier using Ridge regression.
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in fit(self=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=array([[-2.82447424e-04, -2.58626557e-04, -3.856...17981352e-02, -2.59102974e-01, -2.62914313e-01]]), y=array([ 12.3594659,  -6.6712781, -30.8382781, ..., -84.5510781,
+        61.4169219, -87.5566781]), sample_weight=None)
+    483         else:
+    484             self.coef_, self.n_iter_ = ridge_regression(
+    485                 X, y, alpha=self.alpha, sample_weight=sample_weight,
+    486                 max_iter=self.max_iter, tol=self.tol, solver=self.solver,
+    487                 random_state=self.random_state, return_n_iter=True,
+--> 488                 return_intercept=False)
+    489             self._set_intercept(X_offset, y_offset, X_scale)
+    490 
+    491         return self
+    492 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in ridge_regression(X=array([[-2.82447424e-04, -2.58626557e-04, -3.856...17981352e-02, -2.59102974e-01, -2.62914313e-01]]), y=array([[ 12.3594659],
+       [ -6.6712781],
+    ...81],
+       [ 61.4169219],
+       [-87.5566781]]), alpha=array([0.4]), sample_weight=None, solver='saga', max_iter=None, tol=0.001, verbose=0, random_state=7, return_n_iter=True, return_intercept=False)
+    372 
+    373     if alpha.size == 1 and n_targets > 1:
+    374         alpha = np.repeat(alpha, n_targets)
+    375 
+    376     if solver not in ('sparse_cg', 'cholesky', 'svd', 'lsqr', 'sag'):
+--> 377         raise ValueError('Solver %s not understood' % solver)
+        solver = 'saga'
+    378 
+    379     n_iter = None
+    380     if solver == 'sparse_cg':
+    381         coef = _solve_sparse_cg(X, y, alpha, max_iter, tol, verbose)
+
+ValueError: Solver saga not understood
+___________________________________________________________________________
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 682, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 608, in get
+    raise self._value
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+ValueError                                         Thu Dec 13 04:43:34 2018
+PID: 16916                                   Python 3.4.9: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, scorer=make_scorer(accuracy_score), train=array([    0,     1,     2, ..., 16323, 16324, 16325]), test=array([    4,    22,    36, ..., 16294, 16308, 16318]), verbose=0, parameters={'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    233 
+    234     try:
+    235         if y_train is None:
+    236             estimator.fit(X_train, **fit_params)
+    237         else:
+--> 238             estimator.fit(X_train, y_train, **fit_params)
+        estimator.fit = <bound method Ridge.fit of Ridge(alpha=0.4, copy...False, random_state=7, solver='saga', tol=0.001)>
+        X_train =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns]
+        y_train = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64
+        fit_params = {}
+    239 
+    240     except Exception as e:
+    241         # Note fit time as time until error
+    242         fit_time = time.time() - start_time
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in fit(self=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64, sample_weight=None)
+    637 
+    638         Returns
+    639         -------
+    640         self : returns an instance of self.
+    641         """
+--> 642         return super(Ridge, self).fit(X, y, sample_weight=sample_weight)
+        self.fit = <bound method Ridge.fit of Ridge(alpha=0.4, copy...False, random_state=7, solver='saga', tol=0.001)>
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns]
+        y = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64
+        sample_weight = None
+    643 
+    644 
+    645 class RidgeClassifier(LinearClassifierMixin, _BaseRidge):
+    646     """Classifier using Ridge regression.
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in fit(self=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=array([[-2.82447424e-04, -2.58626557e-04, -3.856...17981352e-02, -2.59102974e-01, -2.62914313e-01]]), y=array([ 12.3594659,  -6.6712781, -30.8382781, ..., -84.5510781,
+        61.4169219, -87.5566781]), sample_weight=None)
+    483         else:
+    484             self.coef_, self.n_iter_ = ridge_regression(
+    485                 X, y, alpha=self.alpha, sample_weight=sample_weight,
+    486                 max_iter=self.max_iter, tol=self.tol, solver=self.solver,
+    487                 random_state=self.random_state, return_n_iter=True,
+--> 488                 return_intercept=False)
+    489             self._set_intercept(X_offset, y_offset, X_scale)
+    490 
+    491         return self
+    492 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in ridge_regression(X=array([[-2.82447424e-04, -2.58626557e-04, -3.856...17981352e-02, -2.59102974e-01, -2.62914313e-01]]), y=array([[ 12.3594659],
+       [ -6.6712781],
+    ...81],
+       [ 61.4169219],
+       [-87.5566781]]), alpha=array([0.4]), sample_weight=None, solver='saga', max_iter=None, tol=0.001, verbose=0, random_state=7, return_n_iter=True, return_intercept=False)
+    372 
+    373     if alpha.size == 1 and n_targets > 1:
+    374         alpha = np.repeat(alpha, n_targets)
+    375 
+    376     if solver not in ('sparse_cg', 'cholesky', 'svd', 'lsqr', 'sag'):
+--> 377         raise ValueError('Solver %s not understood' % solver)
+        solver = 'saga'
+    378 
+    379     n_iter = None
+    380     if solver == 'sparse_cg':
+    381         coef = _solve_sparse_cg(X, y, alpha, max_iter, tol, verbose)
+
+ValueError: Solver saga not understood
+___________________________________________________________________________
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 62, in fit
+    rscv.fit(self.X, self.y)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 1190, in fit
+    return self._fit(X, y, groups, sampled_params)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 564, in _fit
+    for parameters in parameter_iterable
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 768, in __call__
+    self.retrieve()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 719, in retrieve
+    raise exception
+sklearn.externals.joblib.my_exceptions.JoblibValueError: JoblibValueError
+___________________________________________________________________________
+Multiprocessing exception:
+...........................................................................
+/home/Manuel.Castillo/pruebasOHC/main.py in <module>()
+     53 """
+     54 ev = Evaluator(X_train, y_train[y_column], seed)
+     55 ev.setEstimador(estimador)
+     56 ev.setParams(parametros)
+     57 ev.setTypeSearch(process)
+---> 58 ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
+     59 # Guardar Modelo en formato csv
+     60 ev.saveDataFrame(modelName + y_column)
+     61 
+     62 
+
+...........................................................................
+/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py in fit(self=<lib.ProcessManager.Evaluator object>, scoring='mse', n_jobs=16, kargs={'elit': 3, 'ngen': 7, 'pelit': 0.5, 'psize': 12})
+     57             self.dff = pd.concat([df1,df2], axis=1).sort_values(['Accuracy', 'FitTime'], ascending=[False, True])
+     58         if (self.type == 'randomized'):
+     59             rscv = RandomizedSearchCV(self.estimador, param_distributions=self.params, 
+     60                                 n_iter=generaciones, cv=self.kf, scoring="accuracy", 
+     61                                 return_train_score=False, n_jobs=n_jobs)
+---> 62             rscv.fit(self.X, self.y)
+        rscv.fit = <bound method RandomizedSearchCV.fit of Randomiz...rain_score=False, scoring='accuracy', verbose=0)>
+        self.X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns]
+        self.y = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64
+     63             rscv.cv_results_ = rscv.cv_results_
+     64             df1 = pd.DataFrame(np.array([rscv.cv_results_['mean_test_score'], rscv.cv_results_['std_test_score'],
+     65                                         rscv.cv_results_['mean_fit_time'], rscv.cv_results_['std_fit_time'],
+     66                                         rscv.cv_results_['mean_score_time'], rscv.cv_results_['std_score_time']
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py in fit(self=RandomizedSearchCV(cv=KFold(n_splits=10, random_...train_score=False, scoring='accuracy', verbose=0), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, groups=None)
+   1185             train/test set.
+   1186         """
+   1187         sampled_params = ParameterSampler(self.param_distributions,
+   1188                                           self.n_iter,
+   1189                                           random_state=self.random_state)
+-> 1190         return self._fit(X, y, groups, sampled_params)
+        self._fit = <bound method RandomizedSearchCV._fit of Randomi...rain_score=False, scoring='accuracy', verbose=0)>
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns]
+        y = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64
+        groups = None
+        sampled_params = <sklearn.model_selection._search.ParameterSampler object>
+   1191 
+   1192 
+   1193 
+   1194 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py in _fit(self=RandomizedSearchCV(cv=KFold(n_splits=10, random_...train_score=False, scoring='accuracy', verbose=0), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, groups=None, parameter_iterable=<sklearn.model_selection._search.ParameterSampler object>)
+    559                                   fit_params=self.fit_params,
+    560                                   return_train_score=self.return_train_score,
+    561                                   return_n_test_samples=True,
+    562                                   return_times=True, return_parameters=True,
+    563                                   error_score=self.error_score)
+--> 564           for parameters in parameter_iterable
+        parameters = undefined
+        parameter_iterable = <sklearn.model_selection._search.ParameterSampler object>
+    565           for train, test in cv_iter)
+    566 
+    567         # if one choose to see train score, "out" will contain train score info
+    568         if self.return_train_score:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=Parallel(n_jobs=16), iterable=<generator object <genexpr>>)
+    763             if pre_dispatch == "all" or n_jobs == 1:
+    764                 # The iterable was consumed all at once by the above for loop.
+    765                 # No need to wait for async callbacks to trigger to
+    766                 # consumption.
+    767                 self._iterating = False
+--> 768             self.retrieve()
+        self.retrieve = <bound method Parallel.retrieve of Parallel(n_jobs=16)>
+    769             # Make sure that we get a last message telling us we are done
+    770             elapsed_time = time.time() - self._start_time
+    771             self._print('Done %3i out of %3i | elapsed: %s finished',
+    772                         (len(self._output), len(self._output),
+
+---------------------------------------------------------------------------
+Sub-process traceback:
+---------------------------------------------------------------------------
+ValueError                                         Thu Dec 13 04:43:34 2018
+PID: 16916                                   Python 3.4.9: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001),        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, make_scorer(accuracy_score), array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[16326 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, scorer=make_scorer(accuracy_score), train=array([    0,     1,     2, ..., 16323, 16324, 16325]), test=array([    4,    22,    36, ..., 16294, 16308, 16318]), verbose=0, parameters={'alpha': 0.4, 'fit_intercept': True, 'normalize': False, 'solver': 'saga'}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    233 
+    234     try:
+    235         if y_train is None:
+    236             estimator.fit(X_train, **fit_params)
+    237         else:
+--> 238             estimator.fit(X_train, y_train, **fit_params)
+        estimator.fit = <bound method Ridge.fit of Ridge(alpha=0.4, copy...False, random_state=7, solver='saga', tol=0.001)>
+        X_train =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns]
+        y_train = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64
+        fit_params = {}
+    239 
+    240     except Exception as e:
+    241         # Note fit time as time until error
+    242         fit_time = time.time() - start_time
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in fit(self=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64, sample_weight=None)
+    637 
+    638         Returns
+    639         -------
+    640         self : returns an instance of self.
+    641         """
+--> 642         return super(Ridge, self).fit(X, y, sample_weight=sample_weight)
+        self.fit = <bound method Ridge.fit of Ridge(alpha=0.4, copy...False, random_state=7, solver='saga', tol=0.001)>
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...1          0     0  
+
+[14693 rows x 1055 columns]
+        y = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64
+        sample_weight = None
+    643 
+    644 
+    645 class RidgeClassifier(LinearClassifierMixin, _BaseRidge):
+    646     """Classifier using Ridge regression.
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in fit(self=Ridge(alpha=0.4, copy_X=True, fit_intercept=True...=False, random_state=7, solver='saga', tol=0.001), X=array([[-2.82447424e-04, -2.58626557e-04, -3.856...17981352e-02, -2.59102974e-01, -2.62914313e-01]]), y=array([ 12.3594659,  -6.6712781, -30.8382781, ..., -84.5510781,
+        61.4169219, -87.5566781]), sample_weight=None)
+    483         else:
+    484             self.coef_, self.n_iter_ = ridge_regression(
+    485                 X, y, alpha=self.alpha, sample_weight=sample_weight,
+    486                 max_iter=self.max_iter, tol=self.tol, solver=self.solver,
+    487                 random_state=self.random_state, return_n_iter=True,
+--> 488                 return_intercept=False)
+    489             self._set_intercept(X_offset, y_offset, X_scale)
+    490 
+    491         return self
+    492 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/ridge.py in ridge_regression(X=array([[-2.82447424e-04, -2.58626557e-04, -3.856...17981352e-02, -2.59102974e-01, -2.62914313e-01]]), y=array([[ 12.3594659],
+       [ -6.6712781],
+    ...81],
+       [ 61.4169219],
+       [-87.5566781]]), alpha=array([0.4]), sample_weight=None, solver='saga', max_iter=None, tol=0.001, verbose=0, random_state=7, return_n_iter=True, return_intercept=False)
+    372 
+    373     if alpha.size == 1 and n_targets > 1:
+    374         alpha = np.repeat(alpha, n_targets)
+    375 
+    376     if solver not in ('sparse_cg', 'cholesky', 'svd', 'lsqr', 'sag'):
+--> 377         raise ValueError('Solver %s not understood' % solver)
+        solver = 'saga'
+    378 
+    379     n_iter = None
+    380     if solver == 'sparse_cg':
+    381         coef = _solve_sparse_cg(X, y, alpha, max_iter, tol, verbose)
+
+ValueError: Solver saga not understood
+___________________________________________________________________________
