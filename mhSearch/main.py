@@ -51,7 +51,7 @@ searchParams = hypSwitcher.getHeurisctics()()
 """
 Hyperparameter Search
 """
-ev = Evaluator(X_train, y_train[y_column])
+ev = Evaluator(X_train, y_train[y_column], seed)
 ev.setEstimador(estimador)
 ev.setParams(parametros)
 ev.setTypeSearch(process)

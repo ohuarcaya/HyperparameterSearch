@@ -8,10 +8,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
 
 class Evaluator:
-    def __init__(self, X, y):
+    def __init__(self, X, y, seed):
         self.X = X
         self.y = y
-        self.kf = KFold(n_splits=10)
+        self.kf = KFold(n_splits=10, shuffle=True, random_state=seed) # Just for
 
     def setEstimador(self, estimador):
         self.estimador = estimador

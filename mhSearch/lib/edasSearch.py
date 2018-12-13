@@ -25,7 +25,7 @@ class EdasHyperparameterSearch:
         self.epsilon = 10e-6
         # class members
         self.class_method = of
-        self.objective_function = of.getModelAccuracy if type=="accuracy" else of.getModelMSE
+        self.objective_function = of.getModelAccuracy if type=="accuracy" else of.getModelApproach
         self.sample = []
         self.means = []
         self.stdevs = []

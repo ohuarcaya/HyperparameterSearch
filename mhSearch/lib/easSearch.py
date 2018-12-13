@@ -88,8 +88,76 @@ def _cxIndividual(ind1, ind2, prob_cruce, gene_type):
 def _individual_to_params(individual, name_values):
     return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
 
+def distance2d(y_true, y_pred):
+    y_true = np.array(list(y_true[0]) if (list(y_true)==[0]) else list(y_true))
+    y_pred = np.array(list(y_pred[0]) if (list(y_pred)==[0]) else list(y_pred))
+    _range = np.concatenate((y_true,y_pred))
+    _limit = (np.max(_range) - np.min(_range))**2
+    return (_limit - mse(y_true,y_pred))/_limit
+
+def mse(y_true, y_pred):
+    return scoreMetrics.mean_squared_error(y_true, y_pred)
+    
+def mae(y_true, y_pred):
+    return scoreMetrics.mean_absolute_error(y_true, y_pred)
+
+def _evalfs(x):
+    d = x[0]
+    d['time'] = x[1] + x[2]
+    return d
 
 def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params,
+                  verbose=0, error_score='raise', score_cache={}, result_cache=[]):
+    parameters = _individual_to_params(individual, name_values)
+    nombreModelo = str(individual.est).split('(')[0] # individual.est.__class__.__name__
+    score = 0
+    paramkey = nombreModelo+str(individual)
+    if 'genCount' in score_cache:
+        score_cache['genCount'] = score_cache['genCount'] + 1
+    else:
+        score_cache['genCount'] = 1
+    if paramkey in score_cache:
+        score = score_cache[paramkey]
+    else:
+        try:
+            resultIndividuo = []
+            scorer = scoring_reg = { 'mae': make_scorer(mae), 'mse': make_scorer(mse), 'approach': make_scorer(distance2d) }
+            for train, test in cv.split(X, y):
+                resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,  parameters=parameters,
+                        train=train, test=test, verbose=verbose, fit_params=None, return_times=True))
+            df = pd.DataFrame(list(map(lambda x: _evalfs(x), resultIndividuo)))
+            accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
+            runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
+            score = df['approach'].mean()
+            score_cache[paramkey] = score
+            dict_result = parameters
+            dict_result['Approach'] = score
+            dict_result['stdApproach'] = df['approach'].std()
+            dict_result['MSE'] = df['mse'].mean()
+            dict_result['stdMSE'] = df['mse'].std()
+            dict_result['MAE'] = df['mae'].mean()
+            dict_result['stdMAE'] = df['mae'].std()
+            dict_result['Runtime'] = df['time'].mean()
+            dict_result['stdRuntime'] = df['time'].std()
+            dict_result['genCount'] = score_cache['genCount']
+            result_cache.append(dict_result)
+        except Exception as ex:
+            print(ex)
+            score_cache[paramkey] = 0
+            dict_result = params
+            dict_result['Approach'] = 0
+            dict_result['stdApproach'] = 0
+            dict_result['Runtime'] = 0
+            dict_result['stdRuntime'] = 0
+            dict_result['MSE'] = 100
+            dict_result['stdMSE'] = 100
+            dict_result['MAE'] = 100
+            dict_result['stdMAE'] = 100
+            dict_result['genCount'] = score_cache['genCount']
+            result_cache.append(dict_result)
+    return (score,)
+
+def _evalFunctionClassifier(individual, name_values, X, y, scorer, cv, uniform, fit_params,
                   verbose=0, error_score='raise', score_cache={}, result_cache=[]):
     parameters = _individual_to_params(individual, name_values)
     nombreModelo = str(individual.est).split('(')[0]
@@ -107,8 +175,7 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
             scorer = check_scoring(individual.est, scoring="accuracy")
             for train, test in cv.split(X, y):
                 resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,
-                            train=train, test=test, verbose=verbose,
-                            parameters=parameters, fit_params=None, return_times=True))
+                            train=train, test=test, verbose=verbose, parameters=parameters, fit_params=None, return_times=True))
             accuracy = np.array(resultIndividuo)[:, 0]  # accuracy
             runtime = np.array(resultIndividuo)[:, 2] + np.array(resultIndividuo)[:, 1]  # runtime train+test
             score = accuracy.mean()
@@ -211,7 +278,8 @@ class GeneticSearchCV:
         n_samples = _num_samples(X)
         if _num_samples(y) != n_samples:
             raise ValueError('Target [y], data [X] no coinciden')
-        self.cv = check_cv(self.cv, y=y, classifier=is_classifier(self.estimator))
+        #self.cv = check_cv(self.cv, y=y, classifier=is_classifier(self.estimator))
+        # self.cv = KFold(n_splits=10, shuffle=True, random_state=self.seed) # Just for
         toolbox = base.Toolbox()
         name_values, self.gene_type, maxints = _get_param_types_maxint(parameter_dict)
         if self.verbose:
