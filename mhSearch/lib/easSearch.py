@@ -37,6 +37,7 @@ from sklearn.utils.validation import _num_samples
 from sklearn.utils.validation import indexable
 # [https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/utils/validation.py][208]
 from multiprocessing import Pool, Manager, cpu_count
+from sklearn.metrics import make_scorer
 # Selección para estimadores
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
@@ -51,6 +52,8 @@ from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import make_scorer
+from sklearn import metrics as scoreMetrics
 
 def _get_param_types_maxint(params):
     params_data = list(params.items())  # name_values
@@ -90,10 +93,17 @@ def _individual_to_params(individual, name_values):
 
 def distance2d(y_true, y_pred):
     y_true = np.array(list(y_true[0]) if (list(y_true)==[0]) else list(y_true))
-    y_pred = np.array(list(y_pred[0]) if (list(y_pred)==[0]) else list(y_pred))
-    _range = np.concatenate((y_true,y_pred))
-    _limit = (np.max(_range) - np.min(_range))**2
-    return (_limit - mse(y_true,y_pred))/_limit
+    # y_pred = np.array(list(y_pred[0]) if (list(y_pred)==[0]) else list(y_pred))
+    # _range = np.concatenate((y_true,y_pred))
+    # _limit = (np.max(_range) - np.min(_range))**2
+    # return (_limit - mse(y_true,y_pred))/_limit
+    _range = [4864745, 4865018] if np.min(y_true)>0 else [-7696, -7300]
+    _limit = (np.max(_range)/2 - np.min(_range)/2)**2
+    out = (_limit - mse(y_true,y_pred))/_limit
+    if (out<0):
+        return 0
+    else:
+        return out
 
 def mse(y_true, y_pred):
     return scoreMetrics.mean_squared_error(y_true, y_pred)
@@ -121,7 +131,7 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
     else:
         try:
             resultIndividuo = []
-            scorer = scoring_reg = { 'mae': make_scorer(mae), 'mse': make_scorer(mse), 'approach': make_scorer(distance2d) }
+            scorer = { 'mae': make_scorer(mae), 'mse': make_scorer(mse), 'approach': make_scorer(distance2d) }
             for train, test in cv.split(X, y):
                 resultIndividuo.append(_fit_and_score(estimator=individual.est, X=X, y=y, scorer=scorer,  parameters=parameters,
                         train=train, test=test, verbose=verbose, fit_params=None, return_times=True))
@@ -131,7 +141,7 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
             score = df['approach'].mean()
             score_cache[paramkey] = score
             dict_result = parameters
-            dict_result['Approach'] = score
+            dict_result['Accuracy'] = score
             dict_result['stdApproach'] = df['approach'].std()
             dict_result['MSE'] = df['mse'].mean()
             dict_result['stdMSE'] = df['mse'].std()
@@ -144,8 +154,8 @@ def _evalFunction(individual, name_values, X, y, scorer, cv, uniform, fit_params
         except Exception as ex:
             print(ex)
             score_cache[paramkey] = 0
-            dict_result = params
-            dict_result['Approach'] = 0
+            dict_result = parameters
+            dict_result['Accuracy'] = 0
             dict_result['stdApproach'] = 0
             dict_result['Runtime'] = 0
             dict_result['stdRuntime'] = 0

@@ -64,6 +64,8 @@ class EdasHyperparameterSearch:
     def draw_sample(self):
         # for each variable to optimize
         self.stdevs = ((self.stdevs == 0) * self.epsilon) + self.stdevs
+        self.stdevs = ((self.stdevs > 0) * self.stdevs)
+        self.stdevs = ((self.stdevs <= 0) * 0) + self.epsilon
         self.sample = np.floor(np.random.normal(
             self.means, self.stdevs, size=(self.sample_size, self.dimensions + 1)))
         var = (np.max(self.sample, 0) - np.min(self.sample, 0))

@@ -25,8 +25,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_
 """
 Argumentos de Ejecucion
 """
-arg1 = int(sys.argv[1]) # 0 al 3 - proceso
-arg2 = int(sys.argv[2]) # 0 al 3 - y_predict
+arg1 = int(sys.argv[1]) # 0:randomized, 1:exhaustive, 2:edas, 3:eas
+arg2 = int(sys.argv[2]) # 0:FLOOR, 1:BUILDINGID, 2:LATITUDE, 3:LONGITUDE
 arg3 = int(sys.argv[3]) # 0 al 17 (classifier) 0 al 13 (regressor)
 arg4 = 0 # 1:classifier, 0: regression
 listProcess = ["randomized", "exhaustive", "edas", "eas"]
@@ -55,6 +55,7 @@ ev = Evaluator(X_train, y_train[y_column], seed)
 ev.setEstimador(estimador)
 ev.setParams(parametros)
 ev.setTypeSearch(process)
-ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
+n_jobs = cpu_count() # 1
+ev.fit(scoring='mse', n_jobs=n_jobs, kargs=searchParams)
 # Guardar Modelo en formato csv
 ev.saveDataFrame(modelName + y_column)

@@ -6,7 +6,7 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection._validation import _fit_and_score
 from sklearn.model_selection import train_test_split
 from sklearn import metrics as scoreMetrics
-
+from sklearn.metrics import make_scorer
 
 class GeneralMethods:
     def __init__(self, estimador, X, y, test_size=0.2, seed=7):
@@ -105,7 +105,7 @@ class GeneralMethods:
                 score = df['approach'].mean()
                 score_cache[paramkey] = score
                 dict_result = params
-                dict_result['Approach'] = score
+                dict_result['Accuracy'] = score
                 dict_result['stdApproach'] = df['approach'].std()
                 dict_result['MSE'] = df['mse'].mean()
                 dict_result['stdMSE'] = df['mse'].std()
@@ -119,7 +119,7 @@ class GeneralMethods:
                 print(ex)
                 score_cache[paramkey] = 0
                 dict_result = params
-                dict_result['Approach'] = 0
+                dict_result['Accuracy'] = 0
                 dict_result['stdApproach'] = 0
                 dict_result['Runtime'] = 0
                 dict_result['stdRuntime'] = 0
@@ -140,10 +140,15 @@ def _individual_to_params(individual, parametros):
 
 def distance2d(y_true, y_pred):
     y_true = np.array(list(y_true[0]) if (list(y_true)==[0]) else list(y_true))
-    y_pred = np.array(list(y_pred[0]) if (list(y_pred)==[0]) else list(y_pred))
-    _range = np.concatenate((y_true,y_pred))
-    _limit = (np.max(_range) - np.min(_range))**2
-    return (_limit - mse(y_true,y_pred))/_limit
+    #y_pred = np.array(list(y_pred[0]) if (list(y_pred)==[0]) else list(y_pred))
+    #_range = np.concatenate((y_true,y_pred))
+    _range = [4864745, 4865018] if np.min(y_true)>0 else [-7696, -7300]
+    _limit = (np.max(_range)/2 - np.min(_range)/2)**2
+    out = (_limit - mse(y_true,y_pred))/_limit
+    if (out<0):
+        return 0
+    else:
+        return out
 
 def mse(y_true, y_pred):
     return scoreMetrics.mean_squared_error(y_true, y_pred)
@@ -222,5 +227,132 @@ pd.DataFrame(list(map(lambda x: x[0], resultIndividuo)))
 - 24 bq Curie 4.1.1 12                  [437]*
 - 18 MT11i 2.3.4 4                      [374]SONY
 - 0 Celkon A27 4.0.4(6577) 0            [120]
+
+"""
+
+"""
+import sys
+import imp
+import numpy as np
+import pandas as pd
+from functools import reduce
+from multiprocessing import cpu_count
+sys.path.append("./lib/")
+from sklearn.model_selection import train_test_split
+from lib.Hiperparametros import HyperparameterSwitcher
+from lib.ImportacionModelos import getClassifierNames
+from lib.ImportacionModelos import getClassifierModels
+from lib.ImportacionModelos import getRegressorNames
+from lib.ImportacionModelos import getRegressorModels
+from lib.ProcessManager import Evaluator
+seed = 9
+xSize = 1055
+df = pd.read_csv("data/filtred.csv")
+X = df[df.columns[:xSize]]
+Y = df[df.columns[xSize:]]
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=seed)
+arg1 = 2 # int(sys.argv[1]) # 0:randomized, 1:exhaustive, 2:edas, 3:eas
+arg2 = 2 # int(sys.argv[2]) # 0:FLOOR, 1:BUILDINGID, 2:LATITUDE, 3:LONGITUDE
+arg3 = 0 # int(sys.argv[3]) # 0 al 17 (classifier) 0 al 13 (regressor)
+arg4 = 0 # 1:classifier, 0: regression
+listProcess = ["randomized", "exhaustive", "edas", "eas"]
+listPredict = ["FLOOR", "BUILDINGID", "LATITUDE", "LONGITUDE"]
+process = listProcess[arg1]
+y_column = listPredict[arg2]
+idModelo = arg3
+if(arg4):
+    estimadorDictionary = getClassifierModels(includeEnsambled=True)
+    modelNameList = getClassifierNames(includeEnsambled=True)
+else:
+    estimadorDictionary = getRegressorModels(includeEnsambled=True)
+    modelNameList = getRegressorNames(includeEnsambled=True)
+
+modelName = modelNameList[idModelo]
+hypSwitcher = HyperparameterSwitcher(modelName)
+estimador = estimadorDictionary[modelName]
+parametros = hypSwitcher.getHyperparameters()()
+searchParams = hypSwitcher.getHeurisctics()()
+ev = Evaluator(X_train, y_train[y_column], seed)
+ev.setEstimador(estimador)
+ev.setParams(parametros)
+ev.setTypeSearch(process)
+n_jobs = 1 # cpu_count()
+ev.fit(scoring='mse', n_jobs=n_jobs, kargs=searchParams)
+# Guardar Modelo en formato csv
+ev.saveDataFrame(modelName + y_column)
+
+
+
+
+import numpy as np
+import pandas as pd
+from Methods import GeneralMethods
+from easSearch import GeneticSearchCV
+from sklearn.model_selection import KFold
+from edasSearch import EdasHyperparameterSearch
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn import metrics as scoreMetrics
+from sklearn.metrics import make_scorer
+
+
+def distance2d(y_true, y_pred):
+    y_true = np.array(list(y_true[0]) if (list(y_true)==[0]) else list(y_true))
+    y_pred = np.array(list(y_pred[0]) if (list(y_pred)==[0]) else list(y_pred))
+    _range = np.concatenate((y_true,y_pred))
+    _limit = (np.max(_range) - np.min(_range))**2
+    return (_limit - mse(y_true,y_pred))/_limit
+
+
+def mse(y_true, y_pred):
+    return scoreMetrics.mean_squared_error(y_true, y_pred)
+    
+
+def mae(y_true, y_pred):
+    return scoreMetrics.mean_absolute_error(y_true, y_pred)
+
+
+X = X_train
+y = y_train[y_column]
+kf = KFold(n_splits=10, shuffle=True, random_state=seed) # Just for
+estimador = estimadorDictionary[modelName]
+params = parametros    
+type = process
+
+scoring = "neg_mean_squared_error"
+scoring = { 'mae': make_scorer(mae), 'mse': make_scorer(mse), 'approach': make_scorer(distance2d) }
+escv = GridSearchCV(estimador, param_grid=params, cv=kf, scoring=scoring, refit=False
+                        return_train_score=False, n_jobs=n_jobs)
+escv.fit(X, y)
+df1 = pd.DataFrame(np.array([escv.cv_results_['mean_test_score'], escv.cv_results_['std_test_score'],
+                            escv.cv_results_['mean_fit_time'], escv.cv_results_['std_fit_time'],
+                            escv.cv_results_['mean_score_time'], escv.cv_results_['std_score_time']
+                            ]).T, columns = ['Accuracy', 'stdAccuracy', 'FitTime', 'stdFitTime', 
+                            'ScoreTime', 'stdScoreTime'])
+df2 = pd.DataFrame(escv.cv_results_['params'])
+dff = pd.concat([df1,df2], axis=1).sort_values(['Accuracy', 'FitTime'], ascending=[False, True])
+
+"""
+"""
+
+dict_keys(['mean_fit_time', 'std_fit_time', 'mean_score_time', 'std_score_time',
+ 'param_fit_intercept', 'param_normalize', 'params', 'split0_test_mae', 'split1_test_mae',
+ 'split2_test_mae', 'split3_test_mae', 'split4_test_mae', 'split5_test_mae', 'split6_test_mae',
+ 'split7_test_mae', 'split8_test_mae', 'split9_test_mae', 'mean_test_mae', 'std_test_mae', 
+ 'rank_test_mae', 'split0_test_mse', 'split1_test_mse', 'split2_test_mse', 'split3_test_mse',
+ 'split4_test_mse', 'split5_test_mse', 'split6_test_mse', 'split7_test_mse', 'split8_test_mse', 
+ 'split9_test_mse', 'mean_test_mse', 'std_test_mse', 'rank_test_mse', 'split0_test_approach', 
+ 'split1_test_approach', 'split2_test_approach', 'split3_test_approach', 'split4_test_approach', 
+ 'split5_test_approach', 'split6_test_approach', 'split7_test_approach', 'split8_test_approach', 
+ 'split9_test_approach', 'mean_test_approach', 'std_test_approach', 'rank_test_approach']
+
+
+ df1 = pd.DataFrame(np.array([escv.cv_results_['mean_test_approach'], escv.cv_results_['std_test_approach'],
+                            escv.cv_results_['mean_test_mse'], escv.cv_results_['std_test_mse'],
+                            escv.cv_results_['mean_test_mae'], escv.cv_results_['std_test_mae'],
+                            escv.cv_results_['mean_fit_time'], escv.cv_results_['std_fit_time'],
+                            escv.cv_results_['mean_score_time'], escv.cv_results_['std_score_time']
+                            ]).T, columns = ['Accuracy', 'stdAccuracy', 'Mse', 'stdMse', 'Mae', 'stdMae', 'FitTime', 'stdFitTime', 
+                            'ScoreTime', 'stdScoreTime'])
 
 """
