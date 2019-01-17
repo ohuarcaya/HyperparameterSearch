@@ -1,5 +1,5 @@
 import sys
-import imp
+import time
 import numpy as np
 import pandas as pd
 from functools import reduce
@@ -29,6 +29,7 @@ arg1 = int(sys.argv[1]) # 0:randomized, 1:exhaustive, 2:edas, 3:eas
 arg2 = int(sys.argv[2]) # 0:FLOOR, 1:BUILDINGID, 2:LATITUDE, 3:LONGITUDE
 arg3 = int(sys.argv[3]) # 0 al 17 (classifier) 0 al 13 (regressor)
 arg4 = 0 # 1:classifier, 0: regression
+# arg4 = True if arg2<=1 else False
 listProcess = ["randomized", "exhaustive", "edas", "eas"]
 listPredict = ["FLOOR", "BUILDINGID", "LATITUDE", "LONGITUDE"]
 process = listProcess[arg1]
@@ -56,6 +57,8 @@ ev.setEstimador(estimador)
 ev.setParams(parametros)
 ev.setTypeSearch(process)
 n_jobs = cpu_count() # 1
+start_time = time.time()
 ev.fit(scoring='mse', n_jobs=n_jobs, kargs=searchParams)
+print("--- %s seconds ---" % (time.time() - start_time))
 # Guardar Modelo en formato csv
 ev.saveDataFrame(modelName + y_column)

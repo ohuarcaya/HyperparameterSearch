@@ -136,6 +136,14 @@ def _individual_to_params(individual, parametros):
     individual = np.int32(individual)
     name_values = list(parametros.items())
     return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
+    # try:
+    #     response  = dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
+    # except e:
+    #     print(individual)
+    #     print(name_values)
+    #     print(e)
+    #     response  = dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
+    # return response
 
 
 def distance2d(y_true, y_pred):
