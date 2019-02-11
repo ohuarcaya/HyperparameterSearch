@@ -344,6 +344,8 @@ class HyperparameterSwitcher:
     def Heuristics_BaggingClassifier(self): # 48
         return getHeuristicParamSearch(4, 10, 3, 0.5)
     
+    # Regression List
+    
     def Heuristics_LinearRegression(self): # 4
         return getHeuristicParamSearch(2, 2, 2, 0.5)
     

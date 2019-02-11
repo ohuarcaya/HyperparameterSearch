@@ -24,7 +24,7 @@ Y = df[df.columns[xSize:]]
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=seed)
 """
 Argumentos de Ejecucion
-"""
+"""#1 2 9
 arg1 = int(sys.argv[1]) # 0:randomized, 1:exhaustive, 2:edas, 3:eas
 arg2 = int(sys.argv[2]) # 0:FLOOR, 1:BUILDINGID, 2:LATITUDE, 3:LONGITUDE
 arg3 = int(sys.argv[3]) # 0 al 17 (classifier) 0 al 13 (regressor)
