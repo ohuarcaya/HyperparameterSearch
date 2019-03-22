@@ -16,5 +16,5 @@ e_ram=$(echo "$ene" | cut -d "J" -f2 | cut -d "/" -f3 | sed 's/ //g' | sed 's/,/
 mcpu=$(top -bn 2 -d 0,33 | grep '^%Cpu' | tail -n 1 | gawk '{print $2+$4+$6}')
 
 mem_used=$(top -bn 2 -d 0,3 | grep '^KiB Mem' | tail -n 1 | gawk '{print $6}')
-echo "$mhora,$e_core,$e_ram,$mcpu,$mem_used" >> perfs/$1.csv
+echo "$mhora,$e_core,$e_ram,$mcpu,$mem_used" >> results/$1.csv
 
