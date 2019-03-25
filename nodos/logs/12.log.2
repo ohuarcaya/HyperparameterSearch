@@ -1,0 +1,174 @@
+1551322768.340172
+KNeighborsRegressor
+--- 359841.5357530117 seconds ---
+RandomForestRegressor Failure xxx
+JoblibValueError
+___________________________________________________________________________
+Multiprocessing exception:
+...........................................................................
+/data/users/oscar/mhSearch/main.py in <module>()
+     67     ev.setParams(parametros)
+     68     ev.setTypeSearch(process)
+     69     n_jobs = cpu_count() # 1
+     70     start_time = time.time()
+     71     try:
+---> 72         ev.fit(scoring='mse', n_jobs=n_jobs, kargs=searchParams)
+     73         # except:
+     74         #    print("salió un error con el algoritmo %d" %(arg3))
+     75         print(start_time)
+     76         print(modelName)
+
+...........................................................................
+/data/users/oscar/mhSearch/lib/ProcessManager.py in fit(self=<lib.ProcessManager.Evaluator object>, scoring={'approach': make_scorer(distance2d), 'mae': make_scorer(mae), 'mse': make_scorer(mse)}, n_jobs=48, kargs={'elit': 3, 'ngen': 5, 'pelit': 0.5, 'psize': 25})
+     49             self.dff = pd.DataFrame(list(edcv.resultados)).sort_values(['Accuracy'], 
+     50                     ascending=False).reset_index(drop=True)
+     51         if (self.type == 'exhaustive'):
+     52             escv = GridSearchCV(self.estimador, param_grid=self.params, cv=self.kf, scoring=scoring, refit=False,
+     53                                     return_train_score=False, n_jobs=n_jobs)
+---> 54             escv.fit(self.X, self.y)
+        escv.fit = <bound method BaseSearchCV.fit of GridSearchCV(c...ch': make_scorer(distance2d)},
+       verbose=0)>
+        self.X =        WAP001  WAP002  WAP003  WAP004  ...   NEX...    0        0     0
+
+[16326 rows x 1055 columns]
+        self.y = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64
+     55             if(scoring=="accuracy"):
+     56                 df1 = pd.DataFrame(np.array([escv.cv_results_['mean_test_score'], escv.cv_results_['std_test_score'],
+     57                                             escv.cv_results_['mean_fit_time'], escv.cv_results_['std_fit_time'],
+     58                                             escv.cv_results_['mean_score_time'], escv.cv_results_['std_score_time']
+
+...........................................................................
+/data/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_search.py in fit(self=GridSearchCV(cv=KFold(n_splits=10, random_state=...ach': make_scorer(distance2d)},
+       verbose=0), X=       WAP001  WAP002  WAP003  WAP004  ...   NEX...    0        0     0
+
+[16326 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, groups=None, **fit_params={})
+    635                                   return_train_score=self.return_train_score,
+    636                                   return_n_test_samples=True,
+    637                                   return_times=True, return_parameters=False,
+    638                                   error_score=self.error_score)
+    639           for parameters, (train, test) in product(candidate_params,
+--> 640                                                    cv.split(X, y, groups)))
+        cv.split = <bound method _BaseKFold.split of KFold(n_splits=10, random_state=9, shuffle=True)>
+        X =        WAP001  WAP002  WAP003  WAP004  ...   NEX...    0        0     0
+
+[16326 rows x 1055 columns]
+        y = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64
+        groups = None
+    641 
+    642         # if one choose to see train score, "out" will contain train score info
+    643         if self.return_train_score:
+    644             (train_score_dicts, test_score_dicts, test_sample_counts, fit_time,
+
+...........................................................................
+/data/anaconda3/lib/python3.7/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=Parallel(n_jobs=48), iterable=<generator object BaseSearchCV.fit.<locals>.<genexpr>>)
+    784             if pre_dispatch == "all" or n_jobs == 1:
+    785                 # The iterable was consumed all at once by the above for loop.
+    786                 # No need to wait for async callbacks to trigger to
+    787                 # consumption.
+    788                 self._iterating = False
+--> 789             self.retrieve()
+        self.retrieve = <bound method Parallel.retrieve of Parallel(n_jobs=48)>
+    790             # Make sure that we get a last message telling us we are done
+    791             elapsed_time = time.time() - self._start_time
+    792             self._print('Done %3i out of %3i | elapsed: %s finished',
+    793                         (len(self._output), len(self._output),
+
+---------------------------------------------------------------------------
+Sub-process traceback:
+---------------------------------------------------------------------------
+ValueError                                         Mon Mar  4 04:58:31 2019
+PID: 97695                        Python 3.7.0: /data/anaconda3/bin/python3
+...........................................................................
+/data/anaconda3/lib/python3.7/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (RandomForestRegressor(bootstrap=False, criterion...True, random_state=7, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  ...   NEX...    0        0     0
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, {'approach': make_scorer(distance2d), 'mae': make_scorer(mae), 'mse': make_scorer(mse)}, array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'bootstrap': False, 'criterion': 'mse', 'max_features': None, 'n_estimators': 5, 'oob_score': True, 'warm_start': True}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': False, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/data/anaconda3/lib/python3.7/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (RandomForestRegressor(bootstrap=False, criterion...True, random_state=7, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  ...   NEX...    0        0     0
+
+[16326 rows x 1055 columns], 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, {'approach': make_scorer(distance2d), 'mae': make_scorer(mae), 'mse': make_scorer(mse)}, array([    0,     1,     2, ..., 16323, 16324, 16325]), array([    4,    22,    36, ..., 16294, 16308, 16318]), 0, {'bootstrap': False, 'criterion': 'mse', 'max_features': None, 'n_estimators': 5, 'oob_score': True, 'warm_start': True})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': False, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/data/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=RandomForestRegressor(bootstrap=False, criterion...True, random_state=7, verbose=0, warm_start=True), X=       WAP001  WAP002  WAP003  WAP004  ...   NEX...    0        0     0
+
+[16326 rows x 1055 columns], y=1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 16326, dtype: float64, scorer={'approach': make_scorer(distance2d), 'mae': make_scorer(mae), 'mse': make_scorer(mse)}, train=array([    0,     1,     2, ..., 16323, 16324, 16325]), test=array([    4,    22,    36, ..., 16294, 16308, 16318]), verbose=0, parameters={'bootstrap': False, 'criterion': 'mse', 'max_features': None, 'n_estimators': 5, 'oob_score': True, 'warm_start': True}, fit_params={}, return_train_score=False, return_parameters=False, return_n_test_samples=True, return_times=True, error_score='raise')
+    453 
+    454     try:
+    455         if y_train is None:
+    456             estimator.fit(X_train, **fit_params)
+    457         else:
+--> 458             estimator.fit(X_train, y_train, **fit_params)
+        estimator.fit = <bound method BaseForest.fit of RandomForestRegr...rue, random_state=7, verbose=0, warm_start=True)>
+        X_train =        WAP001  WAP002  WAP003  WAP004  ...   NEX...    0        0     0
+
+[14693 rows x 1055 columns]
+        y_train = 1007     4.864885e+06
+14408    4.864866e+06
+1501...+06
+Name: LATITUDE, Length: 14693, dtype: float64
+        fit_params = {}
+    459 
+    460     except Exception as e:
+    461         # Note fit time as time until error
+    462         fit_time = time.time() - start_time
+
+...........................................................................
+/data/anaconda3/lib/python3.7/site-packages/sklearn/ensemble/forest.py in fit(self=RandomForestRegressor(bootstrap=False, criterion...True, random_state=7, verbose=0, warm_start=True), X=array([[0., 0., 0., ..., 0., 0., 0.],
+       [0....   [0., 0., 0., ..., 0., 0., 0.]], dtype=float32), y=array([[4864884.949544],
+       [4864865.9188  ]...      [4864934.007   ],
+       [4864785.0334  ]]), sample_weight=None)
+    283 
+    284         # Check parameters
+    285         self._validate_estimator()
+    286 
+    287         if not self.bootstrap and self.oob_score:
+--> 288             raise ValueError("Out of bag estimation only available"
+    289                              " if bootstrap=True")
+    290 
+    291         random_state = check_random_state(self.random_state)
+    292 
+
+ValueError: Out of bag estimation only available if bootstrap=True
+___________________________________________________________________________
