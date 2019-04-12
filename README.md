@@ -34,3 +34,9 @@ indoor localization database to test Indoor Positioning System that rely on WLAN
         - Number of Iterations
         - Computational consumption (CPU, RAM, Energy, Cycles)
 
+- __new changes__
+
+    ExtraTrees| bootstrap=True
+    RandomForest| bootstrap=True
+    BaggingRegresor| warm_start=False
+
