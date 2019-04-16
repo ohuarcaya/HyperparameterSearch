@@ -36,7 +36,12 @@ indoor localization database to test Indoor Positioning System that rely on WLAN
 
 - __new changes__
 
-    ExtraTrees| bootstrap=True
-    RandomForest| bootstrap=True
-    BaggingRegresor| warm_start=False
+    - ExtraTrees| bootstrap=True
+    - RandomForest| bootstrap=True
+    - BaggingRegresor| warm_start=False
+
+    - 4*25=100
+    - 96*7=672
+    - 72*5=360
+
 
