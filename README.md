@@ -36,7 +36,8 @@ indoor localization database to test Indoor Positioning System that rely on WLAN
 
 - __new changes__
 
-    ExtraTrees| bootstrap=True
-    RandomForest| bootstrap=True
-    BaggingRegresor| warm_start=False
-
+        - AdaBoostRegressorLONGITUDE.csv = 36
+        - BaggingRegressorLATITUDE.csv = 101
+        - ExtraTreesRegressorLATITUDE.csv = 673
+        - KNeighborsRegressorLONGITUDE.csv = 1441
+        - RandomForestRegressorLATITUDE.csv = 481
