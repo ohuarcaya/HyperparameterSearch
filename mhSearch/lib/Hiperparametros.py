@@ -260,20 +260,22 @@ class HyperparameterSwitcher:
 
     def Parametros_RandomForestRegressor(self):
         parameters = {}
-        parameters['n_estimators'] = [5, 10, 15, 20]
+        parameters['n_estimators'] = [5]#, 10, 15, 20]
         parameters['criterion'] = ['mse', 'mae']
         parameters['max_features'] = [None, 'sqrt', 'log2']
-        parameters['bootstrap'] = [True, False]
+        parameters['bootstrap'] = [True]#, False]
+        parameters['min_samples_split'] = [2, 4, 6]
         parameters['oob_score'] = [True, False]
         parameters['warm_start'] = [True, False]
         return parameters
 
     def Parametros_ExtraTreesRegressor(self):
         parameters = {}
-        parameters['n_estimators'] = [10, 12, 15, 18, 20]
+        parameters['n_estimators'] = [4]#10, 12, 15, 18, 20]
         parameters['criterion'] = ['mse', 'mae']
         parameters['max_features'] = [None, 'sqrt', 'log2']
-        parameters['bootstrap'] = [True, False]
+        parameters['min_samples_split'] = [2, 5, 8, 10]
+        parameters['bootstrap'] = [True]#, False]
         parameters['oob_score'] = [True, False]
         parameters['warm_start'] = [True, False]
         #parameters['max_depth'] = [2, 3, 4, 5, None]
@@ -284,7 +286,7 @@ class HyperparameterSwitcher:
         parameters['n_estimators'] = [5, 8, 12, 15, 18, 20]
         # parameters['max_samples'] = # int or float by choose
         # parameters['max_features'] = # int or float by choose
-        parameters['bootstrap'] = [True, False]
+        parameters['bootstrap'] = [True] #, False
         parameters['bootstrap_features'] = [True, False]
         parameters['oob_score'] = [True, False]
         #parameters['warm_start'] = [True, False]
