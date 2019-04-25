@@ -70,7 +70,7 @@ class Evaluator:
             self.dff = pd.concat([df1,df2], axis=1).sort_values(['Accuracy', 'FitTime'], ascending=[False, True])
         if (self.type == 'randomized'):
             rscv = RandomizedSearchCV(self.estimador, param_distributions=self.params, 
-                                n_iter=generaciones, cv=self.kf, scoring=scoring, refit=False,
+                                n_iter=generaciones*pop_size, cv=self.kf, scoring=scoring, refit=False,
                                 return_train_score=False, n_jobs=n_jobs)
             rscv.fit(self.X, self.y)
             if(scoring=="accuracy"):
