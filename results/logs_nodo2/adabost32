@@ -1,0 +1,14 @@
+2019-05-04 18:59:47.017399
+Tipos: [1, 2, 1], rangos: [2, 3, 2]
+--- Evolve in 36 possible combinations ---
+gen	nevals	avg     	min     	max     	std      
+0  	10    	0.993477	0.970573	0.998382	0.0095507
+1  	8     	0.998242	0.99811 	0.998311	6.15256e-05
+2  	5     	0.998293	0.998216	0.998334	3.93311e-05
+3  	5     	0.99832 	0.998286	0.998373	2.21507e-05
+Best individual is: {'n_estimators': 500, 'learning_rate': 0.1, 'loss': 'exponential'}
+with fitness: 0.998381546205118
+1557010787.0184023
+AdaBoostRegressor
+--- 11820.466608524323 seconds ---
+2019-05-04 22:16:47.487538

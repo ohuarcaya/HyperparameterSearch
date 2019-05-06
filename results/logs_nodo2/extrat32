@@ -1,0 +1,26 @@
+2019-05-03 08:17:05.355738
+Tipos: [1, 1, 1, 1, 1, 1, 1], rangos: [6, 1, 2, 3, 0, 1, 1]
+n_estimators=18 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=18 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=20 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=18 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=18 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=20 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=15 must be larger or equal to len(estimators_)=18 when warm_start==True
+--- Evolve in 672 possible combinations ---
+gen	nevals	avg     	min     	max     	std        
+0  	40    	0.997553	0.995569	0.998845	0.000784023
+1  	23    	0.948139	0       	0.998845	0.217518   
+2  	17    	0.948533	0       	0.998845	0.217609   
+3  	19    	0.973732	0       	0.998869	0.155922   
+4  	23    	0.948808	0       	0.998877	0.217672   
+5  	19    	0.998832	0.998428	0.998877	6.77235e-05
+6  	17    	0.998849	0.998829	0.998877	1.18843e-05
+7  	23    	0.973885	0       	0.998877	0.155946   
+8  	25    	0.948871	0       	0.998877	0.217686   
+Best individual is: {'n_estimators': 20, 'criterion': 'mae', 'max_features': None, 'min_samples_split': 5, 'bootstrap': True, 'oob_score': False, 'warm_start': True}
+with fitness: 0.998876840140628
+1556885825.3580475
+ExtraTreesRegressor
+--- 76031.50291728973 seconds ---
+2019-05-04 05:24:16.864779

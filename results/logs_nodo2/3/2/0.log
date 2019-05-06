@@ -1,0 +1,41 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Tipos: [1, 1], rangos: [1, 1]
+--- Evolve in 4 possible combinations ---
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "./lib/easSearch.py", line 124, in _evalFunction
+    scorer = scoring_reg = { 'mae': make_scorer(mae), 'mse': make_scorer(mse), 'approach': make_scorer(distance2d) }
+NameError: name 'make_scorer' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "./lib/easSearch.py", line 147, in _evalFunction
+    dict_result = params
+NameError: name 'params' is not defined
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 36, in fit
+    agcv.fit(self.X, self.y)
+  File "./lib/easSearch.py", line 267, in fit
+    self._fit(X, y, self.params)
+  File "./lib/easSearch.py", line 331, in _fit
+    halloffame=hof, verbose=self.verbose)
+  File "/usr/lib/python3.4/site-packages/deap/algorithms.py", line 150, in eaSimple
+    fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 260, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 608, in get
+    raise self._value
+NameError: name 'params' is not defined
