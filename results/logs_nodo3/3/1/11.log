@@ -1,0 +1,22 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Traceback (most recent call last):
+  File "main.py", line 22, in <module>
+    X = df[df.columns[:xSize]]
+  File "/usr/lib64/python3.4/site-packages/pandas/core/frame.py", line 2056, in __getitem__
+    return self._getitem_array(key)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/frame.py", line 2101, in _getitem_array
+    return self.take(indexer, axis=1, convert=True)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/generic.py", line 1817, in take
+    convert=True, verify=True)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 4011, in take
+    axis=axis, allow_dups=True)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 3893, in reindex_indexer
+    fill_tuple=(fill_value,))
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 3973, in _slice_take_blocks_ax0
+    fill_tuple=None))
+  File "/usr/lib64/python3.4/site-packages/pandas/core/internals.py", line 1042, in take_nd
+    allow_fill=False)
+  File "/usr/lib64/python3.4/site-packages/pandas/core/algorithms.py", line 1462, in take_nd
+    out = np.empty(out_shape, dtype=dtype)
+MemoryError

@@ -1,0 +1,13 @@
+1549947463.0742428
+AdaBoostRegressor
+--- 5032.099932193756 seconds ---
+salió un error con el algoritmo 14
+1549952495.1783798
+BaggingRegressor
+--- 3.546419143676758 seconds ---
+Traceback (most recent call last):
+  File "main.py", line 72, in <module>
+    ev.saveDataFrame(modelName + y_column)
+  File "/data/users/oscar/mhSearch/lib/ProcessManager.py", line 97, in saveDataFrame
+    self.dff.to_csv("result/" + self.type + "/" + fileName + self.complete + ".csv", index=False)
+AttributeError: 'Evaluator' object has no attribute 'dff'

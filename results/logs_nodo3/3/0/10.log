@@ -1,0 +1,44 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Tipos: [1, 1], rangos: [1, 3]
+Process ForkPoolWorker-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 254, in _bootstrap
+    self.run()
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/usr/lib64/python3.4/multiprocessing/queues.py", line 362, in get
+    return ForkingPickler.loads(res)
+MemoryError
+--- Evolve in 8 possible combinations ---
+Process ForkPoolWorker-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 254, in _bootstrap
+    self.run()
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/usr/lib64/python3.4/multiprocessing/queues.py", line 360, in get
+    res = self._reader.recv_bytes()
+  File "/usr/lib64/python3.4/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "/usr/lib64/python3.4/multiprocessing/connection.py", line 420, in _recv_bytes
+    return self._recv(size)
+  File "/usr/lib64/python3.4/multiprocessing/connection.py", line 383, in _recv
+    chunk = read(handle, remaining)
+MemoryError
+Process ForkPoolWorker-6:
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 254, in _bootstrap
+    self.run()
+  File "/usr/lib64/python3.4/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 108, in worker
+    task = get()
+  File "/usr/lib64/python3.4/multiprocessing/queues.py", line 362, in get
+    return ForkingPickler.loads(res)
+_pickle.UnpicklingError: invalid load key, 'm'.
+

@@ -1,0 +1,11 @@
+indice	Accuracy  learning_rate         loss  n_estimators
+0	0.998636           0.01  exponential            50
+1	       0           0.01  exponential            50
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648           0]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+2	       0
+1557022725.126838
+AdaBoostRegressor
+--- 7766.870161294937 seconds ---

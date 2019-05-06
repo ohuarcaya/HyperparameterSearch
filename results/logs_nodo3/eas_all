@@ -1,0 +1,83 @@
+Tipos: [1, 1, 1, 1, 1], rangos: [11, 1, 2, 4, 3]
+--- Evolve in 1440 possible combinations ---
+gen	nevals	avg     	min     	max     	std       
+0  	50    	0.996792	0.991404	0.998122	0.00131691
+1  	27    	0.997721	0.996772	0.998148	0.000317293
+2  	24    	0.998006	0.997654	0.99819 	0.000133354
+3  	33    	0.998114	0.997703	0.998191	8.82525e-05
+4  	35    	0.998165	0.998104	0.998194	2.70806e-05
+5  	36    	0.998163	0.997143	0.998194	0.000146784
+6  	30    	0.998191	0.99819 	0.998194	4.70451e-07
+7  	30    	0.998184	0.997915	0.998194	4.03693e-05
+8  	40    	0.99819 	0.998141	0.998194	1.01527e-05
+Best individual is: {'n_neighbors': 6, 'weights': 'distance', 'algorithm': 'ball_tree', 'p': 1, 'leaf_size': 70}
+with fitness: 0.9981942829050858
+1556575503.8255708
+KNeighborsRegressor
+--- 38834.19670701027 seconds ---
+Tipos: [1, 2, 1], rangos: [2, 3, 2]
+--- Evolve in 36 possible combinations ---
+gen	nevals	avg     	min     	max     	std      
+0  	10    	0.982127	0.837266	0.998637	0.0482905
+1  	4     	0.998413	0.997085	0.998637	0.000453119
+2  	5     	0.998607	0.99858 	0.998637	2.40019e-05
+3  	3     	0.998602	0.99858 	0.998637	2.1787e-05 
+Best individual is: {'n_estimators': 100, 'learning_rate': 0.01, 'loss': 'exponential'}
+with fitness: 0.9986373847783098
+1556614338.0270915
+AdaBoostRegressor
+--- 9272.078184604645 seconds ---
+Tipos: [1, 1, 1, 1, 1, 1, 1], rangos: [4, 1, 2, 2, 0, 1, 1]
+n_estimators=15 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=10 must be larger or equal to len(estimators_)=15 when warm_start==True
+n_estimators=10 must be larger or equal to len(estimators_)=25 when warm_start==True
+--- Evolve in 360 possible combinations ---
+gen	nevals	avg     	min     	max    	std        
+0  	25    	0.998453	0.997742	0.99896	0.000350492
+1  	19    	0.998784	0.998223	0.998977	0.00020038 
+2  	13    	0.958888	0       	0.998984	0.195732   
+3  	14    	0.919007	0       	0.998984	0.271      
+4  	15    	0.998978	0.9989  	0.998984	1.62228e-05
+5  	7     	0.959024	0       	0.998984	0.19576    
+6  	10    	0.998984	0.998984	0.998984	0          
+7  	11    	0.959025	0       	0.998984	0.19576    
+8  	10    	0.998984	0.998984	0.998984	0          
+Best individual is: {'n_estimators': 15, 'criterion': 'mse', 'max_features': None, 'min_samples_split': 2, 'bootstrap': True, 'oob_score': True, 'warm_start': True}
+with fitness: 0.9989844012266991
+1556623610.107951
+RandomForestRegressor
+--- 43172.679540872574 seconds ---
+Tipos: [1, 1, 1, 1, 1, 1, 1], rangos: [6, 1, 2, 3, 0, 1, 1]
+n_estimators=20 must be larger or equal to len(estimators_)=25 when warm_start==True
+n_estimators=12 must be larger or equal to len(estimators_)=20 when warm_start==True
+n_estimators=10 must be larger or equal to len(estimators_)=20 when warm_start==True
+--- Evolve in 672 possible combinations ---
+gen	nevals	avg     	min     	max     	std        
+0  	40    	0.998357	0.996923	0.998963	0.000516991
+1  	23    	0.998766	0.998003	0.998963	0.000275149
+2  	21    	0.973933	0       	0.998963	0.155954   
+3  	24    	0.949005	0       	0.998963	0.217717   
+4  	27    	0.998946	0.998506	0.99897 	7.30824e-05
+5  	25    	0.99896 	0.998864	0.99897 	1.66499e-05
+6  	17    	0.998963	0.998963	0.998963	0          
+7  	18    	0.998963	0.998963	0.998963	0          
+8  	21    	0.998946	0.998261	0.998963	0.000109592
+Best individual is: {'n_estimators': 25, 'criterion': 'mse', 'max_features': None, 'min_samples_split': 2, 'bootstrap': True, 'oob_score': False, 'warm_start': True}
+with fitness: 0.9989703034112022
+1556666782.7910974
+ExtraTreesRegressor
+--- 34034.5367295742 seconds ---
+Tipos: [1, 1, 1, 1], rangos: [24, 0, 1, 1]
+--- Evolve in 100 possible combinations ---
+gen	nevals	avg     	min     	max     	std        
+0  	12    	0.998421	0.998265	0.998497	7.13873e-05
+1  	8     	0.998477	0.998356	0.998497	3.7553e-05 
+2  	8     	0.998494	0.998471	0.998497	7.44847e-06
+3  	6     	0.998497	0.998497	0.998497	1.11022e-16
+4  	2     	0.998497	0.998497	0.998497	1.11022e-16
+5  	7     	0.998497	0.998497	0.998497	1.11022e-16
+Best individual is: {'n_estimators': 88, 'bootstrap': True, 'bootstrap_features': True, 'oob_score': True}
+with fitness: 0.9984971856792588
+1556700817.331732
+BaggingRegressor
+--- 2117.2119476795197 seconds ---

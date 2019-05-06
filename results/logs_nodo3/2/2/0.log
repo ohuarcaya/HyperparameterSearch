@@ -1,0 +1,7 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+name 'make_scorer' is not defined
+name 'make_scorer' is not defined
+indice	Accuracy  fit_intercept  normalize
+0	     0.0          False       True
+1	     0.0          False       True

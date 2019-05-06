@@ -1,0 +1,3 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Tipos: [1, 2, 1, 1], rangos: [2, 4, 1, 1]

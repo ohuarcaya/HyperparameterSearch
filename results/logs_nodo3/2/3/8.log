@@ -1,0 +1,13 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+name 'make_scorer' is not defined
+name 'make_scorer' is not defined
+name 'make_scorer' is not defined
+name 'make_scorer' is not defined
+name 'make_scorer' is not defined
+indice	Accuracy  alpha kernel  normalize_y      optimizer
+0	     0.0    1.0   None        False  fmin_l_bfgs_b
+name 'make_scorer' is not defined
+name 'make_scorer' is not defined
+name 'make_scorer' is not defined
+1	     0.0  0.001   None        False  fmin_l_bfgs_b

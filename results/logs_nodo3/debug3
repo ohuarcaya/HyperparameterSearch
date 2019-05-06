@@ -1,0 +1,29 @@
+indice	Accuracy  learning_rate         loss  n_estimators
+0	0.998636           0.01  exponential            50
+1	0.998594           0.01  linear            50
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+[-2147483648 -2147483648 -2147483648           0]
+[('n_estimators', [50, 100, 500]), ('learning_rate', [0.01, 0.1, 1.0, 2.0]), ('loss', ['linear', 'square', 'exponential'])]
+2	0.998115
+1556769512.5692947
+AdaBoostRegressor
+--- 12957.479976654053 seconds ---

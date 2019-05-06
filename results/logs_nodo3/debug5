@@ -1,0 +1,12 @@
+indice	Accuracy  learning_rate         loss  n_estimators
+0	0.998636           0.01  exponential            50
+Traceback (most recent call last):
+  File "debug_main.py", line 72, in <module>
+    ev.fit(scoring='mse', n_jobs=n_jobs, kargs=searchParams)
+  File "/data/users/oscar/mhSearch/lib/ProcessManager.py", line 48, in fit
+    edcv.run()
+  File "./lib/edasSearch.py", line 118, in run
+    self.draw_sample()
+  File "./lib/edasSearch.py", line 75, in draw_sample
+    self.sample = np.int32(self.sample * self.int32(np.sample>0))
+AttributeError: 'EdasHyperparameterSearch' object has no attribute 'int32'

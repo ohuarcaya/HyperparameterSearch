@@ -1,0 +1,472 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 344, in __call__
+    return self.func(*args, **kwargs)
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 131, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py", line 227, in _fit_and_score
+    estimator.set_params(**parameters)
+  File "/usr/lib64/python3.4/site-packages/sklearn/linear_model/stochastic_gradient.py", line 83, in set_params
+    super(BaseSGD, self).set_params(*args, **kwargs)
+  File "/usr/lib64/python3.4/site-packages/sklearn/base.py", line 291, in set_params
+    (key, self.__class__.__name__))
+ValueError: Invalid parameter average for estimator PassiveAggressiveClassifier. Check the list of available parameters with `estimator.get_params().keys()`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 353, in __call__
+    raise TransportableException(text, e_type)
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+ValueError                                         Mon Nov 19 14:00:46 2018
+PID: 20316                                   Python 3.4.5: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], y=6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, scorer=make_scorer(accuracy_score), train=array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), test=array([   0,    1,    2, ..., 1624, 1625, 1626]), verbose=0, parameters={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    222     fit_params = fit_params if fit_params is not None else {}
+    223     fit_params = dict([(k, _index_param_value(X, v, train))
+    224                       for k, v in fit_params.items()])
+    225 
+    226     if parameters is not None:
+--> 227         estimator.set_params(**parameters)
+        estimator.set_params = <bound method PassiveAggressiveClassifier.set_pa...       shuffle=True, verbose=0, warm_start=True)>
+        parameters = {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}
+    228 
+    229     start_time = time.time()
+    230 
+    231     X_train, y_train = _safe_split(estimator, X, y, train)
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/stochastic_gradient.py in set_params(self=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), *args=(), **kwargs={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+     78         # iteration count for learning rate schedule
+     79         # must not be int (e.g. if ``learning_rate=='optimal'``)
+     80         self.t_ = None
+     81 
+     82     def set_params(self, *args, **kwargs):
+---> 83         super(BaseSGD, self).set_params(*args, **kwargs)
+        self.set_params = <bound method PassiveAggressiveClassifier.set_pa...       shuffle=True, verbose=0, warm_start=True)>
+        args = ()
+        kwargs = {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}
+     84         self._validate_params()
+     85         return self
+     86 
+     87     @abstractmethod
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/base.py in set_params(self=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), **params={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+    286                 # simple objects case
+    287                 if key not in valid_params:
+    288                     raise ValueError('Invalid parameter %s for estimator %s. '
+    289                                      'Check the list of available parameters '
+    290                                      'with `estimator.get_params().keys()`.' %
+--> 291                                      (key, self.__class__.__name__))
+        key = 'average'
+        self.__class__.__name__ = 'PassiveAggressiveClassifier'
+    292                 setattr(self, key, value)
+    293         return self
+    294 
+    295     def __repr__(self):
+
+ValueError: Invalid parameter average for estimator PassiveAggressiveClassifier. Check the list of available parameters with `estimator.get_params().keys()`.
+___________________________________________________________________________
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 682, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/usr/lib64/python3.4/multiprocessing/pool.py", line 608, in get
+    raise self._value
+sklearn.externals.joblib.my_exceptions.TransportableException: TransportableException
+___________________________________________________________________________
+ValueError                                         Mon Nov 19 14:00:46 2018
+PID: 20316                                   Python 3.4.5: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], y=6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, scorer=make_scorer(accuracy_score), train=array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), test=array([   0,    1,    2, ..., 1624, 1625, 1626]), verbose=0, parameters={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    222     fit_params = fit_params if fit_params is not None else {}
+    223     fit_params = dict([(k, _index_param_value(X, v, train))
+    224                       for k, v in fit_params.items()])
+    225 
+    226     if parameters is not None:
+--> 227         estimator.set_params(**parameters)
+        estimator.set_params = <bound method PassiveAggressiveClassifier.set_pa...       shuffle=True, verbose=0, warm_start=True)>
+        parameters = {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}
+    228 
+    229     start_time = time.time()
+    230 
+    231     X_train, y_train = _safe_split(estimator, X, y, train)
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/stochastic_gradient.py in set_params(self=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), *args=(), **kwargs={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+     78         # iteration count for learning rate schedule
+     79         # must not be int (e.g. if ``learning_rate=='optimal'``)
+     80         self.t_ = None
+     81 
+     82     def set_params(self, *args, **kwargs):
+---> 83         super(BaseSGD, self).set_params(*args, **kwargs)
+        self.set_params = <bound method PassiveAggressiveClassifier.set_pa...       shuffle=True, verbose=0, warm_start=True)>
+        args = ()
+        kwargs = {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}
+     84         self._validate_params()
+     85         return self
+     86 
+     87     @abstractmethod
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/base.py in set_params(self=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), **params={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+    286                 # simple objects case
+    287                 if key not in valid_params:
+    288                     raise ValueError('Invalid parameter %s for estimator %s. '
+    289                                      'Check the list of available parameters '
+    290                                      'with `estimator.get_params().keys()`.' %
+--> 291                                      (key, self.__class__.__name__))
+        key = 'average'
+        self.__class__.__name__ = 'PassiveAggressiveClassifier'
+    292                 setattr(self, key, value)
+    293         return self
+    294 
+    295     def __repr__(self):
+
+ValueError: Invalid parameter average for estimator PassiveAggressiveClassifier. Check the list of available parameters with `estimator.get_params().keys()`.
+___________________________________________________________________________
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='accuracy', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 50, in fit
+    escv.fit(self.X, self.y)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 945, in fit
+    return self._fit(X, y, groups, ParameterGrid(self.param_grid))
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 564, in _fit
+    for parameters in parameter_iterable
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 768, in __call__
+    self.retrieve()
+  File "/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py", line 719, in retrieve
+    raise exception
+sklearn.externals.joblib.my_exceptions.JoblibValueError: JoblibValueError
+___________________________________________________________________________
+Multiprocessing exception:
+...........................................................................
+/home/Manuel.Castillo/pruebasOHC/main.py in <module>()
+     53 """
+     54 ev = Evaluator(X_train, y_train[y_column])
+     55 ev.setEstimador(estimador)
+     56 ev.setParams(parametros)
+     57 ev.setTypeSearch(process)
+---> 58 ev.fit(scoring='accuracy', n_jobs=cpu_count(), kargs=searchParams)
+     59 # Guardar Modelo en formato csv
+     60 ev.saveDataFrame(modelName + y_column)
+     61 
+     62 
+
+...........................................................................
+/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py in fit(self=<lib.ProcessManager.Evaluator object>, scoring='accuracy', n_jobs=16, kargs={'elit': 3, 'ngen': 4, 'pelit': 0.5, 'psize': 15})
+     45             self.dff = pd.DataFrame(list(edcv.resultados)).sort_values(['Accuracy'], 
+     46                     ascending=False).reset_index(drop=True)
+     47         if (self.type == 'exhaustive'):
+     48             escv = GridSearchCV(self.estimador, param_grid=self.params, cv=self.kf, scoring=scoring, 
+     49                                     return_train_score=False, n_jobs=n_jobs)
+---> 50             escv.fit(self.X, self.y)
+        escv.fit = <bound method GridSearchCV.fit of GridSearchCV(c...ore=False,
+       scoring='accuracy', verbose=0)>
+        self.X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns]
+        self.y = 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64
+     51             df1 = pd.DataFrame(np.array([escv.cv_results_['mean_test_score'], escv.cv_results_['std_test_score'],
+     52                                         escv.cv_results_['mean_fit_time'], escv.cv_results_['std_fit_time'],
+     53                                         escv.cv_results_['mean_score_time'], escv.cv_results_['std_score_time']
+     54                                         ]).T, columns = ['Accuracy', 'stdAccuracy', 'FitTime', 'stdFitTime', 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py in fit(self=GridSearchCV(cv=KFold(n_splits=10, random_state=...core=False,
+       scoring='accuracy', verbose=0), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], y=6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, groups=None)
+    940 
+    941         groups : array-like, with shape (n_samples,), optional
+    942             Group labels for the samples used while splitting the dataset into
+    943             train/test set.
+    944         """
+--> 945         return self._fit(X, y, groups, ParameterGrid(self.param_grid))
+        self._fit = <bound method GridSearchCV._fit of GridSearchCV(...ore=False,
+       scoring='accuracy', verbose=0)>
+        X =        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns]
+        y = 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64
+        groups = None
+        self.param_grid = {'C': [0.8, 0.9, 1.0, 1.1, 1.2], 'average': [True, False], 'class_weight': [None, 'balanced'], 'fit_intercept': [True, False], 'warm_start': [True, False]}
+    946 
+    947 
+    948 class RandomizedSearchCV(BaseSearchCV):
+    949     """Randomized search on hyper parameters.
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py in _fit(self=GridSearchCV(cv=KFold(n_splits=10, random_state=...core=False,
+       scoring='accuracy', verbose=0), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], y=6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, groups=None, parameter_iterable=<sklearn.model_selection._search.ParameterGrid object>)
+    559                                   fit_params=self.fit_params,
+    560                                   return_train_score=self.return_train_score,
+    561                                   return_n_test_samples=True,
+    562                                   return_times=True, return_parameters=True,
+    563                                   error_score=self.error_score)
+--> 564           for parameters in parameter_iterable
+        parameters = undefined
+        parameter_iterable = <sklearn.model_selection._search.ParameterGrid object>
+    565           for train, test in cv_iter)
+    566 
+    567         # if one choose to see train score, "out" will contain train score info
+    568         if self.return_train_score:
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=Parallel(n_jobs=16), iterable=<generator object <genexpr>>)
+    763             if pre_dispatch == "all" or n_jobs == 1:
+    764                 # The iterable was consumed all at once by the above for loop.
+    765                 # No need to wait for async callbacks to trigger to
+    766                 # consumption.
+    767                 self._iterating = False
+--> 768             self.retrieve()
+        self.retrieve = <bound method Parallel.retrieve of Parallel(n_jobs=16)>
+    769             # Make sure that we get a last message telling us we are done
+    770             elapsed_time = time.time() - self._start_time
+    771             self._print('Done %3i out of %3i | elapsed: %s finished',
+    772                         (len(self._output), len(self._output),
+
+---------------------------------------------------------------------------
+Sub-process traceback:
+---------------------------------------------------------------------------
+ValueError                                         Mon Nov 19 14:00:46 2018
+PID: 20316                                   Python 3.4.5: /usr/bin/python3
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in __call__(self=<sklearn.externals.joblib.parallel.BatchedCalls object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        self.items = [(<function _fit_and_score>, (PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}), {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False})]
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/externals/joblib/parallel.py in <listcomp>(.0=<list_iterator object>)
+    126     def __init__(self, iterator_slice):
+    127         self.items = list(iterator_slice)
+    128         self._size = len(self.items)
+    129 
+    130     def __call__(self):
+--> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        func = <function _fit_and_score>
+        args = (PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True),        WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], 6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, make_scorer(accuracy_score), array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), array([   0,    1,    2, ..., 1624, 1625, 1626]), 0, {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+        kwargs = {'error_score': 'raise', 'fit_params': {}, 'return_n_test_samples': True, 'return_parameters': True, 'return_times': True, 'return_train_score': False}
+    132 
+    133     def __len__(self):
+    134         return self._size
+    135 
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), X=       WAP001  WAP002  WAP003  WAP004  WAP005   ...01             503  
+
+[16270 rows x 1041 columns], y=6775     0
+7566     1
+17990    1
+1180     4
+1050...1      3
+Name: FLOOR, Length: 16270, dtype: int64, scorer=make_scorer(accuracy_score), train=array([ 1627,  1628,  1629, ..., 16267, 16268, 16269]), test=array([   0,    1,    2, ..., 1624, 1625, 1626]), verbose=0, parameters={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}, fit_params={}, return_train_score=False, return_parameters=True, return_n_test_samples=True, return_times=True, error_score='raise')
+    222     fit_params = fit_params if fit_params is not None else {}
+    223     fit_params = dict([(k, _index_param_value(X, v, train))
+    224                       for k, v in fit_params.items()])
+    225 
+    226     if parameters is not None:
+--> 227         estimator.set_params(**parameters)
+        estimator.set_params = <bound method PassiveAggressiveClassifier.set_pa...       shuffle=True, verbose=0, warm_start=True)>
+        parameters = {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}
+    228 
+    229     start_time = time.time()
+    230 
+    231     X_train, y_train = _safe_split(estimator, X, y, train)
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/linear_model/stochastic_gradient.py in set_params(self=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), *args=(), **kwargs={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+     78         # iteration count for learning rate schedule
+     79         # must not be int (e.g. if ``learning_rate=='optimal'``)
+     80         self.t_ = None
+     81 
+     82     def set_params(self, *args, **kwargs):
+---> 83         super(BaseSGD, self).set_params(*args, **kwargs)
+        self.set_params = <bound method PassiveAggressiveClassifier.set_pa...       shuffle=True, verbose=0, warm_start=True)>
+        args = ()
+        kwargs = {'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True}
+     84         self._validate_params()
+     85         return self
+     86 
+     87     @abstractmethod
+
+...........................................................................
+/usr/lib64/python3.4/site-packages/sklearn/base.py in set_params(self=PassiveAggressiveClassifier(C=0.8, class_weight=...        shuffle=True, verbose=0, warm_start=True), **params={'C': 0.8, 'average': True, 'class_weight': None, 'fit_intercept': True, 'warm_start': True})
+    286                 # simple objects case
+    287                 if key not in valid_params:
+    288                     raise ValueError('Invalid parameter %s for estimator %s. '
+    289                                      'Check the list of available parameters '
+    290                                      'with `estimator.get_params().keys()`.' %
+--> 291                                      (key, self.__class__.__name__))
+        key = 'average'
+        self.__class__.__name__ = 'PassiveAggressiveClassifier'
+    292                 setattr(self, key, value)
+    293         return self
+    294 
+    295     def __repr__(self):
+
+ValueError: Invalid parameter average for estimator PassiveAggressiveClassifier. Check the list of available parameters with `estimator.get_params().keys()`.
+___________________________________________________________________________

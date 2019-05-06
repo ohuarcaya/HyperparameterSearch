@@ -1,0 +1,35 @@
+indice	Accuracy  learning_rate    loss  n_estimators
+0	0.998559            0.1  linear            50
+1	0.998594           0.01  linear            50
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/data/anaconda3/lib/python3.7/multiprocessing/pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "/data/anaconda3/lib/python3.7/multiprocessing/pool.py", line 47, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+  File "./lib/Methods.py", line 89, in getModelApproach
+    params = _individual_to_params(individual, parametros)
+  File "./lib/Methods.py", line 138, in _individual_to_params
+    return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
+  File "./lib/Methods.py", line 138, in <genexpr>
+    return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
+IndexError: list index out of range
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "debug_main.py", line 72, in <module>
+    ev.fit(scoring='mse', n_jobs=n_jobs, kargs=searchParams)
+  File "/data/users/oscar/mhSearch/lib/ProcessManager.py", line 48, in fit
+    edcv.run()
+  File "./lib/edasSearch.py", line 119, in run
+    self.evaluate()
+  File "./lib/edasSearch.py", line 86, in evaluate
+    self.sample[:, -1] = _pool.starmap(self.objective_function, _iterable)
+  File "/data/anaconda3/lib/python3.7/multiprocessing/pool.py", line 276, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+  File "/data/anaconda3/lib/python3.7/multiprocessing/pool.py", line 657, in get
+    raise self._value
+IndexError: list index out of range

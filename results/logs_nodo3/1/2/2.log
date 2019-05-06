@@ -1,0 +1,23 @@
+/usr/lib/python3.4/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  "module. Expect this to be very slow.", ImportWarning)
+Traceback (most recent call last):
+  File "/usr/lib64/python3.4/site-packages/sklearn/metrics/scorer.py", line 205, in get_scorer
+    scorer = SCORERS[scoring]
+KeyError: 'mse'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 58, in <module>
+    ev.fit(scoring='mse', n_jobs=cpu_count(), kargs=searchParams)
+  File "/home/Manuel.Castillo/pruebasOHC/lib/ProcessManager.py", line 50, in fit
+    escv.fit(self.X, self.y)
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 945, in fit
+    return self._fit(X, y, groups, ParameterGrid(self.param_grid))
+  File "/usr/lib64/python3.4/site-packages/sklearn/model_selection/_search.py", line 540, in _fit
+    self.scorer_ = check_scoring(self.estimator, scoring=self.scoring)
+  File "/usr/lib64/python3.4/site-packages/sklearn/metrics/scorer.py", line 252, in check_scoring
+    return get_scorer(scoring)
+  File "/usr/lib64/python3.4/site-packages/sklearn/metrics/scorer.py", line 211, in get_scorer
+    % (scoring, sorted(scorers)))
+ValueError: 'mse' is not a valid scoring value. Valid options are ['accuracy', 'adjusted_rand_score', 'average_precision', 'f1', 'f1_macro', 'f1_micro', 'f1_samples', 'f1_weighted', 'neg_log_loss', 'neg_mean_absolute_error', 'neg_mean_squared_error', 'neg_median_absolute_error', 'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'r2', 'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'roc_auc']

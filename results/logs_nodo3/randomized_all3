@@ -1,0 +1,15 @@
+1556240439.4583657
+KNeighborsRegressor
+--- 91730.06577014923 seconds ---
+1556332169.53448
+AdaBoostRegressor
+--- 4393.8797955513 seconds ---
+1556336563.4174533
+RandomForestRegressor
+--- 34108.2929725647 seconds ---
+1556370671.7165031
+ExtraTreesRegressor
+--- 55212.03241491318 seconds ---
+1556425883.7578733
+BaggingRegressor
+--- 1715.382749080658 seconds ---
