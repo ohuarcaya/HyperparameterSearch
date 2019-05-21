@@ -144,6 +144,14 @@ def _individual_to_params(individual, parametros):
     #     print(e)
     #     response  = dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
     # return response
+    individual = np.int32(individual)
+    name_values = list(parametros.items())
+    try:
+        return dict((name, values[gene]) for gene, (name, values) in zip(individual, name_values))
+    except Exception as ex:
+        print(individual)
+        print(name_values)
+        return {}
 
 
 def distance2d(y_true, y_pred):
