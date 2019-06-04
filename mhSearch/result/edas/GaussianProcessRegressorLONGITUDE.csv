@@ -1,9 +1,0 @@
-Approach,MAE,MSE,Runtime,alpha,generacion,kernel,normalize_y,optimizer,stdApproach,stdMAE,stdMSE,stdRuntime
-0,100,100,0,1e-05,0,,True,fmin_l_bfgs_b,0,100,100,0
-0,100,100,0,0.0001,0,,True,fmin_l_bfgs_b,0,100,100,0
-0,100,100,0,1e-05,0,,False,fmin_l_bfgs_b,0,100,100,0
-0,100,100,0,0.001,0,,False,fmin_l_bfgs_b,0,100,100,0
-0,100,100,0,1.0,0,,False,fmin_l_bfgs_b,0,100,100,0
-0,100,100,0,0.001,1,,True,fmin_l_bfgs_b,0,100,100,0
-0,100,100,0,1.0,1,,True,fmin_l_bfgs_b,0,100,100,0
-0,100,100,0,0.0001,1,,False,fmin_l_bfgs_b,0,100,100,0

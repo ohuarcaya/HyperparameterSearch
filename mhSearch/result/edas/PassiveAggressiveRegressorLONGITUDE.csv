@@ -1,3 +1,0 @@
-Approach,C,MAE,MSE,Runtime,fit_intercept,generacion,stdApproach,stdMAE,stdMSE,stdRuntime,warm_start
-0,"[0.8, 0.9, 1.0, 1.1, 1.2]",100,100,0,"[True, False]",0,0,100,100,0,True
-0,"[0.8, 0.9, 1.0, 1.1, 1.2]",100,100,0,"[True, False]",0,0,100,100,0,False
